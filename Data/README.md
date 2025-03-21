@@ -5,7 +5,7 @@ This folder contains supplementary data files, variable descriptions, and releva
 In Colombia, reporting of **GBV** and **IFV** is mandatory for epidemiological surveillance under **Law 248 of 1995**.  
 For this study, we used data from the **National Institute of Health (INS - *Instituto Nacional de Salud*)** via the **SIVIGILA** system, which collects nationwide public health information.  
 
-Clinicians report **GBV** and **IFV** cases using a standardized form during medical consultations (*Ficha INS 875*). The data, including demographics and event details, are entered into **SIVIGILA** system, and analyzed primarily using descriptive statistics.  
+Clinicians report **GBV** and **IFV** cases using a standardized form during medical consultations (check the file *INS 875*). The data, including demographics and event details, are entered into **SIVIGILA** system, and analyzed primarily using descriptive statistics.  
 
 As mandated by **Law 1712 of 2014**, all data are publicly available with ensured anonymization.
 
