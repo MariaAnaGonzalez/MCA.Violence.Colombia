@@ -1,3 +1,6 @@
+![License: CC BY 4.0](https://img.shields.io/badge/License-CC%20BY%204.0-blue.svg)
+
+
 # Gender-Based and Intrafamilial Violence During COVID-19 in Colombia
 ### A Serial Cross-Sectional Study
 
@@ -5,9 +8,9 @@ This repository contains the data analysis code, statistical models, and visuali
 **"Presentation Patterns of Gender-Based and Intrafamilial Violence During the First Three Years of the COVID-19 Pandemic in Colombia: A Serial Cross-Sectional Study."**
 
 ## 📂 Repository Structure
+- **`Data/`**: Provides supplementary data files (if applicable) and a detailed description of variables used in the analysis.
 - **`Tables/`**: Contains Word documents with the article's tables, summarizing key findings and demographic data.
 - **`Graphics/`**: Includes visualizations in PDF format representing statistical trends and relevant patterns.
-- **`Data/`**: Provides supplementary data files (if applicable) and a detailed description of variables used in the analysis.
 - **`Code/`**: Contains scripts for data cleaning, statistical analysis, and visualization.
 
 ## 🚀 Getting Started
