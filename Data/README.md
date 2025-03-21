@@ -226,14 +226,16 @@ The following variables were retained as in the original datasets:
 
 
 ## References
-[1]: [Observatorio Nacional de Violencias Línea de Violencias de Género Colombia. Serie Registros, Observatorios, Sistemas de Seguimiento y Salas Situacionales en Salud ROSS Colombia. Bogotá; 2016](https://example.com/reference37)  
-[2]: [Instituto Nacional de Salud de Colombia. Protocolo de Vigilancia de Violencia de Género e Intrafamiliar y Ataques con Agentes Químicos. 2022](https://www.ins.gov.co/)  
-[3]: [World Health Organization. World report on violence and health. 2002](https://www.who.int/publications/i/item/violence-prevention)  
-[4]: [Ministerio de Salud y de Protección Social de Colombia. Ciclo de vida 2024 [Available from: https://www.minsalud.gov.co/proteccionsocial/Paginas/cicloVida.aspx) 
-[5]: [Instituto Nacional de Salud  - Observatorio Nacional de  Salud. Covid-19 en Colombia, consecuencias de una pandemia en desarrollo: Décimo Segundo Informe Técnico. Bogotá; 2020) 
-[6]: [Comisión Europea: clasificación europea de capacidades/competencias cyo. International Standard Classification of Occupations (ISCO)) 
-[7]: [Instituto Nacional de Medicina Legal y Ciencias Forenses. Guía para el abordaje forense integral en la investigación de la violencia sexual. Bogotá, Colombia; 2018) 
-[8]: [EL Congreso de Colombia. Ley 1719 de 2014 Colombia2014 [Available from: https://www.funcionpublica.gov.co/eva/gestornormativo/norma.php?i=57716) 
-[9]: [Human Rights Watch. Sterilization of women and girls with disabilities 2011 [Available from: https://www.hrw.org/news/2011/11/10/sterilization-women-and-girls-disabilities) 
-[10]: [World Health Organization. Female genital mutilation 2024 [Available from: https://www.who.int/news-room/fact-sheets/detail/female-genital-mutilatio) 
-[11]: [Comisión Europea: clasificación europea de capacidades/competencias cyo. International Standard Classification of Occupations (ISCO)) 
+## References
+[1]: [Observatorio Nacional de Violencias Línea de Violencias de Género Colombia. *Serie Registros, Observatorios, Sistemas de Seguimiento y Salas Situacionales en Salud ROSS Colombia*. Bogotá; 2016.](https://example.com/reference37)  
+[2]: [Instituto Nacional de Salud de Colombia. *Protocolo de Vigilancia de Violencia de Género e Intrafamiliar y Ataques con Agentes Químicos*. 2022.](https://www.ins.gov.co/)  
+[3]: [World Health Organization. *World Report on Violence and Health*. 2002.](https://www.who.int/publications/i/item/violence-prevention)  
+[4]: [Ministerio de Salud y de Protección Social de Colombia. *Ciclo de Vida*. 2024. Available from: [https://www.minsalud.gov.co/proteccionsocial/Paginas/cicloVida.aspx](https://www.minsalud.gov.co/proteccionsocial/Paginas/cicloVida.aspx)]  
+[5]: [Instituto Nacional de Salud - Observatorio Nacional de Salud. *Covid-19 en Colombia, consecuencias de una pandemia en desarrollo: Décimo Segundo Informe Técnico*. Bogotá; 2020.]  
+[6]: [Comisión Europea. *Clasificación Europea de Capacidades/Competencias CYO. International Standard Classification of Occupations (ISCO)*.]  
+[7]: [Instituto Nacional de Medicina Legal y Ciencias Forenses. *Guía para el abordaje forense integral en la investigación de la violencia sexual*. Bogotá, Colombia; 2018.]  
+[8]: [El Congreso de Colombia. *Ley 1719 de 2014*. Colombia; 2014. Available from: [https://www.funcionpublica.gov.co/eva/gestornormativo/norma.php?i=57716](https://www.funcionpublica.gov.co/eva/gestornormativo/norma.php?i=57716)]  
+[9]: [Human Rights Watch. *Sterilization of Women and Girls with Disabilities*. 2011. Available from: [https://www.hrw.org/news/2011/11/10/sterilization-women-and-girls-disabilities](https://www.hrw.org/news/2011/11/10/sterilization-women-and-girls-disabilities)]  
+[10]: [World Health Organization. *Female Genital Mutilation*. 2024. Available from: [https://www.who.int/news-room/fact-sheets/detail/female-genital-mutilatio](https://www.who.int/news-room/fact-sheets/detail/female-genital-mutilatio)]  
+
+
