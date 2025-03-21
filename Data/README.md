@@ -119,7 +119,7 @@ The variable **"Survivor’s occupation"** was categorized using the latest **In
 ---
 
 ### Survivor’s Main Activity
-The variable **"Survivor’s main activity"** (unrelated to income) was grouped into five categories for consistency:  
+The variable **"Survivor’s main activity"** was grouped into five categories for consistency:  
 - **Other activities**  
 - **Students and civic leaders**  
 - **Domestic workers, homemakers, and caregivers**  
