@@ -31,6 +31,27 @@ To install all required packages, use the setup script [`00_setup.R`](./00_setup
 
 ---
 
+### 🧹 Data Cleaning and Preparation
+
+Each annual dataset (2017–2022) underwent a standardized and reproducible data cleaning process, implemented in individual R scripts. The procedure included:
+
+- **Data import** from Excel files using `readxl`
+- **Initial inspection** using `summary()` and `names()`  
+- **Selection of relevant variables** based on a pre-defined protocol  
+- **Renaming of variables** for clarity and consistency across years  
+- **Type conversion** (e.g., dates, factors, numeric) using `lubridate`, `dplyr`, and `forcats`  
+- **Labeling of categorical variables** based on official INS coding dictionaries  
+- **Identification and recoding of unknown or inconsistent categories**  
+- **Systematic handling of missing data**  
+- **Export of cleaned datasets** in `.Rds` and `.RData` formats
+
+> ⚠️ The exact same procedure was applied to all yearly datasets (2017 to 2022), with minor adjustments to account for structural variations across years.
+
+Scripts are organized and documented for full transparency and reproducibility.
+
+
+
+
 ## 📚 Package Citations
 
 [1] Wickham H, Romain F, Henry L, Müller K. *readxl: Read Excel Files.* https://CRAN.R-project.org/package=readxl  
