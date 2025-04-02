@@ -2,16 +2,16 @@
 
 This folder contains all R scripts used for data preparation, analysis, and export in the study. Scripts are named sequentially to reflect their order of execution.
 
-> ⚠️ **Note**: Due to data confidentiality, the dataset is not included in this repository. However, the code used to process and analyze the data is available here for transparency and reproducibility.
+> ⚠️ **Note**: Due to data confidentiality, the dataset is not included in this repository. However, the code used to process and analyze the data is fully available for transparency and reproducibility.
 
 ---
 
 ## 🔧 Script Overview
 
 - `00_setup.R`: Installs and loads all required R packages.
-- `01_data_cleaning.R`: Imports and prepares data, including recoding and variable transformations.
+- `01_data_cleaning.R`: Imports and prepares the data, including variable recoding and transformations.
 - `02_data_exploration.R`: Performs summary statistics and descriptive analyses.
-- `03_analysis_mca.R`: Runs the Multiple Correspondence Analysis (MCA).
+- `03_analysis_mca.R`: Conducts Multiple Correspondence Analysis (MCA).
 - `04_tables_export.R`: Generates and exports tables for the manuscript.
 - `05_graphs_export.R`: Creates and exports relevant visualizations.
 
@@ -21,34 +21,33 @@ This folder contains all R scripts used for data preparation, analysis, and expo
 
 The following R packages are used in this project (see citations below):
 
-- **Data import & cleaning**: `readxl` [1], `dplyr` [2], `janitor` [3], `lubridate` [4], `forcats` [5], `tidyverse` [6]
-- **Descriptive statistics & tables**: `psych` [7], `Amelia` [8], `kableExtra` [9]
-- **Visualization**: `ggplot2` [10], `ggpubr` [11], `gridExtra`, `patchwork` [12], `plotly` [13], `corrplot` [14], `RColorBrewer` [15], `viridis` [16], `ggrepel` [17], `htmlwidgets` [18]
-- **Multivariate analysis**: `FactoMineR` [19], `factoextra` [20], `FactoInvestigate` [21], `ade4` [22], `ExPosition` [23], `prettyGraphs` [24]
-- **Development tools**: `devtools` [25], `usethis` [26]
+- **Data import & cleaning**: `readxl` [1], `dplyr` [2], `janitor` [3], `lubridate` [4], `forcats` [5], `tidyverse` [6]  
+- **Descriptive statistics & tables**: `psych` [7], `Amelia` [8], `kableExtra` [9]  
+- **Visualization**: `ggplot2` [10], `ggpubr` [11], `gridExtra`, `patchwork` [12], `plotly` [13], `corrplot` [14], `RColorBrewer` [15], `viridis` [16], `ggrepel` [17], `htmlwidgets` [18]  
+- **Multivariate analysis**: `FactoMineR` [19], `factoextra` [20], `FactoInvestigate` [21], `ade4` [22], `ExPosition` [23], `prettyGraphs` [24]  
+- **Development tools**: `devtools` [25], `usethis` [26]  
 
-To install all required packages, use the setup script [`00_setup.R`](./00_setup.R).
+To install all required packages, run the setup script: [`00_setup.R`](./code/00_setup.R)
 
 ---
 
 ## 🧹 Data Cleaning and Preparation
 
-Each annual dataset (2017–2022) underwent a standardized and reproducible data cleaning process, implemented in individual R scripts. The procedure included:
+Each annual dataset (2017–2022) underwent a standardized and reproducible data cleaning process, implemented in a consistent R script. The procedure included:
 
-- **Data import** from Excel files using `readxl`
-- **Initial inspection** using `summary()` and `names()`  
-- **Selection of relevant variables** based on a pre-defined protocol  
-- **Renaming of variables** for clarity and consistency across years  
-- **Type conversion** (e.g., dates, factors, numeric) using `lubridate`, `dplyr`, and `forcats`  
-- **Labeling of categorical variables** based on official INS coding dictionaries  
-- **Identification and recoding of unknown or inconsistent categories**  
-- **Systematic handling of missing data**  
-- **Export of cleaned datasets** in `.Rds` and `.RData` formats
+- **Importing raw data** from Excel files with `readxl`
+- **Initial inspection** using functions like `summary()` and `names()`
+- **Selection of relevant variables** based on a predefined protocol
+- **Renaming variables** to ensure consistency across years
+- **Type conversion** for dates, categorical, and numerical variables using `lubridate`, `dplyr`, and `forcats`
+- **Re-labeling categories** according to official coding dictionaries from the INS
+- **Recoding unknown or inconsistent values**
+- **Systematic handling of missing data**
+- **Exporting the cleaned datasets** as `.Rds` and `.RData` files
 
-> ⚠️ The exact same procedure was applied to all yearly datasets (2017 to 2022), with minor adjustments to account for structural variations across years.
+> ⚠️ The same procedure was applied to all yearly datasets (2017–2022), with small adjustments for structural differences between years.
 
-Scripts are organized and documented for full transparency and reproducibility [`01_data_cleaning.R`](./01_data_cleaning.R)
-
+You can explore the full cleaning procedure in the script [`01_data_cleaning.R`](./code/01_data_cleaning.R).
 
 
 
