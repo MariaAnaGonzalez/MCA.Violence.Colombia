@@ -96,7 +96,7 @@ The variable **"Event’s date"** was divided into two periods:
 
 Data from **2020** was split according to Colombia's official pandemic start date (**March 25, 2020**) [[5]]:  
 - Dates before this were classified as **"Prepandemic"**  
-- Dates after this were classified as **"Pandemic"**  
+- Dates including this date and after this were classified as **"Pandemic"**  
 
 A secondary variable was created to identify each period.
 
@@ -253,7 +253,7 @@ This document contains the dictionary for the 19 variables used in the descripti
 
 ---
 
-##### 2. Subset of Variables Used in Multiple Correspondence Analysis (MCA) (n = 10)
+### 2. Subset of Variables Used in Multiple Correspondence Analysis (MCA) (n = 10)
 
 | Variable Name              | Description                                               | Type                     | Response Options                                                                 |
 |---------------------------|-----------------------------------------------------------|--------------------------|----------------------------------------------------------------------------------|
@@ -272,20 +272,6 @@ This document contains the dictionary for the 19 variables used in the descripti
 ---
 
 **Note:** Life cycle groups are defined according to the Colombian Ministry of Health [4]:
-
-- Early childhood (0–5 years)  
-- Childhood (6–11 years)  
-- Adolescence (12–18 years)  
-- Youth (19–26 years)  
-- Adulthood (27–59 years)  
-- Older adults (60+ years)
-
-
-
-
-
-
-
 
 ## References
 
