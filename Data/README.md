@@ -12,9 +12,10 @@ This folder contains supplementary data files, variable descriptions, and releva
   - [Sex](#sex)  
   - [Sexual Orientation](#sexual-orientation)  
   - [IFV and GBV](#ifv-and-gbv)  
-- [Data Transformation](#data-transformation) 
-- [References](#references) 
----
+- [Data Transformation](#data-transformation)  
+- [Final Dictionary](#final-dictionary)  
+- [References](#references)  
+
 
 ## Data Source
 In Colombia, reporting of **GBV** and **IFV** is mandatory for epidemiological surveillance under **Law 248 of 1995**.  
@@ -220,13 +221,74 @@ The following variables were retained as in the original datasets:
 
 (See Table 1 for further details.)
 
+##  Final Dictionary
+
+This document contains the dictionary for the 19 variables used in the descriptive analysis, and a subset of 10 variables used in the Multiple Correspondence Analysis (MCA) for the project.
+
+---
+
+### 1. Variables Used in the Descriptive Analysis (n = 19)
+
+| Variable Name              | Description                                               | Type                     | Response Options                                                                 |
+|---------------------------|-----------------------------------------------------------|--------------------------|----------------------------------------------------------------------------------|
+| `age`                     | Survivor’s age at the time of the event (in years)        | Continuous (numeric)     | Values starting from 0                                                           |
+| `life_cycle`              | Age group based on Colombia’s Ministry of Health          | Categorical (ordinal)    | Early childhood (0–5), Childhood (6–11), Adolescence (12–18), Youth (19–26), Adulthood (27–59), Older adults (60+) |
+| `nationality`             | Survivor’s nationality                                     | Categorical (nominal)    | Colombian, Venezuelan, Other                                                     |
+| `sex`                     | Survivor’s sex assigned at birth                          | Categorical (binary)     | Female, Male                                                                     |
+| `gender_identity`         | Self-reported gender identity                             | Categorical (nominal)    | Woman, Man, Transgender                                                          |
+| `sexual_orientation`      | Self-reported sexual orientation                          | Categorical (nominal)    | Heterosexual, Bisexual, Homosexual, Asexual                                     |
+| `occupation`              | Survivor’s occupation at the time of the event            | Categorical (nominal)    | Manual workers and elementary occupations, Technicians and administrative support workers, Professionals and managers, Armed Forces occupations |
+| `main_activity`           | Survivor’s main activity                                   | Categorical (nominal)    | Students and civic leaders, Domestic workers/homemakers/caregivers, Farmers and peasants, Sex workers |
+| `pregnant_status`         | Whether the survivor was pregnant at the time of the event| Binary (yes/no)          | Yes, No                                                                          |
+| `head_of_household`       | Survivor is the head of the household                     | Binary (yes/no)          | Yes, No                                                                          |
+| `type_of_violence`        | Main type of violence reported                            | Categorical (nominal)    | Physical, Sexual, Psychological, Negligence and abandonment                     |
+| `sexual_violence_subtype` | Specific subtype of sexual violence                       | Categorical (nominal)    | Sexual abuse and harassment, Rape/sexual assault/acts involving force, Other sexual acts (e.g., forced nudity, sterilization, genital mutilation), Sexual exploitation and trafficking |
+| `history_of_violence`     | Prior history of violence                                 | Binary (yes/no)          | Yes, No                                                                          |
+| `aggressor_sex`           | Sex of the aggressor                                      | Categorical (nominal)    | Male, Female, Undetermined                                                       |
+| `relationship_aggressor`  | Relationship between survivor and aggressor               | Categorical (nominal)    | Partner, Ex-partner, Mother, Father, Other family member, Known (non-family), Unknown (non-family), Undetermined stranger |
+| `coliving_with_aggressor` | Survivor cohabits with the aggressor                      | Binary (yes/no)          | Yes, No                                                                          |
+| `mechanism_of_injury`     | Main physical mechanism of injury                         | Categorical (nominal)    | Blunt/cutting/stabbing injuries, Falls/firearms/others, Strangulation/suffocation, Burns (e.g., water, acid, alkalis) |
+| `event_location`          | Location where the violent event occurred                 | Categorical (nominal)    | Household, Public spaces                                                         |
+| `pandemic_period`         | Timing of the event in relation to the COVID-19 pandemic  | Categorical (nominal)    | Pre-pandemic, Pandemic                                                           |
+
+---
+
+##### 2. Subset of Variables Used in Multiple Correspondence Analysis (MCA) (n = 10)
+
+| Variable Name              | Description                                               | Type                     | Response Options                                                                 |
+|---------------------------|-----------------------------------------------------------|--------------------------|----------------------------------------------------------------------------------|
+| `sex`                     | Survivor’s sex assigned at birth                          | Categorical (binary)     | Female, Male                                                                     |
+| `main_activity`           | Survivor’s main activity                                   | Categorical (nominal)    | Students and civic leaders, Domestic workers/homemakers/caregivers, Farmers and peasants, Sex workers |
+| `history_of_violence`     | Prior history of violence                                 | Binary (yes/no)          | Yes, No                                                                          |
+| `coliving_with_aggressor` | Survivor cohabits with the aggressor                      | Binary (yes/no)          | Yes, No                                                                          |
+| `pandemic_period`         | Timing of the event in relation to the COVID-19 pandemic  | Categorical (nominal)    | Pre-pandemic, Pandemic                                                           |
+| `mechanism_of_injury`     | Main physical mechanism of injury                         | Categorical (nominal)    | Blunt/cutting/stabbing injuries, Falls/firearms/others, Strangulation/suffocation, Burns (e.g., water, acid, alkalis) |
+| `event_location`          | Location where the violent event occurred                 | Categorical (nominal)    | Household, Public spaces                                                         |
+| `life_cycle`              | Age group based on Colombia’s Ministry of Health          | Categorical (ordinal)    | Early childhood (0–5), Childhood (6–11), Adolescence (12–18), Youth (19–26), Adulthood (27–59), Older adults (60+) |
+| `type_of_violence`        | Main type of violence reported                            | Categorical (nominal)    | Physical, Sexual, Psychological, Negligence and abandonment                     |
+| `relationship_aggressor`  | Relationship between survivor and aggressor               | Categorical (nominal)    | Partner, Ex-partner, Mother, Father, Other family member, Known but not family, Unknown and not family, Undetermined stranger |
+
+
+---
+
+**Note:** Life cycle groups are defined according to the Colombian Ministry of Health [4]:
+
+- Early childhood (0–5 years)  
+- Childhood (6–11 years)  
+- Adolescence (12–18 years)  
+- Youth (19–26 years)  
+- Adulthood (27–59 years)  
+- Older adults (60+ years)
+
+
+
 
 
 
 
 
 ## References
-## References
+
 [1]: [Observatorio Nacional de Violencias Línea de Violencias de Género Colombia. *Serie Registros, Observatorios, Sistemas de Seguimiento y Salas Situacionales en Salud ROSS Colombia*. Bogotá; 2016.](https://example.com/reference37)  
 [2]: [Instituto Nacional de Salud de Colombia. *Protocolo de Vigilancia de Violencia de Género e Intrafamiliar y Ataques con Agentes Químicos*. 2022.](https://www.ins.gov.co/)  
 [3]: [World Health Organization. *World Report on Violence and Health*. 2002.](https://www.who.int/publications/i/item/violence-prevention)  
