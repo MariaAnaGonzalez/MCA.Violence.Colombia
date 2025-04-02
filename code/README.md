@@ -31,7 +31,7 @@ To install all required packages, use the setup script [`00_setup.R`](./00_setup
 
 ---
 
-### 🧹 Data Cleaning and Preparation
+## 🧹 Data Cleaning and Preparation
 
 Each annual dataset (2017–2022) underwent a standardized and reproducible data cleaning process, implemented in individual R scripts. The procedure included:
 
