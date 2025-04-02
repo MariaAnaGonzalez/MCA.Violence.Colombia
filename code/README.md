@@ -12,3 +12,15 @@ This folder contains all R scripts used for data preparation, analysis, and expo
 - `03_analysis_mca.R`: Multiple Correspondence Analysis (MCA).
 - `04_tables_export.R`: Generation of tables for the manuscript.
 - `05_graphs_export.R`: Visualization of key results.
+
+### 📦 Required R Packages
+
+The following R packages are used in this project:
+
+- **Data import & cleaning**: `readxl`, `dplyr`, `janitor`, `lubridate`, `forcats`, `tidyverse`
+- **Descriptive statistics**: `psych`, `Amelia`, `kableExtra`
+- **Visualization**: `ggplot2`, `ggpubr`, `gridExtra`, `patchwork`, `plotly`, `corrplot`, `RColorBrewer`, `viridis`, `ggrepel`, `htmlwidgets`
+- **Multivariate analysis**: `FactoMineR`, `factoextra`, `FactoInvestigate`, `ade4`, `ExPosition`, `prettyGraphs`
+- **Development tools**: `devtools`, `usethis`
+
+To install all required packages, use the script [`00_setup.R`](./00_setup.R).
