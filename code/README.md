@@ -131,12 +131,12 @@ For each year, the following steps were performed:
 </details>
 
 
-
+## 📚 Package Citations
 
 <details>
-<summary>## 📚 Package Citations</summary>
 
-[1] Wickham H, Romain F, Henry L, Müller K. *readxl: Read Excel Files.* https://CRAN.R-project.org/package=readxl  
+
+<summary>[1] Wickham H, Romain F, Henry L, Müller K. *readxl: Read Excel Files.* https://CRAN.R-project.org/package=readxl  
 [2] Wickham H, François R, Henry L, Müller K. *dplyr: A Grammar of Data Manipulation.* https://CRAN.R-project.org/package=dplyr  
 [3] Firke S. *janitor: Simple Tools for Examining and Cleaning Dirty Data.* https://CRAN.R-project.org/package=janitor  
 [4] Grolemund G, Wickham H (2011). *Dates and Times Made Easy with lubridate.* Journal of Statistical Software, 40(3), 1–25. https://www.jstatsoft.org/article/view/v040i03  
@@ -161,4 +161,4 @@ For each year, the following steps were performed:
 [23] Beaton D, Dunlop A. *ExPosition: Exploratory Analysis with Positioning.* https://CRAN.R-project.org/package=ExPosition  
 [24] Beaton D, Fatt C. *prettyGraphs: Pretty Graphs for Multivariate Analyses.* https://CRAN.R-project.org/package=prettyGraphs  
 [25] Wickham H, Chang W. *devtools: Tools to Make Developing R Packages Easier.* https://CRAN.R-project.org/package=devtools  
-[26] Wickham H, Bryan J. *usethis: Automate Package and Project Setup.* https://CRAN.R-project.org/package=usethis  
+[26] Wickham H, Bryan J. *usethis: Automate Package and Project Setup.* https://CRAN.R-project.org/package=usethis  </summary>
