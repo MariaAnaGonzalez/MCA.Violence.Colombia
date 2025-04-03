@@ -3,7 +3,9 @@ This folder contains supplementary data files, variable descriptions, and releva
 
 ---
 
-## Table of Contents  
+<details>
+<summary><strong>📌 Table of Contents</strong></summary>
+  
 - [Data Source](#data-source)  
 - [Data Availability](#data-availability)  
 - [Selected Variables and Rationale](#selected-variables-and-rationale)  
@@ -14,16 +16,23 @@ This folder contains supplementary data files, variable descriptions, and releva
   - [IFV and GBV](#ifv-and-gbv)  
 - [Data Transformation](#data-transformation)  
 - [Final Dictionary](#final-dictionary)  
-- [References](#references)  
+- [References](#references)
+
+  
+</details>
 
 
-## Data Source
+<details>
+<summary><strong> ## 📍 Data Source </strong></summary>
+  
 In Colombia, reporting of **GBV** and **IFV** is mandatory for epidemiological surveillance under **Law 248 of 1995**.  
 For this study, we used data from the **National Institute of Health (INS - *Instituto Nacional de Salud*)** via the **SIVIGILA** system, which collects nationwide public health information.  
 
 Clinicians report **GBV** and **IFV** cases using a standardized form during medical consultations (see the file **INS 875**). The data, including demographics and event details, are entered into the **SIVIGILA** system and analyzed primarily using descriptive statistics.  
 
 As mandated by **Law 1712 of 2014**, all data are publicly available with ensured anonymization.
+
+</details>
 
 ---
 
@@ -285,5 +294,24 @@ This document contains the dictionary for the 19 variables used in the descripti
 [8]: [El Congreso de Colombia. *Ley 1719 de 2014*. Colombia; 2014. Available from: [https://www.funcionpublica.gov.co/eva/gestornormativo/norma.php?i=57716](https://www.funcionpublica.gov.co/eva/gestornormativo/norma.php?i=57716)]  
 [9]: [Human Rights Watch. *Sterilization of Women and Girls with Disabilities*. 2011. Available from: [https://www.hrw.org/news/2011/11/10/sterilization-women-and-girls-disabilities](https://www.hrw.org/news/2011/11/10/sterilization-women-and-girls-disabilities)]  
 [10]: [World Health Organization. *Female Genital Mutilation*. 2024. Available from: [https://www.who.int/news-room/fact-sheets/detail/female-genital-mutilatio](https://www.who.int/news-room/fact-sheets/detail/female-genital-mutilatio)]  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
