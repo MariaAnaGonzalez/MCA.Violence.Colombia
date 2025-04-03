@@ -714,7 +714,7 @@ str(vio.2017.a$sexo.agre)
 levels(vio.2017.a$sexo.agre)
 
 
-# Categories:  I: Intersexual, SD: Indeterminado, F: Femenino,  M: Masculino
+# Categories:  I: Indeterminado, SD: Indeterminado, F: Femenino,  M: Masculino
 
 vio.2017.a$sexo.agre <-factor(vio.2017.a$sexo.agre, levels=c( "F", "M", "SD", "I"), 
                               labels=c( "Femenino", "Masculino", "Indeterminado", "Indeterminado"
@@ -919,11 +919,11 @@ save(vio.2017.a, file = "vio.2017.a.RData")
 ########################################################################
 ## NOTE: The same cleaning and preprocessing pipeline was applied     ##
 ##       to the datasets from 2017 to 2022, using equivalent steps:   ##
-##       - Import and inspection                                       ##
-##       - Variable selection and renaming                             ##
-##       - Type conversion and labeling                                ##
-##       - Handling of missing and unknown categories                  ##
-##       - Export of cleaned datasets                                  ##
+##       - Import and inspection                                      ##
+##       - Variable selection and renaming                            ##
+##       - Type conversion and labeling                               ##
+##       - Handling of missing and unknown categories                 ##
+##       - Export of cleaned datasets                                 ##
 ##                                                                    ##
 ##       Only variable names and structures were adjusted if needed   ##
 ##       to accommodate small yearly differences in data layout.      ##
