@@ -35,7 +35,8 @@ To install all required packages, run the setup script: [`00_setup.R`](./code/00
 ## 🧹 1. Data Cleaning and Preparation
 
 <details>
-<summary>Click to expand</summary>
+<summary>Initials</summary>
+
 
 Each annual dataset (2017–2022) underwent a standardized and reproducible data cleaning process, implemented in a consistent R script. The procedure included:
 
@@ -60,7 +61,8 @@ You can explore the full cleaning procedure in the script [`01_data_cleaning.R`]
 ## 🧮 2. Data Manipulation and Exploration
 
 <details>
-<summary> Step A: Standard Variable Transformation</summary>
+<summary> Standard Variable Transformation</summary>
+
 
 This script performs a standardized transformation and aggregation of variables for the 2017–2022 datasets. While the previous script (`01_data_cleaning.R`) focused on raw data cleaning and recoding based on the original dictionary, this step prepares the dataset for analysis through:
 
