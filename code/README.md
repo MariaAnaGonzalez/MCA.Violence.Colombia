@@ -53,9 +53,10 @@ You can explore the full cleaning procedure in the script [01_data_cleaning.R](.
 ## 🧮 2. Data Manipulation and Exploration
 
 <details>
-<summary>🔹 Step A: Standard Variable Transformation</summary>
+<summary>  Step A: Standard Variable Transformation</summary>
 
 This script performs a standardized transformation and aggregation of variables for the 2017–2022 datasets. While the previous script (01_data_cleaning.R) focused on raw data cleaning and recoding based on the original dictionary, this step prepares the dataset for analysis through:
+
 
 - **Temporal validation** of notification and event dates (fech.not, fech.hech)
 - **Categorization of age** into meaningful age groups according to national health standards
@@ -81,9 +82,10 @@ Cleaned and manipulated datasets are saved in .Rds format at the end of each scr
 ---
 
 <details>
-<summary>🔹 Step B: Time Analysis (2020 Focus)</summary>
+<summary>  Step B: Time Analysis (2020 Focus)</summary>
 
 This component adds a temporal dimension to the 2020 dataset by distinguishing between pre-pandemic and pandemic periods:
+
 
 - **Creation of binary classification variables**:
   - periodo.hecho: Based on the event date (fech.hech) — labeled as "Prepandemic" or "Pandemic"
@@ -97,9 +99,10 @@ This component adds a temporal dimension to the 2020 dataset by distinguishing b
 ---
 
 <details>
-<summary>🔹 Step C: Time Delay Computation (2017–2022)</summary>
+<summary>  Step C: Time Delay Computation (2017–2022)</summary>
 
 For each year, the following steps were performed:
+
 
 - Computation of the time difference (dif.dias) between the date of the event and the date of notification
 - **Summary statistics**: min, max, mean, median, SD, range
@@ -113,7 +116,8 @@ For each year, the following steps were performed:
 ---
 
 <details>
-<summary>🔹 Final Outputs</summary>
+<summary> Final Outputs</summary>
+
 
 - Yearly datasets enriched with the new variable dif.dias were saved as .Rds and .RData files (e.g., vio.2017.c, vio.2022.c)
 - Combined histograms summarizing delay distributions were exported as:
@@ -129,8 +133,8 @@ For each year, the following steps were performed:
 
 
 
-
-## 📚 Package Citations
+<details>
+<summary>## 📚 Package Citations</summary>
 
 [1] Wickham H, Romain F, Henry L, Müller K. *readxl: Read Excel Files.* https://CRAN.R-project.org/package=readxl  
 [2] Wickham H, François R, Henry L, Müller K. *dplyr: A Grammar of Data Manipulation.* https://CRAN.R-project.org/package=dplyr  
