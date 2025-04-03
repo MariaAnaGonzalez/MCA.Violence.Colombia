@@ -4,8 +4,7 @@ This folder contains supplementary data files, variable descriptions, and releva
 
 ---
 
-<details>
-<summary><strong>📌 Table of Contents</strong></summary>
+📌 Table of Contents
   
 - [Data Source](#data-source)  
 - [Data Availability](#data-availability)  
@@ -19,8 +18,8 @@ This folder contains supplementary data files, variable descriptions, and releva
 - [Final Dictionary](#final-dictionary)  
 - [References](#references)
   
-</details>
 
+--------------------------------
 
 <details>
 <summary><strong>📍 Data Source</strong></summary>
