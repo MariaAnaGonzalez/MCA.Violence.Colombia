@@ -146,6 +146,106 @@ You can explore the full procedure in the script [`03_descriptive_analysis.R`](.
 
 ---
 
+# 🎯 4. Final Analysis: Multiple Correspondence Analysis (MCA) 
+
+This section summarizes the complete MCA process performed on three datasets:
+- `vio.before`: Prepandemic period
+- `vio.pandemic`: Pandemic period
+- `vio.todo`: Combined dataset (2017–2022)
+
+The analysis includes variable selection, cleaning and recoding, MCA execution, visualization (2D and 3D), and export of results.
+
+---
+
+## 📁 A. Data Preparation for MCA
+
+### Variable Selection and Renaming - Quality Control 
+
+For each dataset (`before`, `pandemic`, `todo`):
+- Selected 10–11 variables: `sexo`, `activi.cat`, `antec.vio`, `sexo.agre`, `conv.agre`, `mecanismo.cat`, `escena.cat`, `edad.cat`, `tipo.viol`, `relacion` (+ `periodo` for `todo`)
+- Renamed variables into English for clarity (e.g., `sexo` → `Sex`, `tipo.viol` → `Violence`)
+- Translated categorical levels (e.g., "Sí" → "Yes")
+- Corrected typos in levels (e.g., "Phsychological" → "Psychological")
+
+---
+
+## 📊 B. MCA Execution
+
+###  MCA per Dataset
+
+- Used `MCA(..., ncp = 3)` from the `FactoMineR` package
+- Extracted eigenvalues using `get_eigenvalue()`
+- Saved MCA objects for future use
+
+###  Scree Plots
+
+Generated scree plots with `fviz_screeplot()`:
+- Added red dashed line at 4.9% for retained variability threshold
+- Saved as `.pdf` (e.g., `Screeplot.vio.prepandemic.pdf`)
+
+---
+
+## 📈 C. Variable Category Plots
+
+###  2D MCA Variable Plots
+
+Generated biplots for variable categories using `fviz_mca_var()` for:
+- Dim 1 vs 2
+- Dim 1 vs 3
+- Dim 2 vs 3
+
+Combined into a vertical layout using `patchwork::plot_layout()` and saved (e.g., `variables.MCA.vio.DIM.todo.before.pdf`)
+
+###  Enhanced Variable Plots with Labels
+
+- Added custom labels using `geom_text_repel()`
+- Highlighted key labels in bold (e.g., "Sexual violence")
+- Used `viridis` palette for quadrant shading
+- Exported with suffix `.quadrant.pdf`
+
+###  3D MCA Plot of Variable Categories
+
+- Used `plotly::plot_ly()` for interactive 3D scatter plots
+- Colored points and labeled axes by explained variance
+- Saved as `.html` (e.g., `3D_MCA_Categories_with_Quadrants.html`)
+
+---
+
+## 👤 D. Individual Records Plot (by Violence Type)
+
+###  2D Individual Plot
+
+- Colored individuals by `Violence` type
+- Added ellipses per group with `fviz_mca_ind()`
+- Used `viridis_d` palette for clarity
+
+###  3D Individual Plot
+
+- Created 3D scatter plot of individuals grouped by `Violence` using `plot_ly()`
+- Added color legend with hover info
+- Exported as `.html` (e.g., `3D_MCA_individuals_todo.html`)
+
+---
+
+## 💾 E. Saved Outputs
+
+| Type       | Prepandemic              | Pandemic                  | Combined                   |
+|------------|---------------------------|----------------------------|-----------------------------|
+| Dataset    | `vio.before.MCA.Rds`      | `vio.pandemic.MCA.Rds`     | `vio.todo.MCA.Rds`          |
+| Results    | `res.vio.before.MCA.Rds`  | `res.vio.pandemic.MCA.Rds` | `res.vio.todo.MCA.Rds`      |
+| Screeplot  | `Screeplot.vio.prepandemic.pdf` | `Screeplot.vio.pandemic.pdf` | `Screeplot.vio.todo.pdf`     |
+| Plots (2D) | `variables.MCA.vio.DIM.*`  | `variables.MCA.vio.DIM.*`  | `variables.MCA.vio.DIM.*`   |
+| Plots (3D) | `3D_MCA_Categories_with_Quadrants.html` | `3D_MCA_Categories_with_Pandemic.html` | `3D_MCA_Categories_with_Todo.html` |
+| Indiv (2D) | `individuals.before.vio.pdf` | `individuals.pandemic.vio.pdf` | `individuals.todo.vio.pdf` |
+| Indiv (3D) | `3D_MCA_individuals_prepandemic.html` | `3D_MCA_individuals_pandemic.html` | `3D_MCA_individuals_todo.html` |
+
+---
+
+✅ The MCA workflow ensures full transparency, visual interpretability, and analytical consistency across prepandemic, pandemic, and full datasets.
+
+
+
+
 ## 📚 Package Citations
 
 <details>
