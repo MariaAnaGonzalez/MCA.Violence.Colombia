@@ -1,0 +1,2029 @@
+############################################################
+## B. Data exploration and manipulation - 2017 ##
+############################################################
+
+## 1. Set working directory
+
+## 2. Import last database "vio.2017.a"
+
+# 3. Data manipulation and exploration of each variable
+
+# A. "fech.not" - notification date
+
+range(vio.2017.a$fech.not)
+
+# - Range from: 01 of January 2017 until 28 of March 2018
+
+
+# B. "fech.hech"  - date of the event 
+
+range(vio.2017.a$fech.hech)
+
+# - Range from: 01 of January 2017 until 30 of December 2017
+
+
+# C. "año" - year (no changes) 
+
+summary(vio.2017.a$año)
+
+# D. "edad" - age 
+
+describe(vio.2017.a$edad)
+
+# C. Transformation of "edad" to "edad.cat" (categorization according to Colombia's Ministry of Health)
+
+# Early childhood = 0 to 5 years  ---- 0 - 5
+# Childhood = 6 to 11 years  ---- 6 to 11
+# Adolescence = 12 to 18 years  ---- 12 to 18 years
+# Youth = 19 to 26 years  ---- 19 to 26 years
+# Adulthood = 27 to 59 years  ---- 27 to 59 years
+# Older adult = 60 years and above  ---- 60 - +
+
+?cut
+vio.2017.a$edad.cat<-cut(vio.2017.a$edad, breaks=c(-Inf, 5, 11, 18, 26, 59, Inf), 
+                         levels=c("1","2","3","4","5","6"),     
+                         labels=c("Early childhood", "Childhood", "Adolescence", "Youth", "Adulthood","Older adult"), 
+                         include.lowest=FALSE)
+
+levels(vio.2017.a$edad.cat)
+str(vio.2017.a$edad.cat)
+
+
+# Converting into an ordinal variable 
+vio.2017.a$edad.cat<-as.ordered(vio.2017.a$edad.cat)
+str(vio.2017.a$edad.cat)
+
+
+# Check proportions, frequencies and missings (with 1 rounded proportions)
+
+tabyl(vio.2017.a$edad.cat, show_na = TRUE)%>%
+  adorn_pct_formatting(digits = 1)
+
+
+# D. "sexo" - sex 
+
+# Convert F to 1 and M to 2, then apply factor with labels
+vio.2017.a$sexo <- as.numeric(factor(vio.2017.a$sexo, levels = c("Femenino", "Masculino"), labels = c(1, 2)))
+
+# Apply factor again to assign the corresponding labels
+vio.2017.a$sexo <- factor(vio.2017.a$sexo, levels = c(1, 2), labels = c("Female", "Male"))
+
+
+# Check proportions, frequencies and missings (with 1 rounded proportions)
+
+tabyl(vio.2017.a$sexo, show_na = TRUE)%>%
+  adorn_pct_formatting(digits = 1)
+
+
+# E. "cod.pais" - nationality 
+
+levels(vio.2017.a$cod.pais)
+
+# Convert labels to numbers, then apply factor with labels
+vio.2017.a$cod.pais <- as.numeric(factor(vio.2017.a$cod.pais, 
+                                         levels = c("Colombia",  "Venezuela",  "Otro"  ), 
+                                         labels = c(1, 2, 3)))
+
+
+# Apply factor again to assign the corresponding labels
+vio.2017.a$cod.pais <- factor(vio.2017.a$cod.pais, levels = c(1, 2,3), 
+                              labels = c("Colombian", "Venezuelan", "Other"))
+
+
+# Check proportions, frequencies and missings (with 1 rounded proportions)
+
+tabyl(vio.2017.a$cod.pais, show_na = TRUE)%>%
+  arrange(desc(n)) %>%  
+  adorn_pct_formatting(digits = 1)
+
+
+# F. "ocup" --- occupation (Trasnformation to  ocup.cat) 
+
+## Codes from the Instituto Nacional de Salud, Colombia / ILO 
+
+# 0 Armed forces occupations--------------------------         from: 0000 - 0999
+# 1 Managers-------------------------------------------------  from: 1000 - 1999
+# 2 Professionals--------------------------------------------  from: 2000 - 2999
+# 3 Technicians and associated professions-------------------- from: 3000 - 3999
+# 4 Administrative support workers---------------------------- from: 4000 - 4999
+# 5 Sales and service workers--------------------------------- from: 5000 - 5999
+# 6 Experts in agriculture, fishing, and forestry------------- from: 6000 - 6999
+# 7 Craft and related workers--------------------------------- from: 7000 - 7999
+# 8 Machinery operators in plants and assembly lines---------- from: 8000 - 8999
+# 9 Elementary occupations------------------------------------ from: 9000 - 9999
+
+# Convert to character
+vio.2017.a$ocup.cat <- as.character(vio.2017.a$ocup)
+
+# Take it 1 by 1 to remove the first number
+vio.2017.a$ocup.cat <- substr(vio.2017.a$ocup.cat, 1, 1)
+
+# Now convert to factor
+vio.2017.a$ocup.cat <- as.factor(vio.2017.a$ocup.cat)
+
+# Now assign labels
+
+levels(vio.2017.a$ocup.cat)
+
+vio.2017.a$ocup.cat <- factor(vio.2017.a$ocup.cat, levels = c("0", "1", "2", "3", 
+                                                              "4", "5", "6", "7", 
+                                                              "8", "9"),
+                              labels = c("Armed forces", "Managers", "Professionals",
+                                         "Technicians", "Administrative support", "Sales and services",
+                                         "Experts in agriculture, fishing, and/or forestry", "Craft workers",
+                                         "Machinery operators", "Elementary occupations"))
+
+
+# Now regroup it like this:
+
+# 1. Armed Forces: "Armed forces"
+# 2. Professionals: "Managers", "Professionals"
+# 3. Technicians and Technological: "Technicians", "Administrative support", "Sales and services"
+# 4. Manual and other jobs: "Experts in agriculture, fishing, and/or forestry", "Craft workers", "Machinery operators", "Elementary occupations"
+
+
+
+## Recode 
+
+vio.2017.a$ocup.cat <- fct_recode(vio.2017.a$ocup.cat,
+                                  "Armed Forces" = "Armed forces", 
+                                  "Professionals & managers" = "Managers",
+                                  "Professionals & managers" = "Professionals",
+                                  "Technicians & administrative support workers" = "Technicians",
+                                  "Technicians & administrative support workers" = "Administrative support",
+                                  "Technicians & administrative support workers" = "Sales and services",
+                                  "Manual workers and craft jobs" = "Experts in agriculture, fishing, and/or forestry",
+                                  "Manual workers and craft jobs" = "Craft workers",
+                                  "Manual workers and craft jobs" = "Machinery operators",
+                                  "Manual workers and craft jobs" = "Elementary occupations")
+
+
+
+levels(vio.2017.a$ocup.cat)
+
+
+
+
+# Check proportions, frequencies and missings (with 1 rounded proportions)
+
+tabyl(vio.2017.a$ocup.cat, show_na = TRUE)%>%
+  arrange(desc(n)) %>% 
+  adorn_pct_formatting(digits = 1)
+
+
+
+# F. "ss" --- Seguridad social (type of social insurance)
+
+levels(vio.2017.a$ss)
+
+
+vio.2017.a$ss <- fct_collapse(vio.2017.a$ss,
+                              "Contributory system" = c("Contributivo"), 
+                              "Subsidize system" = c("Subsidiado"),
+                              "Others (exception, special, unspecified)" = c("Excepción", "Especial", "Indeterminado/Pendiente"), 
+                              "No social security" = c("No asegurado"))
+
+levels(vio.2017.a$ss)
+
+
+# Convert levels to numeric, then apply factor with labels
+vio.2017.a$ss <- as.numeric(factor(vio.2017.a$ss, levels = c("Contributory system", 
+                                                             "Subsidize system",
+                                                             "Others (exception, special, unspecified)", 
+                                                             "No social security"),  
+                                   labels = c(1,2,3,4)))
+
+# Apply factor again to assign the corresponding labels
+vio.2017.a$ss <- factor(vio.2017.a$ss, levels = c(1,2,3,4), 
+                        labels = c("Contributory scheme", 
+                                   "Subsidize scheme",
+                                   "Others (exception, special, unspecified)", 
+                                   "No social security"))
+
+
+
+# Check proportions, frequencies and missings (with 1 rounded proportions)
+
+tabyl(vio.2017.a$ss, show_na = TRUE)%>%
+  arrange(desc(n)) %>% 
+  adorn_pct_formatting(digits = 1)
+
+
+
+# G. "etnia" - Ethnic groups 
+
+levels(vio.2017.a$etnia)
+
+# Now regroup it like this:
+
+# 1. Indigenous: "Indígena" 
+# 2. Other:   "Otro", "Rom/gitano"
+# 3. Afro-Colombian, mulatto, Palenquero, or Raizal:  "Raizal" , "Palenquero" , "Mulato/afro colombiano"
+
+
+vio.2017.a$etnia <- fct_collapse(vio.2017.a$etnia,
+                                 "Indigenous" = c("Indígena"), 
+                                 "Other" = c("Otro", "Rom/gitano"),
+                                 "Afro-Colombian, mulatto, Palenquero, or Raizal" = c("Raizal" , "Palenquero" , "Mulato/afro colombiano"))
+
+levels(vio.2017.a$etnia)
+
+
+# Convert levels to numeric, then apply factor with labels
+vio.2017.a$etnia <- as.numeric(factor(vio.2017.a$etnia, levels = c("Indigenous", 
+                                                                   "Other",
+                                                                   "Afro-Colombian, mulatto, Palenquero, or Raizal"),  
+                                      labels = c(1,2,3)))
+
+# Apply factor again to assign the corresponding labels
+vio.2017.a$etnia <- factor(vio.2017.a$etnia, levels = c(1,2,3), 
+                           labels = c("Indigenous", 
+                                      "Other",
+                                      "Afro-Colombian, mulatto, Palenquero, or Raizal"))
+
+
+
+# Check proportions, frequencies and missings (with 1 rounded proportions)
+
+tabyl(vio.2017.a$etnia, show_na = TRUE)%>%
+  arrange(desc(n)) %>% 
+  adorn_pct_formatting(digits = 1)
+
+
+
+# H. "gp.disca" -  Population with physical or cognitive disabilities
+
+# Check proportions, frequencies and missings (with 1 rounded proportions)
+
+tabyl(vio.2017.a$gp.disca, show_na = TRUE)%>%
+  arrange(desc(n)) %>% 
+  adorn_pct_formatting(digits = 1)
+
+
+# I. "gp.despla" -  Displaced persons due to the internal armed conflict
+
+# Check proportions, frequencies and missings (with 1 rounded proportions)
+
+tabyl(vio.2017.a$gp.despla, show_na = TRUE)%>%
+  arrange(desc(n)) %>% 
+  adorn_pct_formatting(digits = 1)
+
+
+# J. "gp.migra" -  Migrants
+
+# Check proportions, frequencies and missings (with 1 rounded proportions)
+
+tabyl(vio.2017.a$gp.migra, show_na = TRUE)%>%
+  arrange(desc(n)) %>% 
+  adorn_pct_formatting(digits = 1)
+
+
+# K. "gp.carce" -  Prison inmates
+
+# Check proportions, frequencies and missings (with 1 rounded proportions)
+
+tabyl(vio.2017.a$gp.carce, show_na = TRUE)%>%
+  arrange(desc(n)) %>% 
+  adorn_pct_formatting(digits = 1)
+
+
+# L. "gp.gest" -  Pregnants
+
+# Check proportions, frequencies and missings (with 1 rounded proportions)
+
+tabyl(vio.2017.a$gp.gest, show_na = TRUE)%>%
+  arrange(desc(n)) %>% 
+  adorn_pct_formatting(digits = 1)
+
+
+# M. "gp.indi" -  Homeless people 
+
+# Check proportions, frequencies and missings (with 1 rounded proportions)
+
+tabyl(vio.2017.a$gp.indi, show_na = TRUE)%>%
+  arrange(desc(n)) %>% 
+  adorn_pct_formatting(digits = 1)
+
+
+# N. "gp.icbf" -  Children under the care of ICBF (Colombian Institute of Family Welfare) 
+
+# Check proportions, frequencies and missings (with 1 rounded proportions)
+
+tabyl(vio.2017.a$gp.icbf, show_na = TRUE)%>%
+  arrange(desc(n)) %>% 
+  adorn_pct_formatting(digits = 1)
+
+
+# O. "gp.mad.com" -  Community mothers
+
+# Check proportions, frequencies and missings (with 1 rounded proportions)
+
+tabyl(vio.2017.a$gp.mad.com, show_na = TRUE)%>%
+  arrange(desc(n)) %>% 
+  adorn_pct_formatting(digits = 1)
+
+
+# P. "gp.desmo" -  Demobilized individuals from the internal armed conflict
+
+# Check proportions, frequencies and missings (with 1 rounded proportions)
+
+tabyl(vio.2017.a$gp.desmo, show_na = TRUE)%>%
+  arrange(desc(n)) %>% 
+  adorn_pct_formatting(digits = 1)
+
+
+# Q. "gp.psi" -  Population in psychiatric centers
+
+# Check proportions, frequencies and missings (with 1 rounded proportions)
+
+tabyl(vio.2017.a$gp.psi, show_na = TRUE)%>%
+  arrange(desc(n)) %>% 
+  adorn_pct_formatting(digits = 1)
+
+
+# R. "gp.vic.vio" -  Population affected by the internal armed conflict
+
+# Check proportions, frequencies and missings (with 1 rounded proportions)
+
+tabyl(vio.2017.a$gp.vic.vio, show_na = TRUE)%>%
+  arrange(desc(n)) %>% 
+  adorn_pct_formatting(digits = 1)
+
+
+# S. "dep.ocu"  ---- creation of a secondary variable  ----    dep.ocu.cat ## 
+# RAPE: "Regiones Administrativas de Planeación Especial" 
+# We adapted Colombia´s "Special Planning Administrative Regions"
+
+levels(vio.2017.a$dep.ocu)
+
+# - New levels: 
+
+#RAP Caribe/Insular: "Atlántico" , "Bolivar" ,   "Cesar" , "Córdoba" ,  "Guajira", "Magdalena",  "Sucre" ,  "San Andrés"   
+#RAP Centro/Región Andina: "Boyacá" , "Cundinamarca", "Tolima", "Bogotá", "Huila", "Santander", "Norte de Santander"    
+#RAP Orinoquía: "Casanare" , "Arauca", "Vichada" , "Meta"
+#RAP Amazonía/Sur: "Guaviare" , "Guainía" , "Putumayo" ,"Caquetá"  , "Amazonas","Vaupés" 
+#RAP Pacífico: "Cauca" , "Nariño", "Valle",  "Chocó" 
+#RAP Eje Cafetero: "Caldas" ,"Quindío"  , "Risaralda", "Antioquia" 
+#Exterior/Procedencia desconocida: "Exterior", "Procedencia desconocida" 
+
+
+vio.2017.a$dep.ocu.cat<-fct_collapse(vio.2017.a$dep.ocu,
+                                     "RAP Caribbean/Insular" = c("Atlántico", "Bolivar", "Cesar", "Córdoba", "Guajira", "Magdalena", "Sucre", "San Andrés"),
+                                     "RAP Central/Andean Region" = c("Boyacá", "Cundinamarca", "Tolima", "Bogotá", "Huila", "Santander", "Norte de Santander"),
+                                     "RAP Orinoquía" = c("Casanare", "Arauca", "Vichada", "Meta"),
+                                     "RAP Amazon/Southern Region" = c("Guaviare", "Guainía", "Putumayo", "Caquetá", "Amazonas", "Vaupés"),
+                                     "RAP Pacific" = c("Cauca", "Nariño", "Valle del Cauca", "Chocó"),
+                                     "RAP Coffee Triangle region" = c("Caldas", "Quindío", "Risaralda", "Antioquia"),
+                                     "Abroad/Unknown Origin" = c("Exterior", "Procedencia desconocida"))                               
+
+
+levels(vio.2017.a$dep.ocu.cat) 
+
+
+
+# Convert levels to numeric, then apply factor with labels
+vio.2017.a$dep.ocu.cat <- as.numeric(factor(vio.2017.a$dep.ocu.cat, levels = c( "RAP Caribbean/Insular", 
+                                                                                "RAP Central/Andean Region", 
+                                                                                "RAP Orinoquía",
+                                                                                "RAP Amazon/Southern Region", 
+                                                                                "RAP Pacific",
+                                                                                "RAP Coffee Triangle region",
+                                                                                "Abroad/Unknown Origin" ),  
+                                            labels = c(1,2,3,4,5,6,7)))
+
+# Apply factor again to assign the corresponding labels
+vio.2017.a$dep.ocu.cat <- factor(vio.2017.a$dep.ocu.cat, levels = c(1,2,3,4,5,6,7), 
+                                 labels = c("RAP Caribbean/Insular", 
+                                            "RAP Central/Andean Region", 
+                                            "RAP Orinoquía",
+                                            "RAP Amazon/Southern Region", 
+                                            "RAP Pacific",
+                                            "RAP Coffee Triangle region",
+                                            "Abroad/Unknown Origin"))
+
+
+
+# Check proportions, frequencies and missings (with 1 rounded proportions)
+
+tabyl(vio.2017.a$dep.ocu.cat, show_na = TRUE)%>%
+  arrange(desc(n)) %>% 
+  adorn_pct_formatting(digits = 1)
+
+
+# T. "zona.conf.arm"  ---- armed conflict region ##
+
+
+# Check proportions, frequencies and missings (with 1 rounded proportions)
+
+tabyl(vio.2017.a$zona.conf.arm, show_na = TRUE)%>%
+  arrange(desc(n)) %>% 
+  adorn_pct_formatting(digits = 1)
+
+
+# U. "naturaleza". ----- type of violence (missing values correspond to the variable "v.sexual")
+
+
+# Check proportions, frequencies and missings (with 1 rounded proportions)
+
+tabyl(vio.2017.a$naturaleza, show_na = TRUE)%>%
+  arrange(desc(n)) %>% 
+  adorn_pct_formatting(digits = 1)
+
+
+
+# Convert levels to numeric, then apply factor with labels
+vio.2017.a$naturaleza <- as.numeric(factor(vio.2017.a$naturaleza, levels = c("Violencia física", 
+                                                                             "Violencia psicológica",
+                                                                             "Negligencia y abandono"),  
+                                           labels = c(1,2,3)))
+
+# Apply factor again to assign the corresponding labels
+vio.2017.a$naturaleza <- factor(vio.2017.a$naturaleza, levels = c(1,2,3), 
+                                labels = c("Physical violence", 
+                                           "Phsychological violence",
+                                           "Negligence and abandonment"))
+
+
+
+
+# V. "v.seuxal.cat" --- Create a secondary variable based on "v.sexual". ----- type of sexual violence (missing values correspond to the variable "naturaleza")
+
+levels(vio.2017.a$v.sexual) 
+
+
+# Check proportions, frequencies and missings (with 1 rounded proportions)
+
+tabyl(vio.2017.a$v.sexual, show_na = TRUE)%>%
+  arrange(desc(n)) %>% 
+  adorn_pct_formatting(digits = 1)
+
+
+# # - New levels: 
+
+# 1. Sexual abuse and sexual harassment: Abuso sexual, Acoso sexual
+# 2. Rape, sexual assault and sexual acts involving the use of force: Violación +  Actos sexuales con uso de la fuerza 
+# 3. Other sexual acts (nudity, sterilization, forced contraception, genital mutilation): Otros actos sexuales (desnudez, esterilización, planificación) + Mutilación genital
+# 4. Sexual exploitation of minors and human trafficking for sexual exploitation: Explotación sexual comercial de niños, niñas y adolescentes
+
+
+vio.2017.a$v.sexual.cat<-fct_collapse(vio.2017.a$v.sexual,
+                                      "Sexual abuse and sexual harassment"  =c("Abuso sexual", "Acoso sexual"),
+                                      "Rape, sexual assault and sexual acts involving the use of force"  = c("Violación" , "Actos sexuales con uso de la fuerza"),
+                                      "Other sexual acts (forced nudity, sterilization and contraception, genital mutilation)"=  c("Otros actos sexuales (desnudez, esterilización, planificación)", "Mutilación genital"),
+                                      "Sexual exploitation of minors and human trafficking for sexual exploitation"= c("Explotación sexual comercial de niños, niñas y adolescentes", "Trata de personas"))                               
+
+
+levels(vio.2017.a$v.sexual.cat) 
+
+
+# Check the categories of the two variables
+
+table(vio.2017.a$v.sexual, vio.2017.a$v.sexual.cat)
+
+
+
+# Convert levels to numeric, then apply factor with labels
+vio.2017.a$v.sexual.cat <- as.numeric(factor(vio.2017.a$v.sexual.cat, levels = c("Sexual abuse and sexual harassment",                                                    
+                                                                                 "Rape, sexual assault and sexual acts involving the use of force",                       
+                                                                                 "Sexual exploitation of minors and human trafficking for sexual exploitation",           
+                                                                                 "Other sexual acts (forced nudity, sterilization and contraception, genital mutilation)"),  
+                                             labels = c(1,2,3,4)))
+
+# Apply factor again to assign the corresponding labels
+vio.2017.a$v.sexual.cat <- factor(vio.2017.a$v.sexual.cat, levels = c(1,2,3,4), 
+                                  labels = c("Sexual abuse and sexual harassment",                                                    
+                                             "Rape, sexual assault and sexual acts involving the use of force",                       
+                                             "Sexual exploitation of minors and human trafficking for sexual exploitation",           
+                                             "Other sexual acts (forced nudity, sterilization and contraception, genital mutilation)"))
+
+
+
+
+# Check proportions, frequencies and missings (with 1 rounded proportions)
+
+tabyl(vio.2017.a$v.sexual.cat, show_na = TRUE)%>%
+  arrange(desc(n)) %>% 
+  adorn_pct_formatting(digits = 1)
+
+
+### W.  "tipo.viol" ---- Create one variable made of "naturaleza" and "v.sexual.cat"
+
+# First check the categories of the two variables and understand the data
+
+table(vio.2017.a$naturaleza, vio.2017.a$v.sexual.cat, useNA = "always")
+
+# V.física:                                      
+# V.psicológica: 
+# Negligencia y abandono: 
+# V.sexual: 
+#  -  "Sexual abuse and sexual harassment" =                                                   
+#  -  "Rape, sexual assault and sexual acts involving the use of force"  =                     
+#  -  "Sexual exploitation of minors and human trafficking for sexual exploitation"   =          
+#  -  "Other sexual acts (forced nudity, sterilization and contraception, genital mutilation)" = 
+#  -  "Missing" = 
+
+
+# Create a secondary variable "tipo.viol" from "naturaleza"
+
+vio.2017.a$tipo.viol <- vio.2017.a$naturaleza
+
+# Remember, you want category "4" is sexual violence
+# Update 'tipo.viol' based on 'v.sexual.cat'
+# Assign '4' for sexual violence based on conditions in 'v.sexual.cat'
+vio.2017.a$tipo.viol <- ifelse(vio.2017.a$v.sexual.cat %in% c("Sexual abuse and sexual harassment", 
+                                                              "Rape, sexual assault and sexual acts involving the use of force", 
+                                                              "Sexual exploitation of minors and human trafficking for sexual exploitation", 
+                                                              "Other sexual acts (forced nudity, sterilization and contraception, genital mutilation)"), 4, vio.2017.a$tipo.viol)
+
+# Check it 
+
+table(vio.2017.a$tipo.viol)
+
+# Transform it into factor
+
+vio.2017.a$tipo.viol <-factor(vio.2017.a$tipo.viol, levels=c("1", "2", "3", "4"),
+                              
+                              labels=c("Physical violence", 
+                                       "Phsychological violence",
+                                       "Negligence & abandonment",
+                                       "Sexual violence"))
+
+
+
+# Check proportions, frequencies and missings (with 1 rounded proportions)
+
+tabyl(vio.2017.a$tipo.viol, show_na = TRUE)%>%
+  arrange(desc(n)) %>% 
+  adorn_pct_formatting(digits = 1)
+
+
+### X. "mecanismo" ---- to "mecanismo.cat"
+
+# Check it
+levels(vio.2017.a$mecanismo)
+
+tabyl(vio.2017.a$mecanismo, show_na = TRUE)%>%
+  adorn_pct_formatting(digits = 1)
+
+
+## New levels:
+
+# 1: Blunt, cutting, stabbing, and related injuries : "Contundente, cortocontundente",   "Cortante, cortopunzante, punzante" 
+# 2: Falls, firearm projectiles, and others: "Caídas" ,  "Proyectil arma de fuego", "Otros mecanismos" 
+# 3: Hanging, strangulation, suffocation : "Ahorcamiento, estrangulamiento, sofocación" , 
+# 4: Burns (water, acid, alkalis, household substances) : "Quemaduras por fuego o llamas", "Quemaduras por ácido, álcalis o sustancias corrosivas", "Quemaduras por líquido hirviente", "Sustancias de uso doméstico que causen irritación"    
+
+
+
+# First collapse it 
+levels(vio.2017.a$mecanismo)
+vio.2017.a$mecanismo.cat <- fct_collapse(vio.2017.a$mecanismo,
+                                         "Blunt, cutting, stabbing, and related injuries"= c("Contundente, cortocontundente","Cortante, cortopunzante, punzante"),  
+                                         "Falls, firearm projectiles, and others" =  c("Caídas", "Proyectil arma de fuego", "Otros mecanismos"), 
+                                         "Hanging, strangulation, suffocation" =  c("Ahorcamiento, estrangulamiento, sofocación"), 
+                                         "Burns (water, acid, alkalis, household substances)" = c("Quemaduras por fuego o llamas", 
+                                                                                                  "Quemaduras por ácido, álcalis o sustancias corrosivas", 
+                                                                                                  "Quemaduras por líquido hirviente", "Sustancias de uso doméstico que causen irritación"))    
+
+
+
+
+
+levels(vio.2017.a$mecanismo.cat)                                         
+
+
+
+# Convert levels to numeric, then apply factor with labels
+vio.2017.a$mecanismo.cat <- as.numeric(factor(vio.2017.a$mecanismo.cat, levels = c("Blunt, cutting, stabbing, and related injuries", 
+                                                                                   "Falls, firearm projectiles, and others",
+                                                                                   "Hanging, strangulation, suffocation",
+                                                                                   "Burns (water, acid, alkalis, household substances)"),
+                                              labels = c(1,2,3,4)))
+
+
+# Apply factor again to assign the corresponding labels
+vio.2017.a$mecanismo.cat <- factor(vio.2017.a$mecanismo.cat, levels = c(1,2,3,4), 
+                                   labels = c("Blunt, cutting, stabbing, and related injuries", 
+                                              "Falls, firearm projectiles, and others",
+                                              "Hanging, strangulation, suffocation",
+                                              "Burns (water, acid, alkalis, household substances)"))
+
+
+
+levels(vio.2017.a$mecanismo.cat)  
+
+
+
+
+# Check proportions, frequencies and missings (with 1 rounded proportions)
+
+tabyl(vio.2017.a$mecanismo.cat, show_na = TRUE)%>%
+  arrange(desc(n)) %>% 
+  adorn_pct_formatting(digits = 1)                    
+
+
+
+# Y. "escena" ---- location  --- to "escena.cat"
+
+levels(vio.2017.a$escena)
+
+# We will transform it into two levels : Household & Public Spaces 
+
+
+vio.2017.a$escena.cat<- fct_collapse(vio.2017.a$escena, 
+                                     "Household"= c("Vivienda"), 
+                                     "Public Spaces"= c("Vía pública",
+                                                        "Establecimiento educativo", 
+                                                        "Lugar de trabajo", "Comercio y áreas de servicios (tiendas y centros comerciales)", 
+                                                        "Otros espacios abiertos", "Lugar de esparcimiento con expendio de alcohol", "Institución de salud"  , 
+                                                        "Área deportiva y recreativa", "Otro")) 
+
+
+
+levels(vio.2017.a$escena.cat)
+
+
+#  Convert levels to numeric, then apply factor with labels
+vio.2017.a$escena.cat <- as.numeric(factor(vio.2017.a$escena.cat, levels = c("Household", 
+                                                                             "Public Spaces"),
+                                           labels = c(1,2)))
+
+
+# Apply factor again to assign the corresponding labels
+vio.2017.a$escena.cat <- factor(vio.2017.a$escena.cat, levels = c(1,2), 
+                                labels = c("Household", 
+                                           "Public Spaces"))
+
+
+
+levels(vio.2017.a$escena.cat)  
+
+
+
+
+# Check proportions, frequencies and missings (with 1 rounded proportions)
+
+tabyl(vio.2017.a$escena.cat, show_na = TRUE)%>%
+  arrange(desc(n)) %>% 
+  adorn_pct_formatting(digits = 1)                    
+
+
+
+
+# Z. "activi" --- survivor's main activity  --- collapse categories --- "activi.cat"
+
+levels(vio.2017.a$activi)
+
+# New levels
+
+# Other activities: "Otros", "Ninguna" 
+# Civic leaders and students: "Líderes cívicos", "Estudiantes", 
+# Domestic workers, homemakers, and caregivers: "Persona que cuida a otras", "Trabajador/a doméstico", "Persona dedicada al cuidado del hogar"
+# Farmers and peasants: "Campesino/a" , 
+# Sex workers: "Persona en situación de prostitución" 
+
+
+
+
+vio.2017.a$activi.cat <- fct_collapse(vio.2017.a$activi, 
+                                      "Civic leaders and students"= c("Líderes cívicos", "Estudiantes"), 
+                                      "Domestic workers, homemakers, and caregivers" = c("Persona dedicada al cuidado del hogar","Persona que cuida a otras","Trabajador/a doméstico"),     
+                                      "Sex workers" = c("Persona en situación de prostitución"), 
+                                      "Farmers and peasants"= c("Campesino/a"), 
+                                      "Other activities"= c( "Otros","Ninguna" ))
+
+
+levels(vio.2017.a$activi.cat)
+
+
+# Convert levels to numeric, then apply factor with labels
+vio.2017.a$activi.cat <- as.numeric(factor(vio.2017.a$activi.cat, levels = c("Civic leaders and students", 
+                                                                             "Domestic workers, homemakers, and caregivers",
+                                                                             "Sex workers",
+                                                                             "Farmers and peasants", 
+                                                                             "Other activities"),
+                                           labels = c(1,2,3,4,5)))
+
+
+# Apply factor again to assign the corresponding labels
+vio.2017.a$activi.cat <- factor(vio.2017.a$activi.cat, levels = c(1,2,3,4,5), 
+                                labels = c("Civic leaders and students", 
+                                           "Domestic workers, homemakers, and caregivers",
+                                           "Sex workers",
+                                           "Farmers and peasants", 
+                                           "Other activities"))
+
+
+
+levels(vio.2017.a$activi.cat)  
+
+
+
+
+# Check proportions, frequencies and missings (with 1 rounded proportions)
+
+tabyl(vio.2017.a$activi.cat, show_na = TRUE)%>%
+  arrange(desc(n)) %>% 
+  adorn_pct_formatting(digits = 1)                    
+
+
+# A1. orient.sex ---- Survivor's sexual orientation
+
+levels(vio.2017.a$orient.sex)  
+
+  
+# Check proportions, frequencies and missings (with 1 rounded proportions)
+
+tabyl(vio.2017.a$orient.sex, show_na = TRUE)%>%
+  arrange(desc(n)) %>% 
+  adorn_pct_formatting(digits = 1)  
+
+
+
+# A2. ident.gen ---- Survivor's gender identity 
+
+levels(vio.2017.a$ident.gen)  
+
+
+# Translate the labels by directly modifying the levels
+levels(vio.2017.a$ident.gen) <- c("Male", "Female", "Transgender")
+
+# Check the result
+levels(vio.2017.a$ident.gen)
+
+
+
+# Check proportions, frequencies and missings (with 1 rounded proportions)
+
+tabyl(vio.2017.a$ident.gen, show_na = TRUE)%>%
+  arrange(desc(n)) %>% 
+  adorn_pct_formatting(digits = 1) 
+
+
+# A3. "consumo.spa" ---- Consumption of substances - no changes
+
+
+# Check proportions, frequencies and missings (with 1 rounded proportions)
+
+tabyl(vio.2017.a$consumo.spa, show_na = TRUE)%>%
+  arrange(desc(n)) %>% 
+  adorn_pct_formatting(digits = 1) 
+
+
+
+# A4. "jefe.h" ---- Person who is the head of the household - no changes
+
+
+# Check proportions, frequencies and missings (with 1 rounded proportions)
+
+tabyl(vio.2017.a$jefe.h, show_na = TRUE)%>%
+  arrange(desc(n)) %>% 
+  adorn_pct_formatting(digits = 1) 
+
+
+
+# A5. "oh.otros" ---- Presence of alcohol or another substance in the survivor - no changes
+
+
+# Check proportions, frequencies and missings (with 1 rounded proportions)
+
+tabyl(vio.2017.a$oh.otros, show_na = TRUE)%>%
+  arrange(desc(n)) %>% 
+  adorn_pct_formatting(digits = 1) 
+
+
+
+# A6. "antec.vio" ---- Survivors with history of violence - no changes
+
+
+# Check proportions, frequencies and missings (with 1 rounded proportions)
+
+tabyl(vio.2017.a$antec.vio, show_na = TRUE)%>%
+  arrange(desc(n)) %>% 
+  adorn_pct_formatting(digits = 1) 
+
+
+# A7. "sexo.agre" - Survivors with history of violence 
+
+levels(vio.2017.a$sexo.agre)  
+
+# Error checked with the INS August - September 2024 
+
+# Translate the labels by directly modifying the levels
+levels(vio.2017.a$sexo.agre) <- c("Female", "Male", "Undetermined", "Undetermined")
+
+# Check the result
+levels(vio.2017.a$sexo.agre)
+
+# Check proportions, frequencies and missings (with 1 rounded proportions)
+
+tabyl(vio.2017.a$sexo.agre, show_na = TRUE)%>%
+  arrange(desc(n)) %>% 
+  adorn_pct_formatting(digits = 1) 
+
+
+# A.8 "rel.fami" - familiar relationship with the agressor -
+
+levels (vio.2017.a$rel.fami)
+
+# Translate the labels by directly modifying the levels
+levels(vio.2017.a$rel.fami) <- c("Father", "Mother", "Partner", "Ex-partner", "Other family member", "Non-family member")
+
+# Check the result
+levels(vio.2017.a$rel.fami)
+
+
+# Check proportions, frequencies and missings (with 1 rounded proportions)
+
+tabyl(vio.2017.a$rel.fami, show_na = TRUE)%>%
+  arrange(desc(n)) %>% 
+  adorn_pct_formatting(digits = 1)   
+
+
+# A.9 "conv.agre" - living with the agressor -
+
+levels (vio.2017.a$conv.agre)
+
+
+# Check proportions, frequencies and missings (with 1 rounded proportions)
+
+tabyl(vio.2017.a$conv.agre, show_na = TRUE)%>%
+  adorn_pct_formatting(digits = 1) 
+
+
+
+# A.10  "r.no.flia" --- Non familiar relation with the agressor --- to r.no.flia.cat
+
+levels (vio.2017.a$r.no.flia)
+
+# We are goin to convert in into two levels: Stranger and Acquaintance 
+
+vio.2017.a$r.no.flia.cat <- fct_collapse(vio.2017.a$r.no.flia, 
+                                         "Stranger"= c("Desconocido/a"), 
+                                         "Acquaintance" = c("Profesor/a", "Amigo/a", "Compañero/a de trabajo", 
+                                                            "Vecino/a","Compañero/a de estudio", "Conocido/a sin ningún trato", 
+                                                            "Sacerdote/pastor/a","Servidor/a público/a","Otro/a", "Jefe/a" ))    
+
+
+levels(vio.2017.a$r.no.flia.cat)
+
+
+# Convert levels to numeric, then apply factor with labels
+vio.2017.a$r.no.flia.cat <- as.numeric(factor(vio.2017.a$r.no.flia.cat, levels = c("Stranger","Acquaintance"),
+                                              labels = c(1,2)))
+
+
+# Apply factor again to assign the corresponding labels
+vio.2017.a$r.no.flia.cat <- factor(vio.2017.a$r.no.flia.cat, levels = c(1,2), 
+                                   labels = c("Stranger","Acquaintance"))
+
+
+
+levels(vio.2017.a$r.no.flia.cat)  
+
+
+
+
+# Check proportions, frequencies and missings (with 1 rounded proportions)
+
+tabyl(vio.2017.a$r.no.flia.cat, show_na = TRUE)%>%
+  arrange(desc(n)) %>% 
+  adorn_pct_formatting(digits = 1)                    
+
+
+
+# # A.11  "relacion" --- We are going to create one variable from "r.no.flia.cat" and "rel.fami"
+
+
+# Check proportions, frequencies and missings (with 1 rounded proportions)
+
+tabyl(vio.2017.a$r.no.flia.cat, show_na = TRUE)%>%
+  adorn_pct_formatting(digits = 1)        
+
+
+# Check proportions, frequencies and missings (with 1 rounded proportions)
+
+tabyl(vio.2017.a$rel.fami, show_na = TRUE)%>%
+  arrange(desc(n)) %>% 
+  adorn_pct_formatting(digits = 1)        
+
+
+
+# Create a variable "relacion" from "rel.fami"
+# "Father"= 1   ;    "Mother"= 2  ;   "Partner"   = 3  ;   "Ex-partner"  = 4   "Other family member" = 5  ;   "Non-family member" = 6 
+
+
+vio.2017.a$relacion <- vio.2017.a$rel.fami
+vio.2017.a$relacion <- as.numeric(vio.2017.a$relacion)
+
+
+# Assign NA values in 'relacion' to 5 ("Other family member")
+# Recommendation of responsible of data management INS August 2024
+vio.2017.a$relacion[is.na(vio.2017.a$relacion)] <- 5
+
+
+#Check it
+tabyl(vio.2017.a$relacion, show_na = TRUE)%>%
+  arrange(desc(n)) %>% 
+  adorn_pct_formatting(digits = 1)
+
+
+# Create a variable "no.fami" from "r.no.flia.cat"
+# Stranger = 2. ;  Acquaintance = 1
+
+vio.2017.a$no.fami <- vio.2017.a$r.no.flia.cat
+vio.2017.a$no.fami <- as.numeric(vio.2017.a$no.fami)
+
+#Check it 
+tabyl(vio.2017.a$no.fami, show_na = TRUE)%>%
+  adorn_pct_formatting(digits = 1)
+
+
+# Creat the category "9" for the missing of the variable "no.fami" and in "rel.fami" ("Undetermined stranger" )
+# Stranger = 1 ;  Acquaintance = 2 ; 9 = NA
+# "Father"= 1   ;    "Mother"= 2  ;   "Partner"   = 3  ;   "Ex-partner"  = 4   "Other family member" = 5  ;   "Non-family member" = 6 ;  
+
+vio.2017.a$no.fami <-ifelse(is.na(vio.2017.a$no.fami),9,vio.2017.a$no.fami)
+
+
+#Check them
+tabyl(vio.2017.a$no.fami, show_na = TRUE)%>%
+  arrange(desc(n)) %>% 
+  adorn_pct_formatting(digits = 1)  
+
+
+tabyl(vio.2017.a$rel.fami, show_na = TRUE)%>%
+  arrange(desc(n)) %>% 
+  adorn_pct_formatting(digits = 1)  
+
+
+# Update variable "relation" using the category 2 (Acquaintance) from the variable "no.fami" and the new category 7 ("Known but not family")
+
+vio.2017.a$relacion <- ifelse(vio.2017.a$no.fami == 2, 7, vio.2017.a$relacion)
+table(vio.2017.a$relacion, vio.2017.a$no.fami)
+
+
+# Update variable "relation" using the category 1 (Stranger) from the variable "no.fami" and the new category 8 ("Unknown and not family")
+
+vio.2017.a$relacion <- ifelse(vio.2017.a$no.fami == 1, 8, vio.2017.a$relacion)
+
+
+
+# Check everything 
+
+table(vio.2017.a$relacion, vio.2017.a$rel.fami, useNA = "always")
+
+
+
+# Convert 'relacion' into a factor with the appropriate labels
+vio.2017.a$relacion <- factor(vio.2017.a$relacion, 
+                              levels = c(1, 2, 3, 4, 5, 6, 7, 8),
+                              labels = c("Father", "Mother", "Partner", "Ex-partner", 
+                                         "Other family member", "Undetermined stranger", 
+                                         "Known but not family", "Unknown and not family"))
+
+
+# Check proportions
+tabyl(vio.2017.a$relacion, show_na = TRUE)%>%
+  arrange(desc(n)) %>%  
+  adorn_pct_formatting(digits = 1)
+
+
+
+###### Save new datasets: "vio.2017.b"
+
+vio.2017.b <- vio.2017.a
+
+save(vio.2017.b, file = "vio.2017.b.Rds")
+
+
+
+########################################################################
+## NOTE: The same preprocessing pipeline was applied to datasets      ##
+##       from 2017 to 2022, following equivalent steps.               ##
+##                                                                    ##
+##       Variable names and structures were only adjusted when        ##
+##       necessary to accommodate minor year-to-year differences      ##
+##       in data layout.                                              ##
+########################################################################
+
+
+
+
+############################################################
+## B*. Data exploration and manipulation - Time analysis   ##
+############################################################
+
+# Objective:
+# - Create a pandemic/prepandemic binary variable for 2020.
+# - Calculate and summarize the difference between event and notification dates (all years).
+# - Visualize distributions using histograms.
+
+
+## Set working directory
+
+## Load datasets (complete cases by year)
+load("vio.2017.tipo.viol.cc.Rds")
+load("vio.2018.b.Rds")
+load("vio.2019.b.Rds")
+load("vio.2020.b.Rds")
+load("vio.2021.b.Rds")
+load("vio.2022.b.Rds")
+
+## Create binary period variables for 2020
+vio.2020.b <- vio.2020.b %>%
+  mutate(
+    periodo.hecho = case_when(
+      fech.hech <= as.Date("2020-03-24") ~ "Prepandemic",
+      fech.hech >= as.Date("2020-03-25") ~ "Pandemic",
+      TRUE ~ "Other"
+    ),
+    periodo.not = case_when(
+      fech.not <= as.Date("2020-03-24") ~ "Prepandemic",
+      fech.not >= as.Date("2020-03-25") ~ "Pandemic",
+      TRUE ~ "Other"
+    ),
+    periodo.hecho = as.factor(periodo.hecho),
+    periodo.not = as.factor(periodo.not)
+  )
+
+# Explore distributions
+tabyl(vio.2020.b$periodo.hecho, show_na = TRUE) %>% adorn_pct_formatting(digits = 1)
+tabyl(vio.2020.b$periodo.not, show_na = TRUE) %>% adorn_pct_formatting(digits = 1)
+table(vio.2020.b$periodo.not, vio.2020.b$periodo.hecho)
+
+## Create and describe dif.dias for each year
+calculate_and_plot_dif <- function(df, year, fill_color) {
+  df <- df %>% mutate(dif.dias = as.numeric(difftime(fech.not, fech.hech, units = "days")))
+
+  summary_stats <- df %>%
+    summarise(
+      min_days = min(dif.dias, na.rm = TRUE),
+      max_days = max(dif.dias, na.rm = TRUE),
+      mean_days = mean(dif.dias, na.rm = TRUE),
+      median_days = median(dif.dias, na.rm = TRUE),
+      sd_days = sd(dif.dias, na.rm = TRUE),
+      count = n()
+    )
+  print(paste("Summary for", year))
+  print(summary_stats)
+
+  plot <- ggplot(df, aes(x = dif.dias)) +
+    geom_histogram(binwidth = 5, fill = fill_color, color = "black") +
+    labs(title = paste("Time Difference Histogram", year),
+         x = "Difference in Days",
+         y = "Count") +
+    scale_x_continuous(limits = c(0, 500)) +
+    scale_y_continuous(limits = c(0, 1000)) +
+    theme_minimal()
+
+  return(list(data = df, plot = plot))
+}
+
+results <- list(
+  "2017" = calculate_and_plot_dif(vio.2017.tipo.viol.cc, "2017", "lightblue"),
+  "2018" = calculate_and_plot_dif(vio.2018.b, "2018", "salmon"),
+  "2019" = calculate_and_plot_dif(vio.2019.b, "2019", "seagreen1"),
+  "2020" = calculate_and_plot_dif(vio.2020.b, "2020", "slateblue1"),
+  "2021" = calculate_and_plot_dif(vio.2021.b, "2021", "lightgoldenrodyellow"),
+  "2022" = calculate_and_plot_dif(vio.2022.b, "2022", "mintcream")
+)
+
+# Combine and export histograms
+grid_plot <- grid.arrange(
+  results[["2017"]]$plot, results[["2018"]]$plot,
+  results[["2019"]]$plot, results[["2020"]]$plot,
+  results[["2021"]]$plot, results[["2022"]]$plot,
+  nrow = 3
+)
+
+ggsave("histo.dif.dates.all.png", plot = grid_plot)
+ggsave("histo.dif.dates.all.pdf", plot = grid_plot)
+
+## Save cleaned datasets with new variable dif.dias
+vio.2017.c <- results[["2017"]]$data
+vio.2018.c <- results[["2018"]]$data
+
+
+vio.2019.c <- results[["2019"]]$data
+vio.2020.c <- results[["2020"]]$data
+vio.2021.c <- results[["2021"]]$data
+vio.2022.c <- results[["2022"]]$data
+
+save(vio.2017.c, file = "vio.2017.c.Rds")
+save(vio.2018.c, file = "vio.2018.c.Rds")
+save(vio.2019.c, file = "vio.2019.c.Rds")
+save(vio.2020.c, file = "vio.2020.c.Rds")
+save(vio.2021.c, file = "vio.2021.c.Rds")
+save(vio.2022.c, file = "vio.2022.c.Rds")
+
+
+
+
+
+
+############################################################
+##      C. Data manipulation - Prepandemic/Pandemic       ##
+############################################################
+
+## We are going to:
+
+# 1) Merge databases from 2017, 2018, 2019 and 24.03.2020 in one database:"before" (prepandemic)
+# 2) Merge databases from 25.03.2020, 2021, 2022 in one database:"pandemic" (pandemic)
+# 3) Merge all our databases to one: "vio.todo"
+# 4) Describe the "Pandemic" and "Prepandemic" database according to the protocol's selected variables 
+
+## 1. Set working directory
+
+## 2. Import the databases for each year (last version "c")
+
+load("vio.2022.c.Rds")
+load("vio.2021.c.Rds")
+load("vio.2020.c.Rds")
+load("vio.2019.c.Rds")
+load("vio.2018.c.Rds")
+load("vio.2017.c.Rds")
+
+## 3.  Filter and divide the 2020 database: "vio.2020.c"
+
+# According to the variable: "periodo.hech" (date of the event) we will divide "vio.2020.b"and create two databases:  
+# A) Level Prepandemic:      "vio.2020.before"
+# B) Level Pandemic:         "vio.2020.pandemic" 
+
+
+# A)  Create the dataset: "vio.2020.before" according to the variable label of the variable "periodo.hecho" - "Prepandemic"
+
+vio.2020.before <- vio.2020.c[which(vio.2020.c$periodo.hecho== "Prepandemic"), ]
+
+
+# Check the range
+
+range(vio.2020.before$fech.hech)
+
+# From "2019-12-29"  ---  "2020-03-24" - Perfect!
+
+
+# B)  Create the dataset: "vio.2020.pandemic" according to the variable label of the variable "periodo.hecho" - "Pandemic"
+
+vio.2020.pandemic <- vio.2020.c[which(vio.2020.c$periodo.hecho== "Pandemic"), ]
+
+
+# Check the range
+
+range(vio.2020.pandemic$fech.hech)
+
+# From "2020-03-25"  ---  "2020-01-02" - Perfect!
+
+
+## 4. Merge databases from 2017, 2018, 2019 and "vio.2020.before" in one database:"before" (prepandemic)
+
+# First check that all dataframes have the same # of variables
+# The 2020 dataframes have 2 variables that we don't need anymore: "periodo.hecho", "periodo.not"
+
+
+# Drop "periodo.hecho" & "periodo.not" from  the dataframe "vio.2020.before"
+
+vio.2020.before <- vio.2020.before %>% select(-periodo.hecho, -periodo.not)
+
+
+# Drop "periodo.hecho" & "periodo.not" from  the dataframe "vio.2020.pandemic"
+
+vio.2020.pandemic <- vio.2020.pandemic %>% select(-periodo.hecho, -periodo.not)
+
+
+# Merge databases from 2017, 2018, 2019 and "vio.2020.before" in one database:"before" (prepandemic)
+
+vio.before <- rbind(vio.2017.c, vio.2018.c, vio.2019.c, vio.2020.before)
+
+# Check number of observations and variables
+
+
+# Merge databases from "vio.2020.pandemic", 2021, 2022 in one database:"pandemic"
+
+vio.pandemic <- rbind(vio.2021.c, vio.2022.c, vio.2020.pandemic)
+
+# Check number of observations and variables
+
+
+
+## 5. Merge all dataframes to one: "vio.todo"
+
+# Create a variable in each dataset with the name "periodo" and the levels "Prepandemic" & "Pandemic"
+
+# Create the variable "periodo" with the unique label "Prepandemic" for the database "vio.before"
+
+vio.before$periodo <- c("Prepandemic")
+
+# convert it into factor
+vio.before$periodo <- as.factor(vio.before$periodo)
+
+
+
+# Create the variable "periodo" with the unique label "Pandemic" for the database "vio.pandemic"
+
+vio.pandemic$periodo <- c("Pandemic")
+
+# convert it into factor
+vio.pandemic$periodo <- as.factor(vio.pandemic$periodo)
+
+
+# Merge all dataframes to one: "vio.todo"
+
+vio.todo <- rbind(vio.before, vio.pandemic)
+
+
+
+# 5) Describe the "Pandemic" and "Prepandemic" databases 
+
+
+#### Prepandemic dataframe - "vio.before"
+
+# A. "fech.not" - notification date
+
+range(vio.before$fech.not)
+
+
+# B. "fech.hech"  - date of the event 
+
+range(vio.before$fech.hech)
+
+
+
+# C. "año" - year (no changes) 
+
+summary(vio.before$año)
+
+# D. "edad" - age 
+
+describe(vio.before$edad)
+
+# Check proportions, frequencies and missings (with 1 rounded proportions)
+
+tabyl(vio.before$edad.cat, show_na = TRUE)%>%
+  adorn_pct_formatting(digits = 1)
+
+
+# D. "sexo" - sex 
+
+# Check proportions, frequencies and missings (with 1 rounded proportions)
+
+tabyl(vio.before$sexo, show_na = TRUE)%>%
+  adorn_pct_formatting(digits = 1)
+
+
+# E. "cod.pais" - nationality 
+
+levels(vio.before$cod.pais)
+
+# Check proportions, frequencies and missings (with 1 rounded proportions)
+
+tabyl(vio.before$cod.pais, show_na = TRUE)%>%
+  arrange(desc(n)) %>%  
+  adorn_pct_formatting(digits = 1)
+
+
+# F. "ocup.cat" --- occupation 
+
+# Check proportions, frequencies and missings (with 1 rounded proportions)
+
+tabyl(vio.before$ocup.cat, show_na = TRUE)%>%
+  arrange(desc(n)) %>% 
+  adorn_pct_formatting(digits = 1)
+
+
+
+# F. "ss" --- Seguridad social (type of social insurance)
+
+levels(vio.before$ss)
+
+# Check proportions, frequencies and missings (with 1 rounded proportions)
+
+tabyl(vio.before$ss, show_na = TRUE)%>%
+  arrange(desc(n)) %>% 
+  adorn_pct_formatting(digits = 1)
+
+
+
+# G. "etnia" - Ethnic groups 
+
+levels(vio.before$etnia)
+
+
+# Check proportions, frequencies and missings (with 1 rounded proportions)
+
+tabyl(vio.before$etnia, show_na = TRUE)%>%
+  arrange(desc(n)) %>% 
+  adorn_pct_formatting(digits = 1)
+
+
+
+# H. "gp.disca" -  Population with physical or cognitive disabilities
+
+# Check proportions, frequencies and missings (with 1 rounded proportions)
+
+tabyl(vio.before$gp.disca, show_na = TRUE)%>%
+  arrange(desc(n)) %>% 
+  adorn_pct_formatting(digits = 1)
+
+
+# I. "gp.despla" -  Displaced persons due to the internal armed conflict
+
+# Check proportions, frequencies and missings (with 1 rounded proportions)
+
+tabyl(vio.before$gp.despla, show_na = TRUE)%>%
+  arrange(desc(n)) %>% 
+  adorn_pct_formatting(digits = 1)
+
+
+# J. "gp.migra" -  Migrants
+
+# Check proportions, frequencies and missings (with 1 rounded proportions)
+
+tabyl(vio.before$gp.migra, show_na = TRUE)%>%
+  arrange(desc(n)) %>% 
+  adorn_pct_formatting(digits = 1)
+
+
+# K. "gp.carce" -  Prison inmates
+
+# Check proportions, frequencies and missings (with 1 rounded proportions)
+
+tabyl(vio.before$gp.carce, show_na = TRUE)%>%
+  arrange(desc(n)) %>% 
+  adorn_pct_formatting(digits = 1)
+
+
+# L. "gp.gest" -  Pregnants
+
+# Check proportions, frequencies and missings (with 1 rounded proportions)
+
+tabyl(vio.before$gp.gest, show_na = TRUE)%>%
+  arrange(desc(n)) %>% 
+  adorn_pct_formatting(digits = 1)
+
+
+# M. "gp.indi" -  Homeless people 
+
+# Check proportions, frequencies and missings (with 1 rounded proportions)
+
+tabyl(vio.before$gp.indi, show_na = TRUE)%>%
+  arrange(desc(n)) %>% 
+  adorn_pct_formatting(digits = 1)
+
+
+# N. "gp.icbf" -  Children under the care of ICBF (Colombian Institute of Family Welfare) 
+
+# Check proportions, frequencies and missings (with 1 rounded proportions)
+
+tabyl(vio.before$gp.icbf, show_na = TRUE)%>%
+  arrange(desc(n)) %>% 
+  adorn_pct_formatting(digits = 1)
+
+
+# O. "gp.mad.com" -  Community mothers
+
+# Check proportions, frequencies and missings (with 1 rounded proportions)
+
+tabyl(vio.before$gp.mad.com, show_na = TRUE)%>%
+  arrange(desc(n)) %>% 
+  adorn_pct_formatting(digits = 1)
+
+
+# P. "gp.desmo" -  Demobilized individuals from the internal armed conflict
+
+# Check proportions, frequencies and missings (with 1 rounded proportions)
+
+tabyl(vio.before$gp.desmo, show_na = TRUE)%>%
+  arrange(desc(n)) %>% 
+  adorn_pct_formatting(digits = 1)
+
+
+# Q. "gp.psi" -  Population in psychiatric centers
+
+# Check proportions, frequencies and missings (with 1 rounded proportions)
+
+tabyl(vio.before$gp.psi, show_na = TRUE)%>%
+  arrange(desc(n)) %>% 
+  adorn_pct_formatting(digits = 1)
+
+
+# R. "gp.vic.vio" -  Population affected by the internal armed conflict
+
+# Check proportions, frequencies and missings (with 1 rounded proportions)
+
+tabyl(vio.before$gp.vic.vio, show_na = TRUE)%>%
+  arrange(desc(n)) %>% 
+  adorn_pct_formatting(digits = 1)
+
+
+# S. "dep.ocu.cat"  ---- creation of a secondary variable  ----    dep.ocu.cat ##
+
+
+# Check proportions, frequencies and missings (with 1 rounded proportions)
+
+tabyl(vio.before$dep.ocu.cat, show_na = TRUE)%>%
+  arrange(desc(n)) %>% 
+  adorn_pct_formatting(digits = 1)
+
+
+# T. "zona.conf.arm"  ---- armed conflict region ##
+
+
+# Check proportions, frequencies and missings (with 1 rounded proportions)
+
+tabyl(vio.before$zona.conf.arm, show_na = TRUE)%>%
+  arrange(desc(n)) %>% 
+  adorn_pct_formatting(digits = 1)
+
+
+# U. "naturaleza". ----- type of violence (missing values correspond to the variable "v.sexual")
+
+
+# Check proportions, frequencies and missings (with 1 rounded proportions)
+
+tabyl(vio.before$naturaleza, show_na = TRUE)%>%
+  arrange(desc(n)) %>% 
+  adorn_pct_formatting(digits = 1) 
+
+
+
+# V. "v.sexual.cat" --- 
+
+levels(vio.before$v.sexual) 
+
+
+# Check proportions, frequencies and missings (with 1 rounded proportions)
+
+tabyl(vio.before$v.sexual.cat, show_na = TRUE)%>%
+  arrange(desc(n)) %>% 
+  adorn_pct_formatting(digits = 1)
+
+
+### W.  "tipo.viol" ---- Type of violence
+
+# Check proportions, frequencies and missings (with 1 rounded proportions)
+
+tabyl(vio.before$tipo.viol, show_na = TRUE)%>%
+  arrange(desc(n)) %>% 
+  adorn_pct_formatting(digits = 1)
+
+
+### X. "mecanismo.cat" ---- 
+
+
+# Check proportions, frequencies and missings (with 1 rounded proportions)
+
+tabyl(vio.before$mecanismo.cat, show_na = TRUE)%>%
+  arrange(desc(n)) %>% 
+  adorn_pct_formatting(digits = 1)                    
+
+
+
+# Y. "escena.cat" ---- location  --- to "escena.cat"
+
+
+# Check proportions, frequencies and missings (with 1 rounded proportions)
+
+tabyl(vio.before$escena.cat, show_na = TRUE)%>%
+  arrange(desc(n)) %>% 
+  adorn_pct_formatting(digits = 1)                    
+
+
+
+
+# Z. "activi.cat" --- survivor's main activity
+
+
+# Check proportions, frequencies and missings (with 1 rounded proportions)
+
+tabyl(vio.before$activi.cat, show_na = TRUE)%>%
+  arrange(desc(n)) %>% 
+  adorn_pct_formatting(digits = 1)                    
+
+
+# A1. orient.sex ---- Survivor's sexual orientation
+
+levels(vio.before$orient.sex)  
+
+
+# Check proportions, frequencies and missings (with 1 rounded proportions)
+
+tabyl(vio.before$orient.sex, show_na = TRUE)%>%
+  arrange(desc(n)) %>% 
+  adorn_pct_formatting(digits = 1)  
+
+
+# A2. ident.gen ---- Survivor's gender identity 
+
+levels(vio.before$ident.gen)  
+
+
+# Check proportions, frequencies and missings (with 1 rounded proportions)
+
+tabyl(vio.before$ident.gen, show_na = TRUE)%>%
+  arrange(desc(n)) %>% 
+  adorn_pct_formatting(digits = 1) 
+
+
+# A3. "consumo.spa" ---- Consumption of substances - no changes
+
+
+# Check proportions, frequencies and missings (with 1 rounded proportions)
+
+tabyl(vio.before$consumo.spa, show_na = TRUE)%>%
+  arrange(desc(n)) %>% 
+  adorn_pct_formatting(digits = 1) 
+
+
+
+# A4. "jefe.h" ---- Person who is the head of the household - no changes
+
+
+# Check proportions, frequencies and missings (with 1 rounded proportions)
+
+tabyl(vio.before$jefe.h, show_na = TRUE)%>%
+  arrange(desc(n)) %>% 
+  adorn_pct_formatting(digits = 1) 
+
+
+
+# A5. "oh.otros" ---- Presence of alcohol or another substance in the survivor - no changes
+
+
+# Check proportions, frequencies and missings (with 1 rounded proportions)
+
+tabyl(vio.before$oh.otros, show_na = TRUE)%>%
+  arrange(desc(n)) %>% 
+  adorn_pct_formatting(digits = 1) 
+
+
+
+# A6. "antec.vio" ---- Survivors with history of violence - no changes
+
+
+# Check proportions, frequencies and missings (with 1 rounded proportions)
+
+tabyl(vio.before$antec.vio, show_na = TRUE)%>%
+  arrange(desc(n)) %>% 
+  adorn_pct_formatting(digits = 1) 
+
+
+# A7. "sexo.agre" - Sex of the agressor 
+
+levels(vio.before$sexo.agre)  
+
+# Check proportions, frequencies and missings (with 1 rounded proportions)
+
+tabyl(vio.before$sexo.agre, show_na = TRUE)%>%
+  arrange(desc(n)) %>% 
+  adorn_pct_formatting(digits = 1) 
+
+
+# A.8 "rel.fami" - familiar relationship with the agressor -
+
+
+# Check proportions, frequencies and missings (with 1 rounded proportions)
+
+tabyl(vio.before$conv.agre, show_na = TRUE)%>%
+  adorn_pct_formatting(digits = 1) 
+
+
+
+# A.9 "conv.agre" - living with the agressor -
+
+levels (vio.before$conv.agre)
+
+
+# Check proportions, frequencies and missings (with 1 rounded proportions)
+
+tabyl(vio.before$conv.agre, show_na = TRUE)%>%
+  adorn_pct_formatting(digits = 1) 
+
+
+# A.10  "r.no.flia.cat" --- Non familiar relation with the agressor --- 
+
+levels (vio.before$r.no.flia)
+
+
+# Check proportions, frequencies and missings (with 1 rounded proportions)
+
+tabyl(vio.before$r.no.flia.cat, show_na = TRUE)%>%
+  arrange(desc(n)) %>% 
+  adorn_pct_formatting(digits = 1)                    
+
+
+
+# # A.11  "relacion" --- We are going to create one variable from "r.no.flia.cat" and "rel.fami"
+
+
+# Check proportions
+tabyl(vio.before$relacion, show_na = TRUE)%>%
+  arrange(desc(n)) %>%  
+  adorn_pct_formatting(digits = 1)
+
+
+
+#################################################
+
+#### Pandemic dataframe - "vio.pandemic"
+
+#################################################
+
+
+
+
+# A. "fech.not" - notification date
+
+range(vio.pandemic$fech.not)
+
+
+
+# B. "fech.hech"  - date of the event 
+
+range(vio.pandemic$fech.hech)
+
+
+
+# C. "año" - year (no changes) 
+
+summary(vio.pandemic$año)
+
+# D. "edad" - age 
+
+describe(vio.pandemic$edad)
+
+# Check proportions, frequencies and missings (with 1 rounded proportions)
+
+tabyl(vio.pandemic$edad.cat, show_na = TRUE)%>%
+  adorn_pct_formatting(digits = 1)
+
+
+# D. "sexo" - sex 
+
+# Check proportions, frequencies and missings (with 1 rounded proportions)
+
+tabyl(vio.pandemic$sexo, show_na = TRUE)%>%
+  adorn_pct_formatting(digits = 1)
+
+
+# E. "cod.pais" - nationality 
+
+levels(vio.pandemic$cod.pais)
+
+# Check proportions, frequencies and missings (with 1 rounded proportions)
+
+tabyl(vio.pandemic$cod.pais, show_na = TRUE)%>%
+  arrange(desc(n)) %>%  
+  adorn_pct_formatting(digits = 1)
+
+
+# F. "ocup.cat" --- occupation 
+
+# Check proportions, frequencies and missings (with 1 rounded proportions)
+
+tabyl(vio.pandemic$ocup.cat, show_na = TRUE)%>%
+  arrange(desc(n)) %>% 
+  adorn_pct_formatting(digits = 1)
+
+
+
+# F. "ss" --- Seguridad social (type of social insurance)
+
+levels(vio.pandemic$ss)
+
+# Check proportions, frequencies and missings (with 1 rounded proportions)
+
+tabyl(vio.pandemic$ss, show_na = TRUE)%>%
+  arrange(desc(n)) %>% 
+  adorn_pct_formatting(digits = 1)
+
+
+
+# G. "etnia" - Ethnic groups 
+
+levels(vio.pandemic$etnia)
+
+
+# Check proportions, frequencies and missings (with 1 rounded proportions)
+
+tabyl(vio.pandemic$etnia, show_na = TRUE)%>%
+  arrange(desc(n)) %>% 
+  adorn_pct_formatting(digits = 1)
+
+
+
+# H. "gp.disca" -  Population with physical or cognitive disabilities
+
+# Check proportions, frequencies and missings (with 1 rounded proportions)
+
+tabyl(vio.pandemic$gp.disca, show_na = TRUE)%>%
+  arrange(desc(n)) %>% 
+  adorn_pct_formatting(digits = 1)
+
+
+# I. "gp.despla" -  Displaced persons due to the internal armed conflict
+
+# Check proportions, frequencies and missings (with 1 rounded proportions)
+
+tabyl(vio.pandemic$gp.despla, show_na = TRUE)%>%
+  arrange(desc(n)) %>% 
+  adorn_pct_formatting(digits = 1)
+
+
+# J. "gp.migra" -  Migrants
+
+# Check proportions, frequencies and missings (with 1 rounded proportions)
+
+tabyl(vio.pandemic$gp.migra, show_na = TRUE)%>%
+  arrange(desc(n)) %>% 
+  adorn_pct_formatting(digits = 1)
+
+
+# K. "gp.carce" -  Prison inmates
+
+# Check proportions, frequencies and missings (with 1 rounded proportions)
+
+tabyl(vio.pandemic$gp.carce, show_na = TRUE)%>%
+  arrange(desc(n)) %>% 
+  adorn_pct_formatting(digits = 1)
+
+
+# L. "gp.gest" -  Pregnants
+
+# Check proportions, frequencies and missings (with 1 rounded proportions)
+
+tabyl(vio.pandemic$gp.gest, show_na = TRUE)%>%
+  arrange(desc(n)) %>% 
+  adorn_pct_formatting(digits = 1)
+
+
+# M. "gp.indi" -  Homeless people 
+
+# Check proportions, frequencies and missings (with 1 rounded proportions)
+
+tabyl(vio.pandemic$gp.indi, show_na = TRUE)%>%
+  arrange(desc(n)) %>% 
+  adorn_pct_formatting(digits = 1)
+
+
+# N. "gp.icbf" -  Children under the care of ICBF (Colombian Institute of Family Welfare) 
+
+# Check proportions, frequencies and missings (with 1 rounded proportions)
+
+tabyl(vio.pandemic$gp.icbf, show_na = TRUE)%>%
+  arrange(desc(n)) %>% 
+  adorn_pct_formatting(digits = 1)
+
+
+# O. "gp.mad.com" -  Community mothers
+
+# Check proportions, frequencies and missings (with 1 rounded proportions)
+
+tabyl(vio.pandemic$gp.mad.com, show_na = TRUE)%>%
+  arrange(desc(n)) %>% 
+  adorn_pct_formatting(digits = 1)
+
+
+# P. "gp.desmo" -  Demobilized individuals from the internal armed conflict
+
+# Check proportions, frequencies and missings (with 1 rounded proportions)
+
+tabyl(vio.pandemic$gp.desmo, show_na = TRUE)%>%
+  arrange(desc(n)) %>% 
+  adorn_pct_formatting(digits = 1)
+
+
+# Q. "gp.psi" -  Population in psychiatric centers
+
+# Check proportions, frequencies and missings (with 1 rounded proportions)
+
+tabyl(vio.pandemic$gp.psi, show_na = TRUE)%>%
+  arrange(desc(n)) %>% 
+  adorn_pct_formatting(digits = 1)
+
+
+# R. "gp.vic.vio" -  Population affected by the internal armed conflict
+
+# Check proportions, frequencies and missings (with 1 rounded proportions)
+
+tabyl(vio.pandemic$gp.vic.vio, show_na = TRUE)%>%
+  arrange(desc(n)) %>% 
+  adorn_pct_formatting(digits = 1)
+
+
+# S. "dep.ocu.cat"  ---- creation of a secondary variable  ----    dep.ocu.cat ##
+
+
+# Check proportions, frequencies and missings (with 1 rounded proportions)
+
+tabyl(vio.pandemic$dep.ocu.cat, show_na = TRUE)%>%
+  arrange(desc(n)) %>% 
+  adorn_pct_formatting(digits = 1)
+
+
+# T. "zona.conf.arm"  ---- armed conflict region ##
+
+
+# Check proportions, frequencies and missings (with 1 rounded proportions)
+
+tabyl(vio.pandemic$zona.conf.arm, show_na = TRUE)%>%
+  arrange(desc(n)) %>% 
+  adorn_pct_formatting(digits = 1)
+
+
+# U. "naturaleza". ----- type of violence (missing values correspond to the variable "v.sexual")
+
+
+# Check proportions, frequencies and missings (with 1 rounded proportions)
+
+tabyl(vio.pandemic$naturaleza, show_na = TRUE)%>%
+  arrange(desc(n)) %>% 
+  adorn_pct_formatting(digits = 1) 
+
+
+
+# V. "v.sexual.cat" --- 
+
+
+# Check proportions, frequencies and missings (with 1 rounded proportions)
+
+tabyl(vio.pandemic$v.sexual.cat, show_na = TRUE)%>%
+  arrange(desc(n)) %>% 
+  adorn_pct_formatting(digits = 1)
+
+
+### W.  "tipo.viol" ---- Type of violence
+
+# Check proportions, frequencies and missings (with 1 rounded proportions)
+
+tabyl(vio.pandemic$tipo.viol, show_na = TRUE)%>%
+  arrange(desc(n)) %>% 
+  adorn_pct_formatting(digits = 1)
+
+
+### X. "mecanismo.cat" ---- 
+
+
+# Check proportions, frequencies and missings (with 1 rounded proportions)
+
+tabyl(vio.pandemic$mecanismo.cat, show_na = TRUE)%>%
+  arrange(desc(n)) %>% 
+  adorn_pct_formatting(digits = 1)                    
+
+
+
+# Y. "escena.cat" ---- location  --- to "escena.cat"
+
+
+# Check proportions, frequencies and missings (with 1 rounded proportions)
+
+tabyl(vio.pandemic$escena.cat, show_na = TRUE)%>%
+  arrange(desc(n)) %>% 
+  adorn_pct_formatting(digits = 1)                    
+
+
+
+
+# Z. "activi.cat" --- survivor's main activity
+
+
+# Check proportions, frequencies and missings (with 1 rounded proportions)
+
+tabyl(vio.pandemic$activi.cat, show_na = TRUE)%>%
+  arrange(desc(n)) %>% 
+  adorn_pct_formatting(digits = 1)                    
+
+
+# A1. orient.sex ---- Survivor's sexual orientation
+
+levels(vio.pandemic$orient.sex)  
+
+
+# Check proportions, frequencies and missings (with 1 rounded proportions)
+
+tabyl(vio.pandemic$orient.sex, show_na = TRUE)%>%
+  arrange(desc(n)) %>% 
+  adorn_pct_formatting(digits = 1)  
+
+
+# A2. ident.gen ---- Survivor's gender identity 
+
+levels(vio.pandemic$ident.gen)  
+
+
+# Check proportions, frequencies and missings (with 1 rounded proportions)
+
+tabyl(vio.pandemic$ident.gen, show_na = TRUE)%>%
+  arrange(desc(n)) %>% 
+  adorn_pct_formatting(digits = 1) 
+
+
+# A3. "consumo.spa" ---- Consumption of substances - no changes
+
+
+# Check proportions, frequencies and missings (with 1 rounded proportions)
+
+tabyl(vio.pandemic$consumo.spa, show_na = TRUE)%>%
+  arrange(desc(n)) %>% 
+  adorn_pct_formatting(digits = 1) 
+
+
+
+# A4. "jefe.h" ---- Person who is the head of the household - no changes
+
+
+# Check proportions, frequencies and missings (with 1 rounded proportions)
+
+tabyl(vio.pandemic$jefe.h, show_na = TRUE)%>%
+  arrange(desc(n)) %>% 
+  adorn_pct_formatting(digits = 1) 
+
+
+
+# A5. "oh.otros" ---- Presence of alcohol or another substance in the survivor - no changes
+
+
+# Check proportions, frequencies and missings (with 1 rounded proportions)
+
+tabyl(vio.pandemic$oh.otros, show_na = TRUE)%>%
+  arrange(desc(n)) %>% 
+  adorn_pct_formatting(digits = 1) 
+
+
+
+# A6. "antec.vio" ---- Survivors with history of violence - no changes
+
+
+# Check proportions, frequencies and missings (with 1 rounded proportions)
+
+tabyl(vio.pandemic$antec.vio, show_na = TRUE)%>%
+  arrange(desc(n)) %>% 
+  adorn_pct_formatting(digits = 1) 
+
+
+# A7. "sexo.agre" - Sex of the agressor 
+
+levels(vio.pandemic$sexo.agre)  
+
+# Check proportions, frequencies and missings (with 1 rounded proportions)
+
+tabyl(vio.pandemic$sexo.agre, show_na = TRUE)%>%
+  arrange(desc(n)) %>% 
+  adorn_pct_formatting(digits = 1) 
+
+
+# A.8 "rel.fami" - familiar relationship with the agressor -
+
+
+# Check proportions, frequencies and missings (with 1 rounded proportions)
+
+tabyl(vio.pandemic$conv.agre, show_na = TRUE)%>%
+  adorn_pct_formatting(digits = 1) 
+
+
+
+# A.9 "conv.agre" - living with the agressor -
+
+levels (vio.pandemic$conv.agre)
+
+
+# Check proportions, frequencies and missings (with 1 rounded proportions)
+
+tabyl(vio.pandemic$conv.agre, show_na = TRUE)%>%
+  adorn_pct_formatting(digits = 1) 
+
+
+# A.10  "r.no.flia.cat" --- Non familiar relation with the agressor --- 
+
+levels (vio.pandemic$r.no.flia)
+
+
+# Check proportions, frequencies and missings (with 1 rounded proportions)
+
+tabyl(vio.pandemic$r.no.flia.cat, show_na = TRUE)%>%
+  arrange(desc(n)) %>% 
+  adorn_pct_formatting(digits = 1)                    
+
+
+
+# # A.11  "relacion" --- We are going to create one variable from "r.no.flia.cat" and "rel.fami"
+
+
+# Check proportions
+tabyl(vio.pandemic$relacion, show_na = TRUE)%>%
+  arrange(desc(n)) %>%  
+  adorn_pct_formatting(digits = 1)
+
+
+
+####  Save the new dataframes 
+
+
+save(vio.todo, file = "vio.todo.Rds")
+save(vio.todo, file = "vio.todo.RData")
+
+save(vio.before, file = "vio.before.Rds")
+save(vio.before, file = "vio.before.RData")
+
+save(vio.pandemic, file = "vio.pandemic.Rds")
+save(vio.pandemic, file = "vio.pandemic.RData")
