@@ -10,7 +10,7 @@ This folder contains all R scripts used for data preparation, analysis, and expo
 
 - `00_setup.R`: Installs and loads all required R packages.
 - `01_data_cleaning.R`: Imports and prepares the data, including variable recoding and transformations.
-- `02_data_exploration.R`: Performs summary statistics and descriptive analyses.
+- `02_data_exploration_and_manipulation.R`: Performs summary statistics and descriptive analyses.
 - `03_analysis_mca.R`: Conducts Multiple Correspondence Analysis (MCA).
 - `04_tables_export.R`: Generates and exports tables for the manuscript.
 - `05_graphs_export.R`: Creates and exports relevant visualizations.
@@ -31,7 +31,7 @@ To install all required packages, run the setup script: [`00_setup.R`](./code/00
 
 ---
 
-## 🧹 Data Cleaning and Preparation
+## 🧹 1. Data Cleaning and Preparation
 
 Each annual dataset (2017–2022) underwent a standardized and reproducible data cleaning process, implemented in a consistent R script. The procedure included:
 
@@ -48,6 +48,36 @@ Each annual dataset (2017–2022) underwent a standardized and reproducible data
 > ⚠️ The same procedure was applied to all yearly datasets (2017–2022), with small adjustments for structural differences between years.
 
 You can explore the full cleaning procedure in the script [`01_data_cleaning.R`](./code/01_data_cleaning.R).
+
+
+## 🧮 2. Data Manipulation and Exploration
+
+This script performs a standardized transformation and aggregation of variables for the 2017 dataset. While the previous script (`01_data_cleaning.R`) focused on raw data cleaning and recoding based on the original dictionary, this script prepares the dataset for analysis through:
+
+- **Temporal validation** of notification and event dates (`fech.not`, `fech.hech`)
+- **Categorization of age** into meaningful age groups according to national health standards
+- **Re-labeling and re-grouping** of:
+  - Sociodemographic variables (e.g., sex, nationality, occupation)
+  - Social security status
+  - Ethnic background
+  - Belonging to "vulnerable" or priority populations
+  - Departmental origin (`dep.ocu`) into regional planning groups
+- **Thematic groupings** of key variables:
+  - Type of violence (`tipo.viol`)
+  - Mechanism of aggression (`mecanismo.cat`)
+  - Location of aggression (`escena.cat`)
+  - Survivor activity (`activi.cat`)
+  - Aggressor relationship (`relacion`)
+- **Missing values handling** and creation of interpretable labels for statistical analysis
+- **Creation of secondary variables** that simplify or condense granular data into analytic-friendly formats (e.g., `ocup.cat`, `v.sexual.cat`)
+
+> ✅ The same structure will be applied to all yearly datasets (2017–2022) using similarly named scripts (e.g. `02_data_manipulation_2018.R`, etc.) to ensure full reproducibility and consistency across years.
+
+Cleaned and manipulated datasets are saved in `.Rds` format at the end of the script (`vio.2017.b`).
+
+
+
+
 
 
 
