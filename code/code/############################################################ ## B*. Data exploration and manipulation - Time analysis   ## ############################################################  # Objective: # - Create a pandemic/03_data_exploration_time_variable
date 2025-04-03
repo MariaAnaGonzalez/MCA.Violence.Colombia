@@ -1,0 +1,104 @@
+############################################################
+## B*. Data exploration and manipulation - Time analysis   ##
+############################################################
+
+# Objective:
+# - Create a pandemic/prepandemic binary variable for 2020.
+# - Calculate and summarize the difference between event and notification dates (all years).
+# - Visualize distributions using histograms.
+
+
+## Set working directory
+
+## Load datasets (complete cases by year)
+load("vio.2017.tipo.viol.cc.Rds")
+load("vio.2018.b.Rds")
+load("vio.2019.b.Rds")
+load("vio.2020.b.Rds")
+load("vio.2021.b.Rds")
+load("vio.2022.b.Rds")
+
+## Create binary period variables for 2020
+vio.2020.b <- vio.2020.b %>%
+  mutate(
+    periodo.hecho = case_when(
+      fech.hech <= as.Date("2020-03-24") ~ "Prepandemic",
+      fech.hech >= as.Date("2020-03-25") ~ "Pandemic",
+      TRUE ~ "Other"
+    ),
+    periodo.not = case_when(
+      fech.not <= as.Date("2020-03-24") ~ "Prepandemic",
+      fech.not >= as.Date("2020-03-25") ~ "Pandemic",
+      TRUE ~ "Other"
+    ),
+    periodo.hecho = as.factor(periodo.hecho),
+    periodo.not = as.factor(periodo.not)
+  )
+
+# Explore distributions
+tabyl(vio.2020.b$periodo.hecho, show_na = TRUE) %>% adorn_pct_formatting(digits = 1)
+tabyl(vio.2020.b$periodo.not, show_na = TRUE) %>% adorn_pct_formatting(digits = 1)
+table(vio.2020.b$periodo.not, vio.2020.b$periodo.hecho)
+
+## Create and describe dif.dias for each year
+calculate_and_plot_dif <- function(df, year, fill_color) {
+  df <- df %>% mutate(dif.dias = as.numeric(difftime(fech.not, fech.hech, units = "days")))
+
+  summary_stats <- df %>%
+    summarise(
+      min_days = min(dif.dias, na.rm = TRUE),
+      max_days = max(dif.dias, na.rm = TRUE),
+      mean_days = mean(dif.dias, na.rm = TRUE),
+      median_days = median(dif.dias, na.rm = TRUE),
+      sd_days = sd(dif.dias, na.rm = TRUE),
+      count = n()
+    )
+  print(paste("Summary for", year))
+  print(summary_stats)
+
+  plot <- ggplot(df, aes(x = dif.dias)) +
+    geom_histogram(binwidth = 5, fill = fill_color, color = "black") +
+    labs(title = paste("Time Difference Histogram", year),
+         x = "Difference in Days",
+         y = "Count") +
+    scale_x_continuous(limits = c(0, 500)) +
+    scale_y_continuous(limits = c(0, 1000)) +
+    theme_minimal()
+
+  return(list(data = df, plot = plot))
+}
+
+results <- list(
+  "2017" = calculate_and_plot_dif(vio.2017.tipo.viol.cc, "2017", "lightblue"),
+  "2018" = calculate_and_plot_dif(vio.2018.b, "2018", "salmon"),
+  "2019" = calculate_and_plot_dif(vio.2019.b, "2019", "seagreen1"),
+  "2020" = calculate_and_plot_dif(vio.2020.b, "2020", "slateblue1"),
+  "2021" = calculate_and_plot_dif(vio.2021.b, "2021", "lightgoldenrodyellow"),
+  "2022" = calculate_and_plot_dif(vio.2022.b, "2022", "mintcream")
+)
+
+# Combine and export histograms
+grid_plot <- grid.arrange(
+  results[["2017"]]$plot, results[["2018"]]$plot,
+  results[["2019"]]$plot, results[["2020"]]$plot,
+  results[["2021"]]$plot, results[["2022"]]$plot,
+  nrow = 3
+)
+
+ggsave("histo.dif.dates.all.png", plot = grid_plot)
+ggsave("histo.dif.dates.all.pdf", plot = grid_plot)
+
+## Save cleaned datasets with new variable dif.dias
+vio.2017.c <- results[["2017"]]$data
+vio.2018.c <- results[["2018"]]$data
+vio.2019.c <- results[["2019"]]$data
+vio.2020.c <- results[["2020"]]$data
+vio.2021.c <- results[["2021"]]$data
+vio.2022.c <- results[["2022"]]$data
+
+save(vio.2017.c, file = "vio.2017.c.Rds")
+save(vio.2018.c, file = "vio.2018.c.Rds")
+save(vio.2019.c, file = "vio.2019.c.Rds")
+save(vio.2020.c, file = "vio.2020.c.Rds")
+save(vio.2021.c, file = "vio.2021.c.Rds")
+save(vio.2022.c, file = "vio.2022.c.Rds")
