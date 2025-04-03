@@ -1,5 +1,5 @@
 ############################################################
-## A. Data manipulation - 2017 ##
+## B. Data exploration and manipulation - 2017 ##
 ############################################################
 
 ## 1. Set working directory
@@ -995,3 +995,15 @@ tabyl(vio.2017.a$relacion, show_na = TRUE)%>%
 vio.2017.b <- vio.2017.a
 
 save(vio.2017.b, file = "vio.2017.b.Rds")
+
+
+
+########################################################################
+## NOTE: The same preprocessing pipeline was applied to datasets      ##
+##       from 2017 to 2022, following equivalent steps.               ##
+##                                                                    ##
+##       Variable names and structures were only adjusted when        ##
+##       necessary to accommodate minor year-to-year differences      ##
+##       in data layout.                                              ##
+########################################################################
+
