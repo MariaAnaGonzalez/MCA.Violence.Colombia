@@ -88,7 +88,7 @@ Cleaned and manipulated datasets are saved in `.Rds` format at the end of each s
 ---
 
 <details>
-<summary> Step B: Time Analysis (2020 Focus)</summary>
+<summary> Time Analysis (2020 Focus)</summary>
 
 This component adds a temporal dimension to the 2020 dataset by distinguishing between pre-pandemic and pandemic periods:
 
@@ -104,7 +104,7 @@ This component adds a temporal dimension to the 2020 dataset by distinguishing b
 ---
 
 <details>
-<summary> Step C: Time Delay Computation (2017–2022)</summary>
+<summary> Time Delay Computation (2017–2022)</summary>
 
 For each year, the following steps were performed:
 
@@ -141,7 +141,7 @@ You can explore the full procedure in the script [`02_data_exploration_and_manip
 ## 🧾 3. Descriptive Analysis
 
 <details>
-<summary> Step E: Description by Sex and Period</summary>
+<summary> Description by Sex and Period</summary>
 
 This script creates stratified databases for prepandemic and pandemic periods by the variable `sexo` (Female/Male), and then performs descriptive summaries across the study's key sociodemographic and violence-related variables.
 
@@ -170,7 +170,7 @@ This script creates stratified databases for prepandemic and pandemic periods by
 ---
 
 <details>
-<summary> Step F: Description by Age Cohort (0–17 vs 18+)</summary>
+<summary> Description by Age Cohort (0–17 vs 18+)</summary>
 
 This script builds on the previously stratified datasets by creating additional subgroups based on age categories. It enables a comparison between children and adult survivors across pandemic and prepandemic periods.
 
