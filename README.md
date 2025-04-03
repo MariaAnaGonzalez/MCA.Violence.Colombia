@@ -22,11 +22,18 @@ To explore the content:
 If you use this material, please cite as follows:
 > Gonzalez-Alvarez, M. A., Theuring, S., Moreno Luna, I. del S., Wanyenze, R., Acuña, D. C., Blofield, M., & Rodríguez Romero, V. A. (2025). Presentation patterns of gender-based and intrafamilial violence during the first three years of the COVID-19 pandemic in Colombia: A serial cross-sectional study. Unpublished manuscript, Institute of International Health, Charité – Universitätsmedizin Berli
 
+
+## 📚 **Protocol Reference**
+
+Gonzalez-Alvarez, M. A., Theuring, S., del Socorro Moreno Luna, I., Wanyenze, R., Acuña, D. C., Blofield, M., … Rodriguez, V. (2024, October 21). *Gender-based and intrafamilial violence’s presentation patterns and trends during the first three years of COVID-19’s Pandemic in Colombia: A convergent parallel mixed-methods project*. [OSF Repository](https://osf.io/9dahb) · https://doi.org/10.17605/OSF.IO/9DAHB
+
+
 ## 📞 Contact
 For questions or further information, please contact:  
 **maria.gonzaleza@charite.de**
 
 ---
+
 
 📌 **Note on Repository Creation**
 
