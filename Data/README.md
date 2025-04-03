@@ -1,4 +1,5 @@
-# Data
+# 📂 Data
+
 This folder contains supplementary data files, variable descriptions, and relevant tables for the study.
 
 ---
@@ -17,14 +18,13 @@ This folder contains supplementary data files, variable descriptions, and releva
 - [Data Transformation](#data-transformation)  
 - [Final Dictionary](#final-dictionary)  
 - [References](#references)
-
   
 </details>
 
 
 <details>
-<summary><strong> ## 📍 Data Source </strong></summary>
-  
+<summary><strong>📍 Data Source</strong></summary>
+
 In Colombia, reporting of **GBV** and **IFV** is mandatory for epidemiological surveillance under **Law 248 of 1995**.  
 For this study, we used data from the **National Institute of Health (INS - *Instituto Nacional de Salud*)** via the **SIVIGILA** system, which collects nationwide public health information.  
 
@@ -36,15 +36,21 @@ As mandated by **Law 1712 of 2014**, all data are publicly available with ensure
 
 ---
 
-## Data Availability
+<details>
+<summary><strong>🛰️ Data Availability</strong></summary>
+  
 According to the **Instituto Nacional de Salud (INS)** guidelines, the original and secondary data are restricted to the principal researchers and are not publicly accessible.  
 
 However, researchers and the public can request access to the original data via the following link:  
 ➡️ [INS Data Request Portal](https://portalsivigila.ins.gov.co/)
 
+</details>
+
 ---
 
-## Selected Variables and Rationale
+<details>
+<summary><strong>📊 Selected Variables and Rationale</strong></summary>
+
 Most variables in the official records are **categorical**, describing:
 
 - Subjects' sociodemographic characteristics.
@@ -52,9 +58,14 @@ Most variables in the official records are **categorical**, describing:
 
 Although the dataset includes over 100 variables, we selected **19 original variables** for our research (see **Table 1**) based on exploratory analyses conducted during the pilot study.
 
+</details>
+
 ---
 
-## Definitions
+<details>
+<summary><strong>📘 Definitions</strong></summary>
+
+  
 This study follows Colombia’s **official national institution definitions** for all variables and measures described below.
 
 ### [Gender Identity](#gender-identity)
@@ -83,9 +94,12 @@ The **INS** follows the **World Health Organization (WHO)**'s broader definition
 - The use of force or the threat of force.
 - Coercion or circumstances that limit the victim's ability to give free consent [[3], [2]].
 
+</details>
+
 ---
 
-## Data Transformation
+<details>
+<summary><strong>🛠️ Data Transformation</strong></summary>
 
 ### Survivor’s Age
 The quantitative variable **"Survivor’s age"** was categorized following Colombia’s **Ministry of Health** definitions:  
@@ -94,7 +108,7 @@ The quantitative variable **"Survivor’s age"** was categorized following Colom
 - **Adolescence:** 12–18 years  
 - **Youth:** 19–26 years  
 - **Adulthood:** 27–59 years  
-- **Older adult:** 60+ years [[4]]  
+- **Older adult:** 60+ years [[4]]
 
 ---
 
@@ -230,7 +244,15 @@ The following variables were retained as in the original datasets:
 
 (See Table 1 for further details.)
 
-##  Final Dictionary
+
+</details>  
+
+-----
+
+
+<details>
+<summary><strong>📑 Final Dictionary</strong></summary>
+
 
 This document contains the dictionary for the 19 variables used in the descriptive analysis, and a subset of 10 variables used in the Multiple Correspondence Analysis (MCA) for the project.
 
@@ -278,9 +300,15 @@ This document contains the dictionary for the 19 variables used in the descripti
 | `relationship_aggressor`  | Relationship between survivor and aggressor               | Categorical (nominal)    | Partner, Ex-partner, Mother, Father, Other family member, Known but not family, Unknown and not family, Undetermined stranger |
 
 
----
 
 **Note:** Life cycle groups are defined according to the Colombian Ministry of Health [4]:
+
+</details>
+
+--------------------------
+
+<details>
+<summary><strong>📚 References</strong></summary>
 
 ## References
 
@@ -295,23 +323,6 @@ This document contains the dictionary for the 19 variables used in the descripti
 [9]: [Human Rights Watch. *Sterilization of Women and Girls with Disabilities*. 2011. Available from: [https://www.hrw.org/news/2011/11/10/sterilization-women-and-girls-disabilities](https://www.hrw.org/news/2011/11/10/sterilization-women-and-girls-disabilities)]  
 [10]: [World Health Organization. *Female Genital Mutilation*. 2024. Available from: [https://www.who.int/news-room/fact-sheets/detail/female-genital-mutilatio](https://www.who.int/news-room/fact-sheets/detail/female-genital-mutilatio)]  
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+</details>
 
 
