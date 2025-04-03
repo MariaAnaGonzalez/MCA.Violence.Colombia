@@ -170,7 +170,8 @@ This script creates stratified databases for prepandemic and pandemic periods by
 ---
 
 <details>
-<summary> Description by Age Cohort (0–17 vs 18+)</summary>
+  
+<summary> Description by Age Cohort </summary>
 
 This script builds on the previously stratified datasets by creating additional subgroups based on age categories. It enables a comparison between children and adult survivors across pandemic and prepandemic periods.
 
@@ -197,7 +198,7 @@ This script builds on the previously stratified datasets by creating additional 
 > ✅ These subgroup datasets are used to explore interactions between age, sex, and period of occurrence.
 
 
-You can explore the full procedure in the script [`03_descriptive_analysis.R`](./code/`03_descriptive_analysis.R).
+You can explore the full procedure in the script [`03_descriptive_analysis.R`](.code/03_descriptive_analysis.R).
 
 </details>
 
