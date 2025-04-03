@@ -141,7 +141,7 @@ You can explore the full procedure in the script [`02_data_exploration_and_manip
 ## 🧾 3. Descriptive Analysis
 
 <details>
-<summary>📂 Step E: Description by Sex and Period</summary>
+<summary> Step E: Description by Sex and Period</summary>
 
 This script creates stratified databases for prepandemic and pandemic periods by the variable `sexo` (Female/Male), and then performs descriptive summaries across the study's key sociodemographic and violence-related variables.
 
@@ -168,7 +168,7 @@ This script creates stratified databases for prepandemic and pandemic periods by
 ---
 
 <details>
-<summary>📂 Step F: Description by Age Cohort (0–17 vs 18+)</summary>
+<summary> Step F: Description by Age Cohort (0–17 vs 18+)</summary>
 
 This script builds on the previously stratified datasets by creating additional subgroups based on age categories. It enables a comparison between children and adult survivors across pandemic and prepandemic periods.
 
