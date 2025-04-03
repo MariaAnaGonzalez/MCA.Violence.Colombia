@@ -25,3 +25,9 @@ If you use this material, please cite as follows:
 ## 📞 Contact
 For questions or further information, please contact:  
 **maria.gonzaleza@charite.de**
+
+---
+
+📌 **Note on Repository Creation**
+
+This repository was developed with the assistance of ChatGPT (OpenAI) to support documentation clarity, code structuring, and reproducibility. All data handling, analysis design, and interpretation remain the responsibility of the author.
