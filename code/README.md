@@ -1,3 +1,4 @@
+
 # 📁 Code Folder
 
 This folder contains all R scripts used for data preparation, analysis, and export in the study. Scripts are named sequentially to reflect their order of execution.
@@ -8,19 +9,20 @@ This folder contains all R scripts used for data preparation, analysis, and expo
 
 ## 🔧 Script Overview
 
-- [`00_setup.R`](./code/00_setup.R): Installs and loads all required R packages.
-- [`01_data_cleaning.R`](./code/01_data_cleaning.R): Imports and prepares the data, including variable recoding and transformations.
-- [`02_data_exploration_and_manipulation.R`](./code/02_data_exploration_and_manipulation.R): Performs summary statistics and descriptive analyses.
-- [`03_descriptive_analysis.R`](./code/03_descriptive_analysis.R): Performs summary statistics and stratified descriptive analyses.
-- [`04_analysis_mca.R`](./code/04_analysis_mca.R): Conducts Multiple Correspondence Analysis (MCA).
-- [`05_tables_export.R`](./code/05_tables_export.R): Generates and exports tables for the manuscript.
-- [`06_graphs_export.R`](./code/06_graphs_export.R): Creates and exports relevant visualizations.
+- [`00_setup.R`](./code/00_setup.R): Installs and loads all required R packages.  
+- [`01_data_cleaning.R`](./code/01_data_cleaning.R): Imports and prepares the data, including variable recoding and transformations.  
+- [`02_data_exploration_and_manipulation.R`](./code/02_data_exploration_and_manipulation.R): Conducts data exploration and variable standardization.  
+- [`03_descriptive_analysis.R`](./code/03_descriptive_analysis.R): Performs stratified descriptive analysis by period, sex, and age.  
+- [`04_analysis_mca.R`](./code/04_analysis_mca.R): Conducts Multiple Correspondence Analysis (MCA) on pre-pandemic, pandemic, and full datasets.  
+- [`05_sensitivity_analysis.R`](./code/05_sensitivity_analysis.R): Conducts robustness checks and sensitivity analyses.  
+- [`06_tables_export.R`](./code/06_tables_export.R): Generates and exports tables for the manuscript.  
+- [`07_graphs_export.R`](./code/07_graphs_export.R): Creates and exports visualizations.  
 
 ---
 
 ## 📦 Required R Packages
 
-The following R packages are used in this project (see citations below):
+This project uses the following R packages (citations below):
 
 - **Data import & cleaning**: `readxl` [1], `dplyr` [2], `janitor` [3], `lubridate` [4], `forcats` [5], `tidyverse` [6]  
 - **Descriptive statistics & tables**: `psych` [7], `Amelia` [8], `kableExtra` [9]  
@@ -35,23 +37,23 @@ To install all required packages, run the setup script: [`00_setup.R`](./code/00
 ## 🧹 1. Data Cleaning and Preparation
 
 <details>
-<summary>Initials</summary>
+<summary>Click to expand</summary>
 
-Each annual dataset (2017–2022) underwent a standardized and reproducible data cleaning process, implemented in a consistent R script. The procedure included:
+Each annual dataset (2017–2022) underwent a standardized and reproducible data cleaning process. The script included:
 
-- Importing raw data from Excel files with `readxl`
-- Initial inspection using functions like `summary()` and `names()`
+- Importing raw data from Excel files using `readxl`
+- Initial inspection using `summary()` and `names()`
 - Selection of relevant variables based on a predefined protocol
-- Renaming variables to ensure consistency across years
-- Type conversion for dates, categorical, and numerical variables using `lubridate`, `dplyr`, and `forcats`
-- Re-labeling categories according to official coding dictionaries from the INS
+- Renaming variables for consistency across years
+- Type conversion for dates, factors, and numerics using `lubridate`, `dplyr`, and `forcats`
+- Re-labeling categories using INS dictionaries
 - Recoding unknown or inconsistent values
 - Systematic handling of missing data
-- Exporting the cleaned datasets as `.Rds` and `.RData` files
+- Exporting cleaned datasets as `.Rds` and `.RData` files
 
-> ⚠️ The same procedure was applied to all yearly datasets (2017–2022), with small adjustments for structural differences between years.
+> ⚠️ The same process was applied to all datasets, with slight adjustments for annual structural differences.
 
-You can explore the full cleaning procedure in the script [`01_data_cleaning.R`](./code/01_data_cleaning.R).
+See the full procedure in [`01_data_cleaning.R`](./code/01_data_cleaning.R).
 </details>
 
 ---
@@ -59,51 +61,34 @@ You can explore the full cleaning procedure in the script [`01_data_cleaning.R`]
 ## 🧮 2. Data Manipulation and Exploration
 
 <details>
-<summary>Standard Variable Transformation</summary>
+<summary>Click to expand</summary>
 
-This script performs a standardized transformation and aggregation of variables for the 2017–2022 datasets. While the previous script (`01_data_cleaning.R`) focused on raw data cleaning and recoding, this step prepares the dataset for analysis through:
+This script standardizes variables across years (2017–2022) for analysis. Key steps:
 
-- Temporal validation of notification and event dates (`fech.not`, `fech.hech`)
-- Categorization of age into meaningful age groups according to national health standards
-- Re-labeling and grouping of sociodemographic variables
-- Thematic grouping of violence-related variables
-- Creation of simplified secondary variables
-- Export of cleaned datasets
+- Date validation (`fech.not`, `fech.hech`)  
+- Age grouped into health system-relevant categories  
+- Re-labeling of sociodemographic and violence-related variables  
+- Creation of thematic groups (e.g., by type of violence, relationship to aggressor)  
+- Generation of simplified, analysis-ready variables  
+- Export of `.Rds` files
 
-</details>
+**Time Analysis (2020 Focus)**  
+- Binary classification of events by period (`periodo.hecho`, `periodo.not`)  
+- Validation of consistency  
+- Dataset split into `vio.2020.before` and `vio.2020.pandemic`
 
-<details>
-<summary>Time Analysis (2020 Focus)</summary>
+**Time Delay Computation (2017–2022)**  
+- Calculated `dif.dias` (event-to-notification delay)  
+- Computed summary stats (mean, median, SD)  
+- Histograms visualized and exported  
+- Outlier filtering: negative or >30-day delays
 
-This section focuses on temporal segmentation of the 2020 dataset:
+**Final Outputs**  
+- `.c` files saved annually (e.g., `vio.2017.c`)  
+- Combined histogram plots exported  
+- Full-period dataset `vio.todo` created, labeled by period
 
-- Creation of binary classification variables (`periodo.hecho` and `periodo.not`)
-- Validation and consistency checks
-- Splitting and merging into `vio.2020.before` and `vio.2020.pandemic`
-
-</details>
-
-<details>
-<summary>Time Delay Computation (2017–2022)</summary>
-
-For each year:
-
-- Computed time difference (`dif.dias`) between event and notification
-- Summary statistics and delay distribution histograms
-- Filtering of negative or long-delay cases for inspection
-
-</details>
-
-<details>
-<summary>Final Outputs</summary>
-
-- Enriched datasets saved as `.c` files (e.g., `vio.2017.c`)
-- Export of yearly and combined histograms
-- Unified dataset `vio.todo` created with pandemic/prepandemic labels
-
-> ✅ Consistent naming and structure were maintained for reproducibility.
-
-You can explore the full procedure in the script [`02_data_exploration_and_manipulation.R`](./code/02_data_exploration_and_manipulation.R).
+See full script: [`02_data_exploration_and_manipulation.R`](./code/02_data_exploration_and_manipulation.R)
 </details>
 
 ---
@@ -111,123 +96,59 @@ You can explore the full procedure in the script [`02_data_exploration_and_manip
 ## 🧾 3. Descriptive Analysis
 
 <details>
-<summary>Description by Sex and Period</summary>
+<summary>Click to expand</summary>
 
-Stratified descriptive summaries were performed for each sex and pandemic period using:
+Stratified by sex and period:
 
-- `describe()` for continuous variables
-- `tabyl()` + `adorn_pct_formatting()` for categorical summaries
+- `describe()` for continuous variables  
+- `tabyl()` + `adorn_pct_formatting()` for categorical summaries  
+- Analyzed: `vio.before.female`, `vio.before.male`, `vio.pandemic.female`, `vio.pandemic.male`  
+- Output saved for cohort analysis
 
-Datasets analyzed:
+**By Age Cohort**  
+- Children (0–17): early childhood, childhood, adolescence  
+- Adults (18+): youth, adulthood, older adult  
+- Subgroups stratified by sex and period. Factor levels cleaned, summaries exported.
 
-- `vio.before.female`, `vio.before.male`
-- `vio.pandemic.female`, `vio.pandemic.male`
-
-Variables include age, gender identity, occupation, type of violence, and more.
-
-> ✅ Outputs were saved for further stratification by age group.
-
+See the full script: [`03_descriptive_analysis.R`](./code/03_descriptive_analysis.R)
 </details>
+
+---
+
+## 🎯 4. Final Analysis: Multiple Correspondence Analysis (MCA)
 
 <details>
-<summary>Description by Age Cohort</summary>
+<summary>Click to expand</summary>
 
-Further stratification was performed into:
+Conducted on:  
+- `vio.before` (Prepandemic)  
+- `vio.pandemic` (Pandemic)  
+- `vio.todo` (Combined)
 
-- Children (0–17): Early childhood, Childhood, Adolescence
-- Adults (18+): Youth, Adulthood, Older adult
+**Data Preparation**  
+- Selected 10–11 categorical variables  
+- Renamed to English (e.g., `sexo` → `Sex`)  
+- Re-labeled levels (e.g., `"Sí"` → `"Yes"`)  
+- Corrected typos
 
-Each sex-period combination was split and described. Factor levels were cleaned and summaries exported.
+**MCA Execution**  
+- `MCA(..., ncp = 3)` used  
+- `get_eigenvalue()` extracted eigenvalues  
+- Scree plots via `fviz_screeplot()`  
+- Red line at 4.9% threshold
 
-> ✅ This allows deeper insight into how violence patterns differ by age, sex, and pandemic timing.
+**Variable Category Plots (2D & 3D)**  
+- Biplots: 1–2, 1–3, 2–3 dimensions  
+- Labels added via `geom_text_repel()`  
+- Quadrant shading with `viridis`  
+- `plotly()` for interactive 3D  
 
-You can explore the full procedure in the script [`03_descriptive_analysis.R`](./code/03_descriptive_analysis.R).
-</details>
+**Individual Record Plots**  
+- Colored by `Violence` type  
+- Ellipses for group separation  
+- Interactive 3D versions exported as `.html`
 
----
-
-# 🎯 4. Final Analysis: Multiple Correspondence Analysis (MCA) 
-
-This section summarizes the complete MCA process performed on three datasets:
-- `vio.before`: Prepandemic period
-- `vio.pandemic`: Pandemic period
-- `vio.todo`: Combined dataset (2017–2022)
-
-The analysis includes variable selection, cleaning and recoding, MCA execution, visualization (2D and 3D), and export of results.
-
----
-
-## 📁 A. Data Preparation for MCA
-
-### Variable Selection and Renaming - Quality Control 
-
-For each dataset (`before`, `pandemic`, `todo`):
-- Selected 10–11 variables: `sexo`, `activi.cat`, `antec.vio`, `sexo.agre`, `conv.agre`, `mecanismo.cat`, `escena.cat`, `edad.cat`, `tipo.viol`, `relacion` (+ `periodo` for `todo`)
-- Renamed variables into English for clarity (e.g., `sexo` → `Sex`, `tipo.viol` → `Violence`)
-- Translated categorical levels (e.g., "Sí" → "Yes")
-- Corrected typos in levels (e.g., "Phsychological" → "Psychological")
-
----
-
-## 📊 B. MCA Execution
-
-###  MCA per Dataset
-
-- Used `MCA(..., ncp = 3)` from the `FactoMineR` package
-- Extracted eigenvalues using `get_eigenvalue()`
-- Saved MCA objects for future use
-
-###  Scree Plots
-
-Generated scree plots with `fviz_screeplot()`:
-- Added red dashed line at 4.9% for retained variability threshold
-- Saved as `.pdf` (e.g., `Screeplot.vio.prepandemic.pdf`)
-
----
-
-## 📈 C. Variable Category Plots
-
-###  2D MCA Variable Plots
-
-Generated biplots for variable categories using `fviz_mca_var()` for:
-- Dim 1 vs 2
-- Dim 1 vs 3
-- Dim 2 vs 3
-
-Combined into a vertical layout using `patchwork::plot_layout()` and saved (e.g., `variables.MCA.vio.DIM.todo.before.pdf`)
-
-###  Enhanced Variable Plots with Labels
-
-- Added custom labels using `geom_text_repel()`
-- Highlighted key labels in bold (e.g., "Sexual violence")
-- Used `viridis` palette for quadrant shading
-- Exported with suffix `.quadrant.pdf`
-
-###  3D MCA Plot of Variable Categories
-
-- Used `plotly::plot_ly()` for interactive 3D scatter plots
-- Colored points and labeled axes by explained variance
-- Saved as `.html` (e.g., `3D_MCA_Categories_with_Quadrants.html`)
-
----
-
-## 👤 D. Individual Records Plot (by Violence Type)
-
-###  2D Individual Plot
-
-- Colored individuals by `Violence` type
-- Added ellipses per group with `fviz_mca_ind()`
-- Used `viridis_d` palette for clarity
-
-###  3D Individual Plot
-
-- Created 3D scatter plot of individuals grouped by `Violence` using `plot_ly()`
-- Added color legend with hover info
-- Exported as `.html` (e.g., `3D_MCA_individuals_todo.html`)
-
----
-
-## 💾 E. Saved Outputs
+**Saved Outputs**
 
 | Type       | Prepandemic              | Pandemic                  | Combined                   |
 |------------|---------------------------|----------------------------|-----------------------------|
@@ -239,43 +160,24 @@ Combined into a vertical layout using `patchwork::plot_layout()` and saved (e.g.
 | Indiv (2D) | `individuals.before.vio.pdf` | `individuals.pandemic.vio.pdf` | `individuals.todo.vio.pdf` |
 | Indiv (3D) | `3D_MCA_individuals_prepandemic.html` | `3D_MCA_individuals_pandemic.html` | `3D_MCA_individuals_todo.html` |
 
+See full script: [`04_analysis_mca.R`](./code/04_analysis_mca.R)
+</details>
+
 ---
 
-✅ The MCA workflow ensures full transparency, visual interpretability, and analytical consistency across prepandemic, pandemic, and full datasets.
-
-
-
-
-## 📚 Package Citations
+## 🧪 5. Sensitivity Analysis
 
 <details>
 <summary>Click to expand</summary>
 
-[1] Wickham H, Romain F, Henry L, Müller K. *readxl: Read Excel Files.* https://CRAN.R-project.org/package=readxl  
-[2] Wickham H, François R, Henry L, Müller K. *dplyr: A Grammar of Data Manipulation.* https://CRAN.R-project.org/package=dplyr  
-[3] Firke S. *janitor: Simple Tools for Examining and Cleaning Dirty Data.* https://CRAN.R-project.org/package=janitor  
-[4] Grolemund G, Wickham H (2011). *Dates and Times Made Easy with lubridate.* https://www.jstatsoft.org/article/view/v040i03  
-[5] Henry L, Wickham H. *forcats: Tools for Working with Categorical Variables (Factors).* https://CRAN.R-project.org/package=forcats  
-[6] Wickham H, Averick M, Bryan J, et al. (2019). *Welcome to the tidyverse.* https://doi.org/10.21105/joss.01686  
-[7] Revelle W. *psych: Procedures for Psychological, Psychometric, and Personality Research.* https://CRAN.R-project.org/package=psych  
-[8] Honaker J, King G, Blackwell M. *Amelia II: A Program for Missing Data.* https://www.jstatsoft.org/article/view/v045i07  
-[9] Zhu H. *kableExtra: Construct Complex Table with 'kable'.* https://CRAN.R-project.org/package=kableExtra  
-[10] Wickham H. *ggplot2: Elegant Graphics for Data Analysis.* https://ggplot2.tidyverse.org  
-[11] Kassambara A. *ggpubr: 'ggplot2' Based Publication Ready Plots.* https://CRAN.R-project.org/package=ggpubr  
-[12] Wilke CO. *patchwork: The Composer of Plots.* https://CRAN.R-project.org/package=patchwork  
-[13] Sievert C. *Interactive Web-Based Data Visualization with R.* https://plotly-r.com  
-[14] Wei T, Simko V. *corrplot: Visualization of a Correlation Matrix.* https://CRAN.R-project.org/package=corrplot  
-[15] Neuwirth E. *RColorBrewer: ColorBrewer Palettes.* https://CRAN.R-project.org/package=RColorBrewer  
-[16] Garnier S. *viridis: Colorblind-Friendly Color Maps for R.* https://CRAN.R-project.org/package=viridis  
-[17] Slowikowski K. *ggrepel: Automatically Position Non-Overlapping Text Labels.* https://CRAN.R-project.org/package=ggrepel  
-[18] Vaidyanathan R et al. *htmlwidgets: HTML Widgets for R.* https://CRAN.R-project.org/package=htmlwidgets  
-[19] Husson F, Josse J, Le S, Mazet J. *FactoMineR: Multivariate Exploratory Data Analysis.* https://CRAN.R-project.org/package=FactoMineR  
-[20] Kassambara A, Mundt F. *factoextra: Extract and Visualize Multivariate Results.* https://CRAN.R-project.org/package=factoextra  
-[21] Husson F, Josse J, Pages J. *FactoInvestigate.* https://CRAN.R-project.org/package=FactoInvestigate  
-[22] Dray S, Dufour A-B. *The ade4 Package.* https://www.jstatsoft.org/article/view/v022i04  
-[23] Beaton D, Dunlop A. *ExPosition: Exploratory Analysis with Positioning.* https://CRAN.R-project.org/package=ExPosition  
-[24] Beaton D, Fatt C. *prettyGraphs.* https://CRAN.R-project.org/package=prettyGraphs  
-[25] Wickham H, Chang W. *devtools.* https://CRAN.R-project.org/package=devtools  
-[26] Wickham H, Bryan J. *usethis.* https://CRAN.R-project.org/package=usethis  
+This script contains robustness checks and alternative specifications for key analytical decisions:
 
+- Re-categorization of age groups or violence types  
+- Inclusion/exclusion of missing or outlier cases  
+- Validation of MCA results using reduced or expanded variable sets  
+- Cross-validation with other multivariate techniques if applicable
+
+See full script: [`05_sensitivity_analysis.R`](./code/05_sensitivity_analysis.R)
 </details>
+
+---
