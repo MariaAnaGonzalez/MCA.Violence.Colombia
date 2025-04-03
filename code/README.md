@@ -75,7 +75,7 @@ This script performs a standardized transformation and aggregation of variables 
 
 Cleaned and manipulated datasets are saved in `.Rds` format at the end of the script (`vio.2017.b`).
 
-
+You can explore the full  procedure in the script [`02_data_exploration_and_manipulation.R`](./code/02_data_exploration_and_manipulation.R).
 
 
 
