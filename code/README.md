@@ -147,6 +147,7 @@ This script creates stratified databases for prepandemic and pandemic periods by
 
 ###  Steps:
 
+
 - Load the merged and period-classified datasets (`vio.before`, `vio.pandemic`)
 - Subset datasets by `sexo` into:
   - `vio.before.female` / `vio.pandemic.female`
@@ -156,6 +157,7 @@ This script creates stratified databases for prepandemic and pandemic periods by
   - `tabyl()` + `adorn_pct_formatting()` for categorical distributions
 
 ###  Variables summarized include:
+
 
 - `edad`, `edad.cat`, `cod.pais`, `ident.gen`, `orient.sex`, `ocup.cat`, `activi.cat`
 - `gp.gest`, `jefe.h`, `tipo.viol`, `v.sexual.cat`, `sexo.agre`, `relacion`, `conv.agre`
@@ -174,6 +176,7 @@ This script builds on the previously stratified datasets by creating additional 
 
 ###  Steps:
 
+
 - Load the four stratified datasets (`vio.before.female`, `vio.before.male`, etc.)
 - Subset by `edad.cat` into:
   - Children (Early childhood, Childhood, Adolescence)
@@ -187,10 +190,14 @@ This script builds on the previously stratified datasets by creating additional 
 
 ###  Key considerations:
 
+
 - All factor variables were cleaned using `droplevels()` to remove unused categories
 - Distribution tables include frequencies and proportions (rounded to 1 decimal place)
 
 > ✅ These subgroup datasets are used to explore interactions between age, sex, and period of occurrence.
+
+
+You can explore the full procedure in the script [`03_descriptive_analysis.R`](./code/`03_descriptive_analysis.R).
 
 </details>
 
