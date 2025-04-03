@@ -11,9 +11,10 @@ This folder contains all R scripts used for data preparation, analysis, and expo
 - [`00_setup.R`](./code/00_setup.R): Installs and loads all required R packages.
 - [`01_data_cleaning.R`](./code/01_data_cleaning.R): Imports and prepares the data, including variable recoding and transformations.
 - [`02_data_exploration_and_manipulation.R`](./code/02_data_exploration_and_manipulation.R): Performs summary statistics and descriptive analyses.
-- [`03_analysis_mca.R`](./code/03_analysis_mca.R): Conducts Multiple Correspondence Analysis (MCA).
-- [`04_tables_export.R`](./code/04_tables_export.R): Generates and exports tables for the manuscript.
-- [`05_graphs_export.R`](./code/05_graphs_export.R): Creates and exports relevant visualizations.
+- [`03_descriptive_analysis.R`](./code/03_descriptive_analysis.R): Performs summary statistics and stratified descriptive analyses.
+- [`04_analysis_mca.R`](./code/03_analysis_mca.R): Conducts Multiple Correspondence Analysis (MCA).
+- [`05_tables_export.R`](./code/04_tables_export.R): Generates and exports tables for the manuscript.
+- [`06_graphs_export.R`](./code/05_graphs_export.R): Creates and exports relevant visualizations.
 
 ---
 
@@ -135,6 +136,67 @@ You can explore the full procedure in the script [`02_data_exploration_and_manip
 </details>
 
 ---
+
+
+## 🧾 3. Descriptive Analysis
+
+<details>
+<summary>📂 Step E: Description by Sex and Period</summary>
+
+This script creates stratified databases for prepandemic and pandemic periods by the variable `sexo` (Female/Male), and then performs descriptive summaries across the study's key sociodemographic and violence-related variables.
+
+###  Steps:
+
+- Load the merged and period-classified datasets (`vio.before`, `vio.pandemic`)
+- Subset datasets by `sexo` into:
+  - `vio.before.female` / `vio.pandemic.female`
+  - `vio.before.male` / `vio.pandemic.male`
+- For each of the four resulting datasets, descriptive summaries were generated using:
+  - `describe()` for continuous variables like age
+  - `tabyl()` + `adorn_pct_formatting()` for categorical distributions
+
+###  Variables summarized include:
+
+- `edad`, `edad.cat`, `cod.pais`, `ident.gen`, `orient.sex`, `ocup.cat`, `activi.cat`
+- `gp.gest`, `jefe.h`, `tipo.viol`, `v.sexual.cat`, `sexo.agre`, `relacion`, `conv.agre`
+- `mecanismo.cat`, `escena.cat`, `antec.vio`
+
+> ✅ Filtered datasets were saved for downstream age cohort analysis.
+
+</details>
+
+---
+
+<details>
+<summary>📂 Step F: Description by Age Cohort (0–17 vs 18+)</summary>
+
+This script builds on the previously stratified datasets by creating additional subgroups based on age categories. It enables a comparison between children and adult survivors across pandemic and prepandemic periods.
+
+###  Steps:
+
+- Load the four stratified datasets (`vio.before.female`, `vio.before.male`, etc.)
+- Subset by `edad.cat` into:
+  - Children (Early childhood, Childhood, Adolescence)
+  - Adults (Youth, Adulthood, Older adult)
+- New databases created:
+  - `vio.before.children.female`, `vio.before.children.male`
+  - `vio.before.adults.female`, `vio.before.adults.male`
+  - `vio.pandemic.children.female`, `vio.pandemic.children.male`
+  - `vio.pandemic.adults.female`, `vio.pandemic.adults.male`
+- Descriptive statistics for each subgroup mirror those in Step E
+
+###  Key considerations:
+
+- All factor variables were cleaned using `droplevels()` to remove unused categories
+- Distribution tables include frequencies and proportions (rounded to 1 decimal place)
+
+> ✅ These subgroup datasets are used to explore interactions between age, sex, and period of occurrence.
+
+</details>
+
+
+
+
 
 ## 📚 Package Citations
 
