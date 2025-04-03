@@ -129,7 +129,7 @@ Conducted on:
 - Selected 10–11 categorical variables  
 - Renamed to English (e.g., `sexo` → `Sex`)  
 - Re-labeled levels (e.g., `"Sí"` → `"Yes"`)  
-- Corrected typos
+- Corrected typos - Quality control 
 
 **MCA Execution**  
 - `MCA(..., ncp = 3)` used  
@@ -140,7 +140,7 @@ Conducted on:
 **Variable Category Plots (2D & 3D)**  
 - Biplots: 1–2, 1–3, 2–3 dimensions  
 - Labels added via `geom_text_repel()`  
-- Quadrant shading with `viridis`  
+- Quadrant shading with `viridis` - Color blind user friendly palette 
 - `plotly()` for interactive 3D  
 
 **Individual Record Plots**  
