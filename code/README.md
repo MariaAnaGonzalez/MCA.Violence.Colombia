@@ -59,7 +59,7 @@ You can explore the full cleaning procedure in the script [`01_data_cleaning.R`]
 ## 🧮 2. Data Manipulation and Exploration
 
 <details>
-<summary>🔹 Step A: Standard Variable Transformation</summary>
+<summary> Step A: Standard Variable Transformation</summary>
 
 This script performs a standardized transformation and aggregation of variables for the 2017–2022 datasets. While the previous script (`01_data_cleaning.R`) focused on raw data cleaning and recoding based on the original dictionary, this step prepares the dataset for analysis through:
 
@@ -87,7 +87,7 @@ Cleaned and manipulated datasets are saved in `.Rds` format at the end of each s
 ---
 
 <details>
-<summary>🔹 Step B: Time Analysis (2020 Focus)</summary>
+<summary> Step B: Time Analysis (2020 Focus)</summary>
 
 This component adds a temporal dimension to the 2020 dataset by distinguishing between pre-pandemic and pandemic periods:
 
@@ -103,7 +103,7 @@ This component adds a temporal dimension to the 2020 dataset by distinguishing b
 ---
 
 <details>
-<summary>🔹 Step C: Time Delay Computation (2017–2022)</summary>
+<summary> Step C: Time Delay Computation (2017–2022)</summary>
 
 For each year, the following steps were performed:
 
@@ -119,7 +119,7 @@ For each year, the following steps were performed:
 ---
 
 <details>
-<summary>🔹 Final Outputs</summary>
+<summary> Final Outputs</summary>
 
 - Yearly datasets enriched with the new variable `dif.dias` were saved as `.Rds` and `.RData` files (e.g., `vio.2017.c`, `vio.2022.c`)
 - Combined histograms summarizing delay distributions were exported as:
