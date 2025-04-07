@@ -96,57 +96,144 @@ See full script: [`02_data_exploration_and_manipulation.R`](./code/02_data_explo
 ## 🧾 3. Descriptive Analysis
 
 <details>
-<summary>Click to expand</summary>
+<summary><strong>📊 Stratified Analysis by Sex and Pandemic Period</strong></summary>
 
-Stratified by sex and period:
+This section presents descriptive statistics stratified by:
 
-- `describe()` for continuous variables  
-- `tabyl()` + `adorn_pct_formatting()` for categorical summaries  
-- Analyzed: `vio.before.female`, `vio.before.male`, `vio.pandemic.female`, `vio.pandemic.male`  
-- Output saved for cohort analysis
+- **Sex**: Female / Male  
+- **Pandemic period**: Prepandemic / Pandemic  
 
-**By Age Cohort**  
-- Children (0–17): early childhood, childhood, adolescence  
-- Adults (18+): youth, adulthood, older adult  
-- Subgroups stratified by sex and period. Factor levels cleaned, summaries exported.
+### ✅ Steps:
+
+- Datasets were split:  
+  `vio.before.female`, `vio.before.male`, `vio.pandemic.female`, `vio.pandemic.male`
+
+- **Continuous variables**: Summarized with `describe()` (e.g., age, time delay)
+
+- **Categorical variables**: Summarized with `tabyl()` + `adorn_percentages()` (e.g., occupation, violence type)
+
+
+</details>
+
+<details>
+<summary><strong>📊 Descriptive Analysis by Age Cohorts</strong></summary>
+
+Survivors were grouped into official age cohorts:
+
+- **Children**: 0–5 (early), 6–11 (childhood), 12–17 (adolescence)  
+- **Adults**: 18–26 (youth), 27–59 (adulthood), 60+ (older adults)
+
+
+### ✅ Steps:
+
+- Each **sex × period** subgroup was split by age group
+
+- Frequencies and distributions were recalculated
+
+- Factor levels were cleaned and harmonized across years
+
+- Tables were exported for reporting and annexes
+
+</details>
+
+---
 
 See the full script: [`03_descriptive_analysis.R`](./code/03_descriptive_analysis.R)
 </details>
 
 ---
 
-## 🎯 4. Final Analysis: Multiple Correspondence Analysis (MCA)
+## 🎯 4. Multiple Correspondence Analysis (MCA)
 
 <details>
-<summary>Click to expand</summary>
+<summary><strong>🧪 Dataset Preparation and Variable Recoding</strong></summary>
 
-Conducted on:  
-- `vio.before` (Prepandemic)  
-- `vio.pandemic` (Pandemic)  
-- `vio.todo` (Combined)
+### 📂 Datasets:
 
-**Data Preparation**  
-- Selected 10–11 categorical variables  
-- Renamed to English (e.g., `sexo` → `Sex`)  
-- Re-labeled levels (e.g., `"Sí"` → `"Yes"`)  
-- Corrected typos - Quality control 
+- `vio.before.MCA`: Prepandemic  
+- `vio.pandemic.MCA`: Pandemic  
+- `vio.todo.MCA`: Combined (includes `Period` variable)
 
-**MCA Execution**  
-- `MCA(..., ncp = 3)` used  
-- `get_eigenvalue()` extracted eigenvalues  
-- Scree plots via `fviz_screeplot()`  
-- Red line at 4.9% threshold
+### ✅ Preprocessing:
 
-**Variable Category Plots (2D & 3D)**  
-- Biplots: 1–2, 1–3, 2–3 dimensions  
-- Labels added via `geom_text_repel()`  
-- Quadrant shading with `viridis` - Color blind user friendly palette 
-- `plotly()` for interactive 3D  
+- Selected 10–11 categorical variables (e.g., `Sex`, `Activity`, `Violence`, `Relation`, etc.)
 
-**Individual Record Plots**  
-- Colored by `Violence` type  
-- Ellipses for group separation  
-- Interactive 3D versions exported as `.html`
+- Translated variable names to English
+
+- Recoded values:
+  - `"Sí"` → `"Yes"`  
+  - `"Phsychological"` → `"Psychological"`  
+  - `"Civic leaders and students"` → `"Students and civic leaders"`
+
+- Saved final datasets as `.Rds` files
+
+</details>
+
+<details>
+<summary><strong>📈 MCA Execution and Scree Plots</strong></summary>
+
+### ✅ Execution:
+
+- Ran `MCA(..., ncp = 3)` using `FactoMineR`
+
+- Extracted eigenvalues via `get_eigenvalue()`
+
+### 📉 Scree Plots:
+
+- Created using `fviz_screeplot()`  
+- Red dashed threshold line at **4.9%**  
+- Exported as `.pdf` (e.g., `Screeplot.vio.todo.pdf`)
+
+</details>
+
+<details>
+<summary><strong>📌 Variable Category Visualization</strong></summary>
+
+### ✅ 2D Plots:
+
+- Used `fviz_mca_var()` to plot:
+  - Dim 1 vs 2  
+  - Dim 1 vs 3  
+  - Dim 2 vs 3
+
+- Combined with `patchwork::plot_layout()`
+
+- Labeled key categories with `geom_text_repel()` (e.g., `"Sexual violence"`)
+
+- Shaded quadrants with `viridisLite::viridis()` palette (color blind friendly palette)
+
+- Saved as `.pdf` (e.g., `categorias.MCA.vio.before.todo.quadrant.pdf`)
+
+### ✅ 3D Plots:
+
+- Created with `plotly::plot_ly()`  
+- Labeled axes with variance explained  
+- Saved as `.html` (e.g., `3D_MCA_Categories_with_Todo.html`)
+
+</details>
+
+<details>
+<summary><strong>👤 Plots of Individual Records by Violence Type</strong></summary>
+
+### ✅ 2D Plots:
+
+- Colored by `Violence` group  
+- Added confidence ellipses (95%) with `fviz_mca_ind()`
+
+- Used `viridis_d` color scale  (color blind friendly palette)
+- Saved as `.pdf` (e.g., `individuals.pandemic.vio.pdf`)
+
+### ✅ 3D Plots:
+
+- Built with `plot_ly()`  
+- Grouped by `Violence` type  
+- Interactive format saved as `.html` (e.g., `3D_MCA_individuals_prepandemic.html`)
+
+</details>
+
+---
+
+✅ Both the descriptive and MCA analyses were structured to maintain consistency across prepandemic, pandemic, and combined datasets, enabling valid comparisons over time.
 
 **Saved Outputs**
 
