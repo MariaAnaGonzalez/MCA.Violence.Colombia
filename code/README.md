@@ -100,7 +100,7 @@ This section presents descriptive statistics stratified by:
 - **Sex**: Female / Male  
 - **Pandemic period**: Prepandemic / Pandemic  
 
-### ✅ Steps:
+###  Steps:
 
 - Datasets were split:  
   `vio.before.female`, `vio.before.male`, `vio.pandemic.female`, `vio.pandemic.male`
@@ -121,7 +121,7 @@ Survivors were grouped into official age cohorts:
 - **Adults**: 18–26 (youth), 27–59 (adulthood), 60+ (older adults)
 
 
-### ✅ Steps:
+###  Steps:
 
 - Each **sex × period** subgroup was split by age group
 
@@ -142,13 +142,13 @@ See the full script: [`03_descriptive_analysis.R`](./code/03_descriptive_analysi
 <details>
 <summary><strong>🧪 Dataset Preparation and Variable Recoding</strong></summary>
 
-### 📂 Datasets:
+###  Datasets:
 
 - `vio.before.MCA`: Prepandemic  
 - `vio.pandemic.MCA`: Pandemic  
 - `vio.todo.MCA`: Combined (includes `Period` variable)
 
-### ✅ Preprocessing:
+###  Preprocessing:
 
 - Selected 10–11 categorical variables (e.g., `Sex`, `Activity`, `Violence`, `Relation`, etc.)
 
@@ -166,13 +166,13 @@ See the full script: [`03_descriptive_analysis.R`](./code/03_descriptive_analysi
 <details>
 <summary><strong>📈 MCA Execution and Scree Plots</strong></summary>
 
-### ✅ Execution:
+###  Execution:
 
 - Ran `MCA(..., ncp = 3)` using `FactoMineR`
 
 - Extracted eigenvalues via `get_eigenvalue()`
 
-### 📉 Scree Plots:
+###  Scree Plots:
 
 - Created using `fviz_screeplot()`  
 - Red dashed threshold line at **4.9%**  
@@ -183,7 +183,7 @@ See the full script: [`03_descriptive_analysis.R`](./code/03_descriptive_analysi
 <details>
 <summary><strong>📌 Variable Category Visualization</strong></summary>
 
-### ✅ 2D Plots:
+###  2D Plots:
 
 - Used `fviz_mca_var()` to plot:
   - Dim 1 vs 2  
@@ -198,7 +198,7 @@ See the full script: [`03_descriptive_analysis.R`](./code/03_descriptive_analysi
 
 - Saved as `.pdf` (e.g., `categorias.MCA.vio.before.todo.quadrant.pdf`)
 
-### ✅ 3D Plots:
+###  3D Plots:
 
 - Created with `plotly::plot_ly()`  
 - Labeled axes with variance explained  
@@ -209,7 +209,7 @@ See the full script: [`03_descriptive_analysis.R`](./code/03_descriptive_analysi
 <details>
 <summary><strong>👤 Plots of Individual Records by Violence Type</strong></summary>
 
-### ✅ 2D Plots:
+###  2D Plots:
 
 - Colored by `Violence` group  
 - Added confidence ellipses (95%) with `fviz_mca_ind()`
@@ -217,7 +217,7 @@ See the full script: [`03_descriptive_analysis.R`](./code/03_descriptive_analysi
 - Used `viridis_d` color scale  (color blind friendly palette)
 - Saved as `.pdf` (e.g., `individuals.pandemic.vio.pdf`)
 
-### ✅ 3D Plots:
+###  3D Plots:
 
 - Built with `plot_ly()`  
 - Grouped by `Violence` type  
