@@ -24,7 +24,7 @@ This folder contains supplementary data files, variable descriptions, and releva
 <details>
 <summary><strong>📍 Data Source</strong></summary>
 
-In Colombia, reporting of **GBV** and **IFV** is mandatory for epidemiological surveillance under **Law 248 of 1995**.  
+In Colombia, reporting of Gender-Based violence **GBV** and Intrafamily violence **IFV** is mandatory for epidemiological surveillance under **Law 248 of 1995**.  
 For this study, we used data from the **National Institute of Health (INS - *Instituto Nacional de Salud*)** via the **SIVIGILA** system, which collects nationwide public health information.  
 
 Clinicians report **GBV** and **IFV** cases using a standardized form during medical consultations (see the file **INS 875**). The data, including demographics and event details, are entered into the **SIVIGILA** system and analyzed primarily using descriptive statistics.  
@@ -68,13 +68,13 @@ Although the dataset includes over 100 variables, we selected **19 original vari
 This study follows Colombia’s **official national institution definitions** for all variables and measures described below.
 
 ### [Gender Identity](#gender-identity)
-An individual's self-identification influenced by social, historical, and cultural definitions of femininity, masculinity, or the spectrum between them [[1]].
+An individual's self-identification influenced by social, historical, and cultural definitions of femininity, masculinity, or the spectrum between them [1].
 
 ### [Sex](#sex)
-Refers to genetic, hormonal, and structural body traits [[1]].
+Refers to genetic, hormonal, and structural body traits [1].
 
 ### [Sexual Orientation](#sexual-orientation)
-An individual's capacity for emotional, affectionate, and sexual attraction to people of a different, the same, or multiple genders, along with the ability to form intimate relationships [[1]].
+An individual's capacity for emotional, affectionate, and sexual attraction to people of a different, the same, or multiple genders, along with the ability to form intimate relationships [1].
 
 ### [IFV and GBV](#ifv-and-gbv)
 According to **INS** protocols, **IFV** and **GBV** include:
@@ -87,11 +87,11 @@ According to **INS** protocols, **IFV** and **GBV** include:
 The **INS** also recognizes:
 - Attacks involving chemical agents.
 - Violence against children, adolescents, women, and individuals with non-normative gender identities or sexual orientations.
-- Female genital mutilation [[2]].
+- Female genital mutilation [2].
 
 The **INS** follows the **World Health Organization (WHO)**'s broader definition of violence, which includes:
 - The use of force or the threat of force.
-- Coercion or circumstances that limit the victim's ability to give free consent [[3], [2]].
+- Coercion or circumstances that limit the victim's ability to give free consent [3], [2].
 
 </details>
 
@@ -107,7 +107,7 @@ The quantitative variable **"Survivor’s age"** was categorized following Colom
 - **Adolescence:** 12–18 years  
 - **Youth:** 19–26 years  
 - **Adulthood:** 27–59 years  
-- **Older adult:** 60+ years [[4]]
+- **Older adult:** 60+ years [4]
 
 ---
 
@@ -116,7 +116,7 @@ The variable **"Event’s date"** was divided into two periods:
 - **Prepandemic:** 2017–2019  
 - **Pandemic:** 2021–2022  
 
-Data from **2020** was split according to Colombia's official pandemic start date (**March 25, 2020**) [[5]]:  
+Data from **2020** was split according to Colombia's official pandemic start date (**March 25, 2020**) [5]:  
 - Dates before this were classified as **"Prepandemic"**  
 - Dates including this date and after this were classified as **"Pandemic"**  
 
@@ -133,7 +133,7 @@ For the **"Survivor’s nationality"** variable, we categorized individuals into
 ---
 
 ### Survivor’s Occupation
-The variable **"Survivor’s occupation"** was categorized using the latest **International Standard Classification of Occupations (ISCO)** by the **International Labor Organization** [[6]]:  
+The variable **"Survivor’s occupation"** was categorized using the latest **International Standard Classification of Occupations (ISCO)** by the **International Labor Organization** [6]:  
 - **Manual workers and craft jobs**  
 - **Technicians and administrative support workers**  
 - **Professionals and managers**  
@@ -154,14 +154,14 @@ The variable **"Survivor’s main activity"** was grouped into five categories f
 The **INS data collection protocols** state that the categories of violence—**"Physical," "Sexual", "Neglect and Abandonment,"** and **"Psychological"**—are:
 
 - **Mutually exclusive**
-- **Hierarchical**, where only the **most severe** type of violence is recorded (2).
+- **Hierarchical**, where only the **most severe** type of violence is recorded [2]: 
 
 ### Hierarchy of Violence Categories
-- **Sexual violence** is considered the most severe and is prioritised when multiple forms of violence occur against the same individual (2).
+- **Sexual violence** is considered the most severe and is prioritised when multiple forms of violence occur against the same individual [2]: 
 - Followed by:
   - **Physical violence**
   - **Psychological violence**
-  - **Neglect and Abandonment** (ranked last) (2).
+  - **Neglect and Abandonment** (ranked last) [2]: 
 
 ### Reclassification of Sexual Violence Categories
 The variable **"Type of Sexual Violence"** originally included eight categories, which we reclassified into four categories based on:
