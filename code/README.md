@@ -235,7 +235,9 @@ See full script: [`04_analysis_mca.R`](./code/04_analysis_mca.R)
 ## 🧪 5. Sensitivity Analysis
 
 <details>
+  
 <summary><strong>Complete Case vs. Full Dataset Comparison</strong></summary>
+
 
 This script conducts a sensitivity analysis to compare the original dataset (which includes missing data treated as a separate category) against a version with **complete cases only** (rows with no missing values). The goal is to test the robustness and stability of the **Multiple Correspondence Analysis (MCA)** results.
 
@@ -268,10 +270,6 @@ Key steps include:
 
 You can explore the full procedure in the script [`05_sensitivity_analysis.R`](./code/05_sensitivity_analysis.R).
 
-</details>
-
-
-See full script: [`05_sensitivity_analysis.R`](./code/05_sensitivity_analysis.R)
 </details>
 
 ---
