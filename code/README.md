@@ -235,14 +235,41 @@ See full script: [`04_analysis_mca.R`](./code/04_analysis_mca.R)
 ## 🧪 5. Sensitivity Analysis
 
 <details>
-<summary>Click to expand</summary>
+<summary><strong>Complete Case vs. Full Dataset Comparison</strong></summary>
 
-This script contains robustness checks and alternative specifications for key analytical decisions:
+This script conducts a sensitivity analysis to compare the original dataset (which includes missing data treated as a separate category) against a version with **complete cases only** (rows with no missing values). The goal is to test the robustness and stability of the **Multiple Correspondence Analysis (MCA)** results.
 
-- Re-categorization of age groups or violence types  
-- Inclusion/exclusion of missing or outlier cases  
-- Validation of MCA results using reduced or expanded variable sets  
-- Cross-validation with other multivariate techniques if applicable
+Key steps include:
+
+- **Quantification and Visualization of Missing Data**:
+  - Overall and per-variable missingness.
+  - Visual exploration using `missmap()` from the `Amelia` package.
+
+- **Comparison of Variable Distributions**:
+  - Key variables (`Sex`, `Type of violence`, `Pandemic period`) were compared across datasets using `tabyl()` and percentage formatting.
+  - Stacked bar charts of `Type of violence` by `Sex` were created for both datasets to visualize differences.
+
+- **Multiple Correspondence Analysis (MCA) – Complete Cases**:
+  - MCA was performed on the complete-case dataset using `FactoMineR::MCA()` with 3 dimensions.
+  - Scree plot generated to examine variance explained.
+  - Standard 2D MCA biplots (`Dim 1 vs 2`, `1 vs 3`, `2 vs 3`) were produced.
+  - An integrated panel of all 2D plots was also saved.
+  - A quadrant-shaded biplot of variable categories was created, highlighting key violence-related categories.
+
+- **3D MCA Plots**:
+  - Interactive 3D scatter plots of variable categories were built using `plotly::plot_ly()`.
+  - Axes represent the three main MCA dimensions, annotated with explained variance.
+
+- **Individual Record Plots**:
+  - 2D plot of individuals by `Type of violence` with confidence ellipses.
+  - 3D interactive plot with individuals colored by violence category.
+
+> ✅ This sensitivity analysis allows for the evaluation of how missing data may impact MCA outputs and strengthens the transparency of the analysis.
+
+You can explore the full procedure in the script [`05_sensitivity_analysis.R`](./code/05_sensitivity_analysis.R).
+
+</details>
+
 
 See full script: [`05_sensitivity_analysis.R`](./code/05_sensitivity_analysis.R)
 </details>
