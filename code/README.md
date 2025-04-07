@@ -207,7 +207,7 @@ See the full script: [`03_descriptive_analysis.R`](./code/03_descriptive_analysi
 </details>
 
 <details>
-<summary><strong>👤 Plots of Individual Records by Violence Type</strong></summary>
+<summary><strong>🧑‍🤝‍🧑 Plots of Individual Records by Violence Type</strong></summary>
 
 ###  2D Plots:
 
