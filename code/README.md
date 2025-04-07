@@ -15,9 +15,6 @@ This folder contains all R scripts used for data preparation, analysis, and expo
 - [`03_descriptive_analysis.R`](./code/03_descriptive_analysis.R): Performs stratified descriptive analysis by period, sex, and age.  
 - [`04_analysis_mca.R`](./code/04_analysis_mca.R): Conducts Multiple Correspondence Analysis (MCA) on pre-pandemic, pandemic, and full datasets.  
 - [`05_sensitivity_analysis.R`](./code/05_sensitivity_analysis.R): Conducts robustness checks and sensitivity analyses.  
-- [`06_tables_export.R`](./code/06_tables_export.R): Generates and exports tables for the manuscript.  
-- [`07_graphs_export.R`](./code/07_graphs_export.R): Creates and exports visualizations.  
-
 ---
 
 ## 📦 Required R Packages
@@ -134,9 +131,6 @@ Survivors were grouped into official age cohorts:
 
 - Tables were exported for reporting and annexes
 
-</details>
-
----
 
 See the full script: [`03_descriptive_analysis.R`](./code/03_descriptive_analysis.R)
 </details>
@@ -229,28 +223,14 @@ See the full script: [`03_descriptive_analysis.R`](./code/03_descriptive_analysi
 - Grouped by `Violence` type  
 - Interactive format saved as `.html` (e.g., `3D_MCA_individuals_prepandemic.html`)
 
-</details>
 
----
+See full script: [`04_analysis_mca.R`](./code/04_analysis_mca.R)
 
 ✅ Both the descriptive and MCA analyses were structured to maintain consistency across prepandemic, pandemic, and combined datasets, enabling valid comparisons over time.
 
-**Saved Outputs**
 
-| Type       | Prepandemic              | Pandemic                  | Combined                   |
-|------------|---------------------------|----------------------------|-----------------------------|
-| Dataset    | `vio.before.MCA.Rds`      | `vio.pandemic.MCA.Rds`     | `vio.todo.MCA.Rds`          |
-| Results    | `res.vio.before.MCA.Rds`  | `res.vio.pandemic.MCA.Rds` | `res.vio.todo.MCA.Rds`      |
-| Screeplot  | `Screeplot.vio.prepandemic.pdf` | `Screeplot.vio.pandemic.pdf` | `Screeplot.vio.todo.pdf`     |
-| Plots (2D) | `variables.MCA.vio.DIM.*`  | `variables.MCA.vio.DIM.*`  | `variables.MCA.vio.DIM.*`   |
-| Plots (3D) | `3D_MCA_Categories_with_Quadrants.html` | `3D_MCA_Categories_with_Pandemic.html` | `3D_MCA_Categories_with_Todo.html` |
-| Indiv (2D) | `individuals.before.vio.pdf` | `individuals.pandemic.vio.pdf` | `individuals.todo.vio.pdf` |
-| Indiv (3D) | `3D_MCA_individuals_prepandemic.html` | `3D_MCA_individuals_pandemic.html` | `3D_MCA_individuals_todo.html` |
-
-See full script: [`04_analysis_mca.R`](./code/04_analysis_mca.R)
 </details>
 
----
 
 ## 🧪 5. Sensitivity Analysis
 
