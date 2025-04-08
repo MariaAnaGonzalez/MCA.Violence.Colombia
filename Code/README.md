@@ -10,12 +10,13 @@ This folder contains all R scripts used for data preparation, analysis, and expo
 
 ## 🔧 Script Overview
 
-- [`00_setup.R`](./Code/00_setup.R): Installs and loads all required R packages.  
-- [`01_data_cleaning.R`](./Code/01_data_cleaning.R): Imports and prepares the data, including variable recoding and transformations.  
-- [`02_data_exploration_and_manipulation.R`](./Code/02_data_exploration_and_manipulation.R): Conducts data exploration and variable standardization.  
-- [`03_descriptive_analysis.R`](./Code/03_descriptive_analysis.R): Performs stratified descriptive analysis by period, sex, and age.  
-- [`04_analysis_mca.R`](./Code/04_analysis_mca.R): Conducts Multiple Correspondence Analysis (MCA) on pre-pandemic, pandemic, and full datasets.  
-- [`05_sensitivity_analysis.R`](./Code/05_sensitivity_analysis.R): Conducts robustness checks and sensitivity analyses.  
+- `00_setup.R`: Installs and loads all required R packages.  
+- `01_data_cleaning.R`: Imports and prepares the data, including variable recoding and transformations.  
+- `02_data_exploration_and_manipulation.R`: Conducts data exploration and variable standardization.  
+- `03_descriptive_analysis.R`: Performs stratified descriptive analysis by period, sex, and age.  
+- `04_analysis_mca.R`: Conducts Multiple Correspondence Analysis (MCA) on pre-pandemic, pandemic, and full datasets.  
+- `05_sensitivity_analysis.R`: Conducts robustness checks and sensitivity analyses.  
+ 
 ---
 
 ## 📦 Required R Packages
@@ -28,7 +29,7 @@ This project uses the following R packages (citations below):
 - **Multivariate analysis**: `FactoMineR` [19], `factoextra` [20], `FactoInvestigate` [21], `ade4` [22], `ExPosition` [23], `prettyGraphs` [24]  
 - **Development tools**: `devtools` [25], `usethis` [26]  
 
-To install all required packages, run the setup script: [`00_setup.R`](./code/00_setup.R)
+To install all required packages, run the setup script: `00_setup.R`
 
 ---
 
@@ -51,7 +52,7 @@ Each annual dataset (2017–2022) underwent a standardized and reproducible data
 
 > ⚠️ The same process was applied to all datasets, with slight adjustments for annual structural differences.
 
-See the full procedure in [`01_data_cleaning.R`](./Code/01_data_cleaning.R).
+See the full procedure in `01_data_cleaning.R`.
 </details>
 
 ---
@@ -86,7 +87,8 @@ This script standardizes variables across years (2017–2022) for analysis. Key 
 - Combined histogram plots exported  
 - Full-period dataset `vio.todo` created, labeled by period
 
-See full script: [`02_data_exploration_and_manipulation.R`](./Code/02_data_exploration_and_manipulation.R)
+See full script: `02_data_exploration_and_manipulation.R`
+
 </details>
 
 ---
@@ -133,7 +135,8 @@ Survivors were grouped into official age cohorts:
 - Tables were exported for reporting and annexes
 
 
-See the full script: [`03_descriptive_analysis.R`](./Code/03_descriptive_analysis.R)
+See the full script: `03_descriptive_analysis.R`
+
 </details>
 
 ---
@@ -225,7 +228,7 @@ See the full script: [`03_descriptive_analysis.R`](./Code/03_descriptive_analysi
 - Interactive format saved as `.html` (e.g., `3D_MCA_individuals_prepandemic.html`)
 
 
-See full script: [`04_analysis_mca.R`](./Code/04_analysis_mca.R)
+See full script: `04_analysis_mca.R`
 
 ✅ Both the descriptive and MCA analyses were structured to maintain consistency across prepandemic, pandemic, and combined datasets, enabling valid comparisons over time.
 
@@ -269,7 +272,7 @@ Key steps include:
 
 > ✅ This sensitivity analysis allows for the evaluation of how missing data may impact MCA outputs and strengthens the transparency of the analysis.
 
-You can explore the full procedure in the script [`05_sensitivity_analysis.R`](./Code/05_sensitivity_analysis.R).
+You can explore the full procedure in the script `05_sensitivity_analysis.R`. 
 
 </details>
 
