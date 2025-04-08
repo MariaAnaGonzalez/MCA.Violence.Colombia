@@ -16,10 +16,12 @@ Each subfolder includes 2D and 3D plots created during the MCA and descriptive s
 
 This folder contains graphics created using data from the prepandemic period (2017–2019).
 
+
 Includes:
 
+
 - Scree plots
-- MCA 2D biplots (Dimensions 1–2)
+- MCA 2D biplots 
 - 3D MCA category plots
 - Individual plots colored by type of violence
 
@@ -30,9 +32,12 @@ Includes:
 <details>
 <summary><strong>📂 Pandemic</strong></summary>
 
+
 This folder includes graphics generated from the pandemic period period (2020–2022).
 
+
 Includes:
+
 
 - Scree plots
 - MCA 2D biplots (Dimensions 1–2)
@@ -46,9 +51,12 @@ Includes:
 <details>
 <summary><strong>📂 Combined (Prepandemic + Pandemic)</strong></summary>
 
+
 This section merges both periods to analyze combined trends and clustering.
 
+
 Includes:
+
 
 - Scree plots
 - MCA biplots (3D)
