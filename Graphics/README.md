@@ -40,7 +40,7 @@ Includes:
 
 
 - Scree plots
-- MCA 2D biplots (Dimensions 1–2)
+- MCA 2D biplots 
 - 3D MCA category plots
 - Individual plots colored by type of violence
 
