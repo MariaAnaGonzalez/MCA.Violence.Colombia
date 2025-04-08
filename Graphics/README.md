@@ -19,7 +19,7 @@ This folder contains graphics created using data from the prepandemic period (20
 Includes:
 
 - Scree plots
-- MCA 2D biplots (Dimensions 1–2, 1–3, 2–3)
+- MCA 2D biplots (Dimensions 1–2)
 - 3D MCA category plots
 - Individual plots colored by type of violence
 
@@ -35,8 +35,9 @@ This folder includes graphics generated from the pandemic period period (2020–
 Includes:
 
 - Scree plots
-- MCA biplots (2D and 3D)
-- Individual records by type of violence
+- MCA 2D biplots (Dimensions 1–2)
+- 3D MCA category plots
+- Individual plots colored by type of violence
 
 </details>
 
