@@ -10,7 +10,7 @@ This folder contains all R scripts used for data preparation, analysis, and expo
 
 ## 🔧 Script Overview
 
-- [`00_setup.R`](./code/code/00_setup.R): Installs and loads all required R packages.  
+- [`00_setup.R`](./Code/00_setup.R): Installs and loads all required R packages.  
 - [`01_data_cleaning.R`](./Code/01_data_cleaning.R): Imports and prepares the data, including variable recoding and transformations.  
 - [`02_data_exploration_and_manipulation.R`](./Code/02_data_exploration_and_manipulation.R): Conducts data exploration and variable standardization.  
 - [`03_descriptive_analysis.R`](./Code/03_descriptive_analysis.R): Performs stratified descriptive analysis by period, sex, and age.  
