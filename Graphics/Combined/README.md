@@ -30,15 +30,15 @@ This folder contains all graphics generated from the combined dataset (prepandem
 
 ---
 
+---
+
 ## 🧑‍🤝‍🧑 Individual MCA Plots
 
 <details>
 <summary>Click to view</summary>
 
-- [`Individuals.combined.pdf`](./Individuals.combined.pdf) – 2D MCA plot of individual records colored by type of violence  
-- [🌐 `individuals_3D.html`](https://mariaanagonzalez.github.io/MCA.Violence.Colombia/combined/individuals_3D.html) – Interactive 3D MCA of individuals (HTML via GitHub Pages)
+- [🌐 `individuals_3D.html`](https://mariaanagonzalez.github.io/MCA.Violence.Colombia/Combined/individuals_3D.html) – Interactive 3D MCA plot of individual records from the combined dataset (Prepandemic +
 
-</details>
 
 ---
 
