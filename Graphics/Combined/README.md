@@ -37,7 +37,8 @@ This folder contains selected graphics generated from the combined dataset (Prep
 
 - [🌐 `individuals_3D.html`](https://mariaanagonzalez.github.io/MCA.Violence.Colombia/combined/individuals_3D.html) – Interactive 3D MCA plot of individual records from the combined dataset (Prepandemic + Pandemic)
 
-
+<details>
+  
 ---
 
 ## 🌐 3D MCA Category Plot
