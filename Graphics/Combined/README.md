@@ -1,8 +1,9 @@
 # 📂 Combined
 
-This folder contains all graphics generated from the combined dataset (prepandemic + pandemic).
+This folder contains selected graphics generated from the combined dataset (Prepandemic + Pandemic).
 
-> 🔍 Click on each section to explore available plots.
+> 🔍 Click on each section to explore available plots.  
+> ℹ️ Additional combined plots (2D individual and quadrant overlays) are available in the manuscript.
 
 ---
 
@@ -17,27 +18,25 @@ This folder contains all graphics generated from the combined dataset (prepandem
 
 ---
 
-## 📈 MCA Variable Plots
+## 📈 MCA Variable and Category Plots
 
 <details>
 <summary>Click to view</summary>
 
 - [`variables.MCA.combined.pdf`](./variables.MCA.combined.pdf) – MCA biplot of variables (2D)  
-- [`categories.MCA.combined.pdf`](./categories.MCA.combined.pdf) – MCA category plot  
-- [`categories.MCA.combined.quadrant.pdf`](./categories.MCA.combined.quadrant.pdf) – MCA category plot with quadrant shading
+- [`categorias.MCA.combined.pdf`](./categorias.MCA.combined.pdf) – MCA category plot (2D)
 
 </details>
 
 ---
 
----
 
 ## 🧑‍🤝‍🧑 Individual MCA Plots
 
 <details>
 <summary>Click to view</summary>
 
-- [🌐 `individuals_3D.html`](https://mariaanagonzalez.github.io/MCA.Violence.Colombia/combined/individuals_3D.html) – Interactive 3D MCA plot of individual records from the combined dataset (Prepandemic +
+- [🌐 `individuals_3D.html`](https://mariaanagonzalez.github.io/MCA.Violence.Colombia/combined/individuals_3D.html) – Interactive 3D MCA plot of individual records from the combined dataset (Prepandemic + Pandemic)
 
 
 ---
