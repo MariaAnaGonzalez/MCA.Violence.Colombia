@@ -1,6 +1,4 @@
 # 📂 Pandemic
-This folder contains all graphics from the pandemic period.
-# 📂 Pandemic
 
 This folder contains all graphics generated from the **pandemic** dataset.
 
@@ -49,6 +47,7 @@ This folder contains all graphics generated from the **pandemic** dataset.
 <details>
 <summary>Click to view</summary>
 
-- [`categories_3D.html`](https://mariaanagonzalez.github.io/MCA.Violence.Colombia/prepandemic/categories_3D.html) – Interactive 3D category plot with quadrants (HTML)
+- [`categories_3D.html`](https://mariaanagonzalez.github.io/MCA.Violence.Colombia/pandemic/categories_3D.html) – Interactive 3D category plot with quadrants (HTML)
 
 </details>
+
