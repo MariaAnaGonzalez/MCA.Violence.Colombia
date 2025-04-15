@@ -28,13 +28,36 @@ This folder contains all the figures related to the sensitivity analysis, based 
 
 ---
 
-## 🧑‍🤝‍🧑 Individual Plots
+
+## 📉 Descriptive Plot
 
 <details>
 <summary>Click to view</summary>
 
-- [`individuals.todo.vio.complete.pdf`](./individuals.todo.vio.complete.pdf) – 2D MCA plot of individual records from complete-case analysis  
-- [`Stacked.bar.vio.sex.pdf`](./Stacked.bar.vio.sex.pdf) – Stacked bar plot of types of violence by sex
+- [`Stacked.bar.vio.sex.pdf`](./Stacked.bar.vio.sex.pdf) – Stacked bar chart of type of violence by sex
+
+</details>
+
+---
+
+## 🧑‍🤝‍🧑 Individual MCA Plots
+
+<details>
+<summary>Click to view</summary>
+
+- [`individuals.todo.vio.complete.pdf`](./individuals.todo.vio.complete.pdf) – 2D MCA plot of individuals  
+- [🌐 `individuals_3D.html`](https://mariaanagonzalez.github.io/MCA.Violence.Colombia/sensitivity_analysis/individuals_3D.html) – Interactive 3D MCA of individuals
+
+</details>
+
+---
+
+## 🌐 3D MCA Category Plot
+
+<details>
+<summary>Click to view</summary>
+
+- [🌐 `categories_3D.html`](https://mariaanagonzalez.github.io/MCA.Violence.Colombia/sensitivity_analysis/categories_3D.html) – Interactive 3D MCA of categories (HTML)
 
 </details>
 
