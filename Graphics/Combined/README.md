@@ -48,3 +48,5 @@ This folder contains selected graphics generated from the combined dataset (Prep
 - [🌐 `categories_3D.html`](https://mariaanagonzalez.github.io/MCA.Violence.Colombia/combined/categories_3D.html) – Interactive 3D MCA of category coordinates (HTML)
 
 </details>
+
+---
