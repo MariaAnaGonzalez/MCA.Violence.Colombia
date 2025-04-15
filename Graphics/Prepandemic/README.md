@@ -36,8 +36,7 @@ This folder contains all graphics generated from the prepandemic dataset.
 <summary>Click to view</summary>
 
 - [`Individuals.prepandemic.pdf`](./Individuals.prepandemic.pdf) – 2D MCA plot of individual records colored by type of violence  
-- 🔗 [`3D_MCA_individuals_prepandemic.html`](./3D_MCA_individuals_prepandemic.html) – **Interactive 3D MCA plot** of individuals  
-  > 💡 This file must be downloaded and opened in a browser to view the interactive graph. GitHub cannot display large HTML files directly.
+- 🌐 [`Interactive 3D MCA of Individuals`](https://mariaanagonzalez.github.io/MCA.Violence.Colombia/docs/prepandemic/individuals_3D.html) – Interactive 3D MCA of individual records (HTML)
 
 </details>
 
@@ -48,7 +47,7 @@ This folder contains all graphics generated from the prepandemic dataset.
 <details>
 <summary>Click to view</summary>
 
-- [`3D MCA – Categories – Prepandemic (interactive)`](https://mariaanagonzalez.github.io/MCA.Violence.Colombia/prepandemic/) – Interactive 3D MCA category plot with quadrant shading
+- 🌐 [`Interactive 3D MCA of Categories with Quadrants`](https://mariaanagonzalez.github.io/MCA.Violence.Colombia/docs/prepandemic/index.html) – Interactive 3D category plot with quadrant shading (HTML)
 
 </details>
 
