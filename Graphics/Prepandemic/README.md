@@ -45,11 +45,12 @@ This folder contains all graphics generated from the prepandemic dataset.
 
 ---
 
+
 ## 🌐 3D MCA Category Plot
 
 <details>
 <summary>Click to view</summary>
 
-- 🌐 [Interactive 3D MCA of Categories with Quadrants (HTML)](https://mariaanagonzalez.github.io/MCA.Violence.Colombia/docs/prepandemic/index.html)
+- [`categories_3D.html`](https://mariaanagonzalez.github.io/MCA.Violence.Colombia/docs/prepandemic/categories_3D.html) – Interactive 3D category plot with quadrants (HTML)
 
 </details>
