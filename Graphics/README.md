@@ -23,12 +23,22 @@ Each plot is available in two formats:
 
 The analysis identified four overlapping but distinguishable violence profiles:
 
-- **Physical Violence**: Linked to intimate partners or ex-partners, private settings, and injury mechanisms such as blunt force or hanging.
-- **Sexual Violence**: Associated with public spaces, adolescent and adolescent victims, and aggressors who are not part of the family circle.
-- **Neglect and Abandonment**: Characterized by female aggressors (often mothers), male victims in early childhood, and mechanisms such as burns.
-- **Psychological Violence**: Positioned at the center of the MCA space, overlapping with all other types. This profile often co-occurs with physical aggression and involves older female victims and male aggressors.
+#### 🔍 Violence Profiles Identified
 
-Psychological violence forms the **core** of the structure, with the remaining profiles arranged around it in a **triangular configuration**—clearly captured in the 3D visualizations.
+The analysis identified four overlapping but distinguishable violence profiles:
+
+#### 🔍 Violence Profiles Identified
+
+The analysis identified four overlapping but distinguishable violence profiles:
+
+- <span style="color:#800080"><strong>Physical Violence</strong></span>: Linked to intimate partners or ex-partners, private settings, and injury mechanisms such as blunt force or hanging.
+
+- <span style="color:#FFD700"><strong>Sexual Violence</strong></span>: Associated with public spaces, adolescent and child victims, and aggressors who are not part of the family circle.
+
+- <span style="color:#228B22"><strong>Neglect and Abandonment</strong></span>: Characterized by female aggressors (often mothers), male victims in early childhood, and mechanisms such as burns.
+
+- <span style="color:#1E90FF"><strong>Psychological Violence</strong></span>: Positioned at the center of the MCA space, overlapping with all other types. This profile often co-occurs with physical aggression and involves older female victims and male aggressors.
+
 
 📂 The interactive plots are located in the `docs/` folder and can be viewed in any web browser. They are also integrated into the GitHub Pages version of the repository.
 
