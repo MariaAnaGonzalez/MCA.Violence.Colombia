@@ -9,7 +9,7 @@ This folder contains supplementary tables (PDF format) used in the manuscript:
 - **🅰️ Table A**  
   *Sociodemographic characteristics and event descriptors of reports on gender-based and intrafamilial violence (Event 875) registered by the National Institute of Health (INS) in Colombia, 2017–2022.*  
   ➕ Includes cases from **early childhood, childhood, and adolescence (0–18 years)**  
-  📄 [`Table_A_0-18_years.pdf`](./Table_A_0-18_years.pdf)
+  📄 [`Table_A_0-17_years.pdf`](./Table_A_0-17_years.pdf)
 
 - **🅱️ Table B**  
   *Sociodemographic characteristics and event descriptors of reports on gender-based and intrafamilial violence (Event 875) registered by the National Institute of Health (INS) in Colombia, 2017–2022.*  
