@@ -16,7 +16,7 @@ Each subfolder includes 2D and interactive 3D plots produced during the descript
 This repository includes interactive 3D plots derived from Multiple Correspondence Analysis (MCA) of categorical variables related to gender-based and intrafamilial violence in Colombia (2017–2022). These visualizations support the findings presented in the manuscript and enable dynamic exploration of violence patterns across different periods: **prepandemic**, **pandemic**, **combined**, and **sensitivity analysis**.
 
 Each plot is available in two formats:
-- **Individuals Plot**: Each point represents a case, highlighting distribution and clustering.
+- **Individuals Plot**: Each point represents a report, highlighting distribution and clustering.
 - **Categories Plot**: Shows relationships among categorical variables and violence profiles.
 
 #### 🔍 Violence Profiles Identified
