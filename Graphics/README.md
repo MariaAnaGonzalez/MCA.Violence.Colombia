@@ -16,28 +16,21 @@ Each subfolder includes 2D and interactive 3D plots produced during the descript
 This repository includes interactive 3D plots derived from Multiple Correspondence Analysis (MCA) of categorical variables related to gender-based and intrafamilial violence in Colombia (2017–2022). These visualizations support the findings presented in the manuscript and enable dynamic exploration of violence patterns across different periods: **prepandemic**, **pandemic**, **combined**, and **sensitivity analysis**.
 
 Each plot is available in two formats:
-- **Individuals Plot**: Each point represents a report, highlighting distribution and clustering.
+- **Individuals Plot**: Each point represents a report, highlighting distribution and clustering according to the main type of violence reported.
 - **Categories Plot**: Shows relationships among categorical variables and violence profiles.
 
-#### 🔍 Violence Profiles Identified
-
-The analysis identified four overlapping but distinguishable violence profiles:
 
 #### 🔍 Violence Profiles Identified
 
 The analysis identified four overlapping but distinguishable violence profiles:
 
-#### 🔍 Violence Profiles Identified
+- **Physical Violence** *(purple)*: Linked to intimate partners or ex-partners, private settings, and injury mechanisms such as blunt force or hanging.
 
-The analysis identified four overlapping but distinguishable violence profiles:
+- **Sexual Violence** *(yellow)*: Associated with public spaces, adolescent and child victims, and aggressors who are not part of the family circle.
 
-- <span style="color:#800080"><strong>Physical Violence</strong></span>: Linked to intimate partners or ex-partners, private settings, and injury mechanisms such as blunt force or hanging.
+- **Neglect and Abandonment** *(green)*: Characterized by female aggressors (often mothers), male victims in early childhood, and mechanisms such as burns.
 
-- <span style="color:#FFD700"><strong>Sexual Violence</strong></span>: Associated with public spaces, adolescent and child victims, and aggressors who are not part of the family circle.
-
-- <span style="color:#228B22"><strong>Neglect and Abandonment</strong></span>: Characterized by female aggressors (often mothers), male victims in early childhood, and mechanisms such as burns.
-
-- <span style="color:#1E90FF"><strong>Psychological Violence</strong></span>: Positioned at the center of the MCA space, overlapping with all other types. This profile often co-occurs with physical aggression and involves older female victims and male aggressors.
+- **Psychological Violence** *(blue)*: Positioned at the center of the MCA space, overlapping with all other types. This profile often co-occurs with physical aggression and involves older female victims and male aggressors.
 
 
 📂 The interactive plots are located in the `docs/` folder and can be viewed in any web browser. They are also integrated into the GitHub Pages version of the repository.
