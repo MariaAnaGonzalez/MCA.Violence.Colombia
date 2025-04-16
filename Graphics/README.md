@@ -11,6 +11,30 @@ Each subfolder includes 2D and interactive 3D plots generated during the MCA and
 
 ---
 
+###  Interactive 3D Visualizations
+
+This repository includes interactive 3D plots based on Multiple Correspondence Analysis (MCA) of categorical variables related to gender-based and intrafamilial violence in Colombia (2017–2022). These visualizations support the findings presented in the manuscript and allow dynamic exploration of patterns across different periods: **prepandemic**, **pandemic**, **combined**, and **sensitivity analysis**.
+
+Each plot has two formats:
+- **Individuals Plot**: Each dot represents a case, highlighting dispersion and clustering.
+- **Categories Plot**: Visualizes relationships between categorical variables and profiles.
+
+####  Violence Profiles Identified
+
+The analysis revealed four overlapping but distinguishable violence profiles:
+
+- **Physical Violence**: Associated with intimate partners or ex-partners, private settings, and blunt force or hanging injuries.
+- **Sexual Violence**: Linked to public spaces, adolescent and child victims, and aggressors who are often non-family members.
+- **Neglect and Abandonment**: Characterized by female aggressors (often mothers), male victims in early childhood, and mechanisms like burns.
+- **Psychological Violence**: Centrally located in the MCA space, reflecting overlap with all other types. It often co-occurs with physical mechanisms and involves older female victims and male aggressors.
+
+Psychological violence forms the **core** of the configuration, with the other profiles forming a **triangular structure** around it—captured effectively in the 3D visualizations.
+
+
+
+
+
+
 <details>
 <summary><strong>📂 Prepandemic</strong></summary>
 
