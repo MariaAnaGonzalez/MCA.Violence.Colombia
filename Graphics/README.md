@@ -24,7 +24,7 @@ Each plot is available in two formats:
 The analysis identified four overlapping but distinguishable violence profiles:
 
 - **Physical Violence**: Linked to intimate partners or ex-partners, private settings, and injury mechanisms such as blunt force or hanging.
-- **Sexual Violence**: Associated with public spaces, adolescent and child victims, and aggressors who are not part of the family circle.
+- **Sexual Violence**: Associated with public spaces, adolescent and adolescent victims, and aggressors who are not part of the family circle.
 - **Neglect and Abandonment**: Characterized by female aggressors (often mothers), male victims in early childhood, and mechanisms such as burns.
 - **Psychological Violence**: Positioned at the center of the MCA space, overlapping with all other types. This profile often co-occurs with physical aggression and involves older female victims and male aggressors.
 
