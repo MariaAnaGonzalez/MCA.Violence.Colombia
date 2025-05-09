@@ -4,6 +4,7 @@
 ### A Serial Cross-Sectional Study
 
 This repository contains the data analysis code, statistical models, and visualizations for the working paper:  
+
 **"Presentation Patterns of Gender-Based and Intrafamilial Violence During the First Three Years of the COVID-19 Pandemic in Colombia: A Serial Cross-Sectional Study."**
 
 ## 📂 Repository Structure
@@ -23,7 +24,7 @@ To explore the content:
 
 If you use this material, please cite it as:
 
-> González Álvarez, M. A. (2025). *Presentation Patterns of Gender-Based and Intrafamilial Violence During the First Three Years of the COVID-19 Pandemic in Colombia: A Serial Cross-Sectional Study* (Version 1.0) [Computer software]. https://doi.org/10.5281/zenodo.15375020
+> González Álvarez, M. A. (2025). Presentation Patterns of Gender-Based and Intrafamilial Violence During the First Three Years of the COVID-19 Pandemic in Colombia: A Serial Cross-Sectional Study (Repository) (Version 1.0) [Computer software]. https://doi.org/10.5281/zenodo.15375020
 
 ## 📚 Study Protocol Reference
 
